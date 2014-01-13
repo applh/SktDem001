@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		281621031883EC8000C9170E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 281621021883EC8000C9170E /* README.md */; };
+		281621061883EF9200C9170E /* SktSceneGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 281621051883EF9200C9170E /* SktSceneGame.m */; };
 		282723141883E40E00759DC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723131883E40E00759DC7 /* Foundation.framework */; };
 		282723161883E40E00759DC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723151883E40E00759DC7 /* CoreGraphics.framework */; };
 		282723181883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
@@ -39,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		281621021883EC8000C9170E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		281621041883EF9200C9170E /* SktSceneGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktSceneGame.h; sourceTree = "<group>"; };
+		281621051883EF9200C9170E /* SktSceneGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktSceneGame.m; sourceTree = "<group>"; };
 		282723101883E40E00759DC7 /* SktDem001.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SktDem001.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		282723131883E40E00759DC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		282723151883E40E00759DC7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,8 @@
 				282723301883E40E00759DC7 /* Spaceship.png */,
 				282723321883E40E00759DC7 /* Images.xcassets */,
 				2827231C1883E40E00759DC7 /* Supporting Files */,
+				281621041883EF9200C9170E /* SktSceneGame.h */,
+				281621051883EF9200C9170E /* SktSceneGame.m */,
 			);
 			path = SktDem001;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				2827232F1883E40E00759DC7 /* SktMyScene.m in Sources */,
 				282723221883E40E00759DC7 /* main.m in Sources */,
 				282723261883E40E00759DC7 /* SktAppDelegate.m in Sources */,
+				281621061883EF9200C9170E /* SktSceneGame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

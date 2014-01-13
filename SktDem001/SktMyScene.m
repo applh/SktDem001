@@ -7,10 +7,11 @@
 //
 
 #import "SktMyScene.h"
+#import "SktSceneGame.h"
 
 @implementation SktMyScene
 
--(id)initWithSize:(CGSize)size {    
+-(id) initWithSize: (CGSize) size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
@@ -28,22 +29,20 @@
     return self;
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
     /* Called when a touch begins */
-    
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
-    }
+    // Create and configure the scene.
+    SKView * skView = (SKView *)self.view;
+
+    SktSceneGame * scene = [SktSceneGame sceneWithSize:skView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFill;
+
+    // ADD TRANSITION EFFECT
+    SKTransition *doors = [SKTransition
+                           flipHorizontalWithDuration:1.0];
+    // Present the scene.
+    [skView presentScene:scene transition:doors];
+   
 }
 
 -(void)update:(CFTimeInterval)currentTime {
