@@ -35,11 +35,12 @@
         SKAction* action = [SKAction moveByX:0 y:-CGRectGetMidY(self.frame) duration:1];
         SKAction* action2 = [SKAction moveByX:0 y:CGRectGetMidY(self.frame)/2 duration:2];
         
+        [myLabel runAction: action];
+        [myLabel2 runAction: action2];
+
         [self addChild:myLabel];
         [self addChild:myLabel2];
         
-        [myLabel runAction: action];
-        [myLabel2 runAction: action2];
         
     }
     return self;

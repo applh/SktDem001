@@ -20,6 +20,7 @@
         self.hud = [SKNode node];
         self.world = [SKNode node];
         
+        self.anchorPoint = CGPointMake(.5, .5);
         // add to the scene
         [self addChild:self.world];
         [self addChild:self.hud];
@@ -56,6 +57,7 @@
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
     
+    
     [self.world addChild:bg];
     [self.world addChild:fg];
     
@@ -63,6 +65,10 @@
     self.world2fg = fg;
     
     [self setupPlayer];
+    
+    SKAction* scale = [SKAction scaleBy:.10 duration:1];
+    [self.world runAction:scale];
+    
 }
 
 -(void) setupPlayer {
@@ -70,6 +76,10 @@
     
     sprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)) ;
     
+    float angle = arc4random()%360*M_PI/180;
+    
+    SKAction *action = [SKAction rotateByAngle:angle duration:1];
+    [sprite runAction:action];
     [self.world2fg addChild:sprite];
     
 }
@@ -78,15 +88,15 @@
     /* Called when a touch begins */
     
     for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
+        CGPoint location = [touch locationInNode:self.world2fg];
         
         SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship2"];
         
         sprite.position = location;
         
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
+        float angle = arc4random_uniform(360)*M_PI/180;
+        SKAction *action = [SKAction rotateByAngle:angle duration:1];
+        [sprite runAction:action];
         
         [self.world2fg addChild:sprite];
     }
