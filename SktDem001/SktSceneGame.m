@@ -78,6 +78,9 @@
     
     float angle = arc4random()%360*M_PI/180;
     
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
+    sprite.physicsBody.dynamic = YES;
+    
     SKAction *action = [SKAction rotateByAngle:angle duration:1];
     [sprite runAction:action];
     [self.world2fg addChild:sprite];
@@ -95,6 +98,10 @@
         sprite.position = location;
         
         float angle = arc4random_uniform(360)*M_PI/180;
+        
+        sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
+        sprite.physicsBody.dynamic = YES;
+
         SKAction *action = [SKAction rotateByAngle:angle duration:1];
         [sprite runAction:action];
         
