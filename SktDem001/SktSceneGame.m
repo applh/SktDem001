@@ -21,6 +21,11 @@
         self.world = [SKNode node];
         
         self.anchorPoint = CGPointMake(.5, .5);
+        self.world2scale = .1;
+
+        // NO GRAVITY
+        self.physicsWorld.gravity = CGVectorMake(0, 0);
+        
         // add to the scene
         [self addChild:self.world];
         [self addChild:self.hud];
@@ -66,7 +71,7 @@
     
     [self setupPlayer];
     
-    SKAction* scale = [SKAction scaleBy:.10 duration:1];
+    SKAction* scale = [SKAction scaleBy:self.world2scale duration:1];
     [self.world runAction:scale];
     
 }
@@ -77,8 +82,9 @@
     sprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)) ;
     
     float angle = arc4random()%360*M_PI/180;
-    
-    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
+
+    // warning: apply scaling also to physics body
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
     sprite.physicsBody.dynamic = YES;
     
     SKAction *action = [SKAction rotateByAngle:angle duration:1];
@@ -99,7 +105,8 @@
         
         float angle = arc4random_uniform(360)*M_PI/180;
         
-        sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width/2];
+        // warning: apply scaling also to physics body
+        sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
         sprite.physicsBody.dynamic = YES;
 
         SKAction *action = [SKAction rotateByAngle:angle duration:1];
