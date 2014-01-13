@@ -16,8 +16,41 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.05 green:0.05 blue:0.20 alpha:1.0];
         
+        // create the parent nodes
+        self.hud = [SKNode node];
+        self.world = [SKNode node];
+        
+        // add to the scene
+        [self addChild:self.world];
+        [self addChild:self.hud];
+        
+        [self setupHud];
+        [self setupWorld];
+
     }
     return self;
+}
+
+// CUSTOM
+-(void) setupHud {
+    SKNode* bg = [SKNode node];
+    SKNode* fg = [SKNode node];
+    [self.hud addChild:bg];
+    [self.hud addChild:fg];
+    
+    self.hud2fg = fg;
+}
+
+-(void) setupWorld {
+    SKNode* bg = [SKNode node];
+    SKNode* fg = [SKNode node];
+    
+    [self.world addChild:bg];
+    [self.world addChild:fg];
+    
+    self.world2bg = bg;
+    self.world2fg = fg;
+    
 }
 
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -34,7 +67,7 @@
         
         [sprite runAction:[SKAction repeatActionForever:action]];
         
-        [self addChild:sprite];
+        [self.world2fg addChild:sprite];
     }
 }
 

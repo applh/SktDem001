@@ -10,8 +10,19 @@
 
 @interface SktSceneGame : SKScene
 
+@property SKNode* hud;          // HEAD UP DISPLAY
+@property SKNode* hud2fg;       // HUD FOREGROUND
+
+@property SKNode* world;        // WORLD
+@property SKNode* world2fg;     // WORLD FOREGROUND
+@property SKNode* world2bg;     // WORLD BACKGROUND
+
 // OVERRIDE
--(id) initWithSize: (CGSize) size;
+-(id)   initWithSize: (CGSize) size;
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
+
+// CUSTOM
+-(void) setupHud;
+-(void) setupWorld;
 
 @end
