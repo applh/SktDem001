@@ -17,6 +17,8 @@
 @property SKNode* world;        // WORLD
 @property SKNode* world2fg;     // WORLD FOREGROUND
 @property SKNode* world2bg;     // WORLD BACKGROUND
+@property SKNode* world2camera; // WORLD CAMERA NODE / POSITION
+@property SKNode* world2player; // WORLD PLAYER
 
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
@@ -26,5 +28,7 @@
 -(void) setupHud;
 -(void) setupWorld;
 -(void) setupPlayer;
+
+-(void) centerOnNode: (SKNode *) node;
 
 @end

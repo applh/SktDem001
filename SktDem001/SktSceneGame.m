@@ -71,6 +71,12 @@
     
     [self setupPlayer];
     
+    SKNode *camera = [SKNode node];
+    camera.name = @"camera";
+    [self.world addChild:camera];
+    self.world2camera = camera;
+    self.world2camera.position = self.world2player.position;
+    
     SKAction* scale = [SKAction scaleBy:self.world2scale duration:1];
     [self.world runAction:scale];
     
@@ -94,8 +100,9 @@
     SKAction *action = [SKAction rotateByAngle:angle duration:.5];
     [sprite runAction:action];
     
-    
     [self.world2fg addChild:sprite];
+    
+    self.world2player = sprite;
     
 }
 
@@ -124,6 +131,30 @@
         
         [self.world2fg addChild:sprite];
     }
+}
+
+- (void)didSimulatePhysics
+{
+    float dx = self.world2camera.position.x - self.world2player.position.x;
+    float dy = self.world2camera.position.y - self.world2player.position.y;
+    float d2 = dx*dx + dy*dy;
+    // FIXME: how do we compute this threshold?
+    // half of max screen size divided by scale ?
+    float d2max = 1024*1024*10/2; // 5000000;
+    
+    if (d2 > d2max ) {
+        // animate the camera
+        SKAction *action = [SKAction moveTo:self.world2player.position duration:1];
+        [self.world2camera runAction:action];
+    }
+    [self centerOnNode: self.world2camera];
+}
+
+- (void) centerOnNode: (SKNode *) node
+{
+    CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
+    self.world.position = CGPointMake(self.world.position.x - cameraPositionInScene.x,
+                                       self.world.position.y - cameraPositionInScene.y);
 }
 
 @end
