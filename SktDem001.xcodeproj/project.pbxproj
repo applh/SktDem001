@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		281621031883EC8000C9170E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 281621021883EC8000C9170E /* README.md */; };
 		281621061883EF9200C9170E /* SktSceneGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 281621051883EF9200C9170E /* SktSceneGame.m */; };
+		2816210818841B4100C9170E /* Spaceship2.png in Resources */ = {isa = PBXBuildFile; fileRef = 2816210718841B4100C9170E /* Spaceship2.png */; };
 		282723141883E40E00759DC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723131883E40E00759DC7 /* Foundation.framework */; };
 		282723161883E40E00759DC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723151883E40E00759DC7 /* CoreGraphics.framework */; };
 		282723181883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
@@ -42,6 +43,7 @@
 		281621021883EC8000C9170E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		281621041883EF9200C9170E /* SktSceneGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktSceneGame.h; sourceTree = "<group>"; };
 		281621051883EF9200C9170E /* SktSceneGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktSceneGame.m; sourceTree = "<group>"; };
+		2816210718841B4100C9170E /* Spaceship2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship2.png; sourceTree = "<group>"; };
 		282723101883E40E00759DC7 /* SktDem001.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SktDem001.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		282723131883E40E00759DC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		282723151883E40E00759DC7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +128,7 @@
 		2827231B1883E40E00759DC7 /* SktDem001 */ = {
 			isa = PBXGroup;
 			children = (
+				2816210718841B4100C9170E /* Spaceship2.png */,
 				282723241883E40E00759DC7 /* SktAppDelegate.h */,
 				282723251883E40E00759DC7 /* SktAppDelegate.m */,
 				282723271883E40E00759DC7 /* Main.storyboard */,
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
+				2816210818841B4100C9170E /* Spaceship2.png in Resources */,
 				282723331883E40E00759DC7 /* Images.xcassets in Resources */,
 				281621031883EC8000C9170E /* README.md in Resources */,
 				282723311883E40E00759DC7 /* Spaceship.png in Resources */,

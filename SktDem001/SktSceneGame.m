@@ -39,6 +39,17 @@
     [self.hud addChild:fg];
     
     self.hud2fg = fg;
+    
+    SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
+    
+    myLabel.text = @"LEVEL 1";
+    myLabel.fontSize = 50;
+    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                   CGRectGetMidY(self.frame));
+    
+    [self.hud2fg addChild:myLabel];
+
 }
 
 -(void) setupWorld {
@@ -51,6 +62,16 @@
     self.world2bg = bg;
     self.world2fg = fg;
     
+    [self setupPlayer];
+}
+
+-(void) setupPlayer {
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+    
+    sprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)) ;
+    
+    [self.world2fg addChild:sprite];
+    
 }
 
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -59,7 +80,7 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship2"];
         
         sprite.position = location;
         

@@ -24,5 +24,6 @@
 // CUSTOM
 -(void) setupHud;
 -(void) setupWorld;
+-(void) setupPlayer;
 
 @end
