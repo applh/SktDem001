@@ -116,7 +116,7 @@
         
         sprite.position = location;
         
-        float angle = arc4random_uniform(360)*M_PI/180;
+        float angle = arc4random_uniform(360) * M_PI / 180;
         float speed = 100;
         float dx = speed * cos(angle);
         float dy = speed * sin(angle);
@@ -133,7 +133,27 @@
     }
 }
 
-- (void)didSimulatePhysics
+-(void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self.world2fg];
+        CGPoint curLoc = self.world2player.position;
+        float dx = location.x - curLoc.x;
+        float dy = location.y - curLoc.y;
+        self.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
+        //self.world2player.zRotation = atan2f(dy, dx);
+    }
+}
+
+- (void) update:(NSTimeInterval)currentTime {
+    // KEEP player oriented in the speed direction
+    // FIXME: why do we need -MI_PI_2 ?
+    self.world2player.zRotation =   -M_PI_2
+                                    + atan2f(self.world2player.physicsBody.velocity.dy,
+                                             self.world2player.physicsBody.velocity.dx);
+    
+}
+
+- (void) didSimulatePhysics
 {
     float dx = self.world2camera.position.x - self.world2player.position.x;
     float dy = self.world2camera.position.y - self.world2player.position.y;
@@ -143,11 +163,14 @@
     float d2max = 1024*1024*10/2; // 5000000;
     
     if (d2 > d2max ) {
+        //NSLog(@"%.2f, %.2f", self.world2player.position.x, self.world2player.position.y);
         // animate the camera
         SKAction *action = [SKAction moveTo:self.world2player.position duration:1];
         [self.world2camera runAction:action];
     }
     [self centerOnNode: self.world2camera];
+
+    
 }
 
 - (void) centerOnNode: (SKNode *) node
