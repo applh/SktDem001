@@ -11,16 +11,19 @@
 
 @implementation SktMyScene
 
--(id) initWithSize: (CGSize) size {    
+-(id) initWithSize: (CGSize) size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed:1.0 green:0.4 blue:0.0 alpha:1.0];
         
-        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
-        myLabel.text = @"Hellix";
-        myLabel.fontSize = 30;
+        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
+        
+        myLabel.text = @"HELLIX";
+        myLabel.fontSize = 100;
+        myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         

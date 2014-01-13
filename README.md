@@ -15,5 +15,9 @@ Xcode5 link with GitHub Repo
 * Authentification is required (if problem then exit Xcode and restart again)
 
 
+Fonts
+===
+http://iosfonts.com/
 
+This website shows the fonts available for iOS
 
