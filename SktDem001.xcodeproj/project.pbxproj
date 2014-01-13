@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281621031883EC8000C9170E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 281621021883EC8000C9170E /* README.md */; };
 		282723141883E40E00759DC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723131883E40E00759DC7 /* Foundation.framework */; };
 		282723161883E40E00759DC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723151883E40E00759DC7 /* CoreGraphics.framework */; };
 		282723181883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		281621021883EC8000C9170E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		282723101883E40E00759DC7 /* SktDem001.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SktDem001.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		282723131883E40E00759DC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		282723151883E40E00759DC7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -138,6 +140,7 @@
 		2827231C1883E40E00759DC7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				281621021883EC8000C9170E /* README.md */,
 				2827231D1883E40E00759DC7 /* SktDem001-Info.plist */,
 				2827231E1883E40E00759DC7 /* InfoPlist.strings */,
 				282723211883E40E00759DC7 /* main.m */,
@@ -243,6 +246,7 @@
 			files = (
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
 				282723331883E40E00759DC7 /* Images.xcassets in Resources */,
+				281621031883EC8000C9170E /* README.md in Resources */,
 				282723311883E40E00759DC7 /* Spaceship.png in Resources */,
 				282723291883E40E00759DC7 /* Main.storyboard in Resources */,
 			);
@@ -479,6 +483,7 @@
 				2827234B1883E40E00759DC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2827234C1883E40E00759DC7 /* Build configuration list for PBXNativeTarget "SktDem001Tests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +492,7 @@
 				2827234E1883E40E00759DC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
