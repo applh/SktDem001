@@ -12,6 +12,6 @@
 
 // OVERRIDE
 -(id) initWithSize: (CGSize) size;
--(void)touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
+-(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
 
 @end
