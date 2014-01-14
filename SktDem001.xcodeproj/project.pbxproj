@@ -27,6 +27,7 @@
 		2827233C1883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
 		282723441883E40E00759DC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282723421883E40E00759DC7 /* InfoPlist.strings */; };
 		282723461883E40E00759DC7 /* SktDem001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 282723451883E40E00759DC7 /* SktDem001Tests.m */; };
+		28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CB8C9C188546E100AAFEF7 /* world-bg-512.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		282723411883E40E00759DC7 /* SktDem001Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SktDem001Tests-Info.plist"; sourceTree = "<group>"; };
 		282723431883E40E00759DC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		282723451883E40E00759DC7 /* SktDem001Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SktDem001Tests.m; sourceTree = "<group>"; };
+		28CB8C9C188546E100AAFEF7 /* world-bg-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-bg-512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 		2827231B1883E40E00759DC7 /* SktDem001 */ = {
 			isa = PBXGroup;
 			children = (
+				28CB8C9C188546E100AAFEF7 /* world-bg-512.png */,
 				2816210718841B4100C9170E /* Spaceship2.png */,
 				282723241883E40E00759DC7 /* SktAppDelegate.h */,
 				282723251883E40E00759DC7 /* SktAppDelegate.m */,
@@ -252,6 +255,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */,
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
 				2816210818841B4100C9170E /* Spaceship2.png in Resources */,
 				282723331883E40E00759DC7 /* Images.xcassets in Resources */,

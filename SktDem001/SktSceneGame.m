@@ -30,6 +30,9 @@
         [self addChild:self.world];
         [self addChild:self.hud];
         
+        // SETUP
+        self.init2size = size;
+        
         [self setupHud];
         [self setupWorld];
 
@@ -59,15 +62,36 @@
 }
 
 -(void) setupWorld {
+    
+    // THE WORLD IS FLAT
+    self.world2mode = 1;
+    
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
-    
     
     [self.world addChild:bg];
     [self.world addChild:fg];
     
     self.world2bg = bg;
     self.world2fg = fg;
+    
+    // build the world limits depending on screen resolution
+    float sizeMax = self.init2size.width;
+    if (sizeMax < self.init2size.height) sizeMax = self.init2size.height;
+    
+    self.world2min = CGPointMake(-sizeMax/self.world2scale, -sizeMax/self.world2scale);
+    self.world2max = CGPointMake(sizeMax/self.world2scale, sizeMax/self.world2scale);
+    
+    NSLog(@"MIN: %.2f,%.2f", self.world2min.x, self.world2min.y);
+    NSLog(@"MAX: %.2f,%.2f", self.world2max.x, self.world2max.y);
+    
+    SKSpriteNode *sprite2bg = [SKSpriteNode spriteNodeWithTexture:
+                               [SKTexture textureWithImageNamed: @"world-bg-512"]];
+    sprite2bg.size = CGSizeMake(self.world2max.x - self.world2min.x,
+                                self.world2max.y - self.world2min.y);
+    
+    [self.world2bg addChild:sprite2bg];
+    
     
     [self setupPlayer];
     
@@ -79,6 +103,7 @@
     
     SKAction* scale = [SKAction scaleBy:self.world2scale duration:1];
     [self.world runAction:scale];
+    
     
 }
 
@@ -140,16 +165,17 @@
         float dx = location.x - curLoc.x;
         float dy = location.y - curLoc.y;
         self.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
-        //self.world2player.zRotation = atan2f(dy, dx);
+        self.world2player.zRotation = atan2f(dy, dx);
     }
 }
 
 - (void) update:(NSTimeInterval)currentTime {
     // KEEP player oriented in the speed direction
     // FIXME: why do we need -MI_PI_2 ?
-    self.world2player.zRotation =   -M_PI_2
-                                    + atan2f(self.world2player.physicsBody.velocity.dy,
-                                             self.world2player.physicsBody.velocity.dx);
+//    self.world2player.zRotation =   -M_PI_2
+//                                    + atan2f(self.world2player.physicsBody.velocity.dy,
+//                                             self.world2player.physicsBody.velocity.dx);
+    
     
 }
 
@@ -165,11 +191,13 @@
     if (d2 > d2max ) {
         //NSLog(@"%.2f, %.2f", self.world2player.position.x, self.world2player.position.y);
         // animate the camera
-        SKAction *action = [SKAction moveTo:self.world2player.position duration:1];
+        SKAction *action = [SKAction moveTo:self.world2player.position duration: .5];
         [self.world2camera runAction:action];
     }
     [self centerOnNode: self.world2camera];
 
+    // keep the world round
+    [self manageWorldLimit];
     
 }
 
@@ -178,6 +206,51 @@
     CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
     self.world.position = CGPointMake(self.world.position.x - cameraPositionInScene.x,
                                        self.world.position.y - cameraPositionInScene.y);
+}
+
+
+-(void) manageWorldLimit
+{
+    
+    // loop on all elements and check position
+    // warning: might be CPU consuming if too many elements
+    for (SKNode* curN in [self.world2fg children]) {
+        CGPoint curPos = curN.position;
+        float curX = curPos.x;
+        float curY = curPos.y;
+        
+        if (self.world2mode == 0) {
+            // THE WORLD IS ROUND
+            if (curX < self.world2min.x) {
+                curX = self.world2min.x;
+                curN.position = CGPointMake(self.world2max.x, curY);
+            }
+            else if (curX > self.world2max.x) {
+                curX = self.world2max.x;
+                curN.position = CGPointMake(self.world2min.x, curY);
+            }
+            
+            if (curY < self.world2min.y) curN.position = CGPointMake(curX, self.world2max.y);
+            else if (curY > self.world2max.y) curN.position = CGPointMake(curX, self.world2min.y);
+            
+        }
+        else {
+            // FIXME: NOT WORKING :-/
+            // THE WORLD IS FLAT
+            if (curX < self.world2min.x) {
+                curX = self.world2min.x;
+                curN.position = CGPointMake(self.world2min.x, curY);
+            }
+            else if (curX > self.world2max.x) {
+                curX = self.world2max.x;
+                curN.position = CGPointMake(self.world2max.x, curY);
+            }
+
+            if (curY < self.world2min.y) curN.position = CGPointMake(curX, self.world2min.y);
+            else if (curY > self.world2max.y) curN.position = CGPointMake(curX, self.world2max.y);
+            
+        }
+    }
 }
 
 @end

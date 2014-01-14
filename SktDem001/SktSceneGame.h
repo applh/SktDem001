@@ -20,6 +20,11 @@
 @property SKNode* world2camera; // WORLD CAMERA NODE / POSITION
 @property SKNode* world2player; // WORLD PLAYER
 
+@property CGSize  init2size;
+@property CGPoint world2min;
+@property CGPoint world2max;
+@property int     world2mode;   // 0 = round, 1 = flat
+
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
@@ -30,5 +35,6 @@
 -(void) setupPlayer;
 
 -(void) centerOnNode: (SKNode *) node;
+-(void) manageWorldLimit;
 
 @end
