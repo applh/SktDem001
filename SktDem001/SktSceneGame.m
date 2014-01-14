@@ -82,8 +82,8 @@
     self.world2min = CGPointMake(-sizeMax/self.world2scale, -sizeMax/self.world2scale);
     self.world2max = CGPointMake(sizeMax/self.world2scale, sizeMax/self.world2scale);
     
-    NSLog(@"MIN: %.2f,%.2f", self.world2min.x, self.world2min.y);
-    NSLog(@"MAX: %.2f,%.2f", self.world2max.x, self.world2max.y);
+    //NSLog(@"MIN: %.2f,%.2f", self.world2min.x, self.world2min.y);
+    //NSLog(@"MAX: %.2f,%.2f", self.world2max.x, self.world2max.y);
     
     SKSpriteNode *sprite2bg = [SKSpriteNode spriteNodeWithTexture:
                                [SKTexture textureWithImageNamed: @"world-bg-512"]];
@@ -92,14 +92,7 @@
     
     [self.world2bg addChild:sprite2bg];
     
-    
-    [self setupPlayer];
-    
-    SKNode *camera = [SKNode node];
-    camera.name = @"camera";
-    [self.world addChild:camera];
-    self.world2camera = camera;
-    self.world2camera.position = self.world2player.position;
+    [self setupPlayer]; // player and camera
     
     SKAction* scale = [SKAction scaleBy:self.world2scale duration:1];
     [self.world runAction:scale];
@@ -121,14 +114,25 @@
     sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
     sprite.physicsBody.dynamic = YES;
     sprite.physicsBody.velocity = CGVectorMake(dx,dy);
-    
+    sprite.physicsBody.angularVelocity = 0;
+    sprite.physicsBody.linearDamping = 0;
+    sprite.physicsBody.angularDamping = 0;
+    sprite.physicsBody.restitution = 0;
+
     SKAction *action = [SKAction rotateByAngle:angle duration:.5];
     [sprite runAction:action];
     
     [self.world2fg addChild:sprite];
     
     self.world2player = sprite;
-    
+
+    // SETUP CAMERA
+    SKNode *camera = [SKNode node];
+    camera.name = @"camera";
+    [self.world addChild:camera];
+    self.world2camera = camera;
+    self.world2camera.position = self.world2player.position;
+
 }
 
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -165,16 +169,12 @@
         float dx = location.x - curLoc.x;
         float dy = location.y - curLoc.y;
         self.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
+        self.world2player.physicsBody.angularVelocity = 0;
         self.world2player.zRotation = atan2f(dy, dx);
     }
 }
 
 - (void) update:(NSTimeInterval)currentTime {
-    // KEEP player oriented in the speed direction
-    // FIXME: why do we need -MI_PI_2 ?
-//    self.world2player.zRotation =   -M_PI_2
-//                                    + atan2f(self.world2player.physicsBody.velocity.dy,
-//                                             self.world2player.physicsBody.velocity.dx);
     
     
 }
@@ -186,7 +186,7 @@
     float d2 = dx*dx + dy*dy;
     // FIXME: how do we compute this threshold?
     // half of max screen size divided by scale ?
-    float d2max = 1024*1024*10/2; // 5000000;
+    float d2max = self.init2size.width*self.init2size.height * .5 / self.world2scale; // 5000000;
     
     if (d2 > d2max ) {
         //NSLog(@"%.2f, %.2f", self.world2player.position.x, self.world2player.position.y);
