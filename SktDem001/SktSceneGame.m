@@ -63,6 +63,8 @@
 
 -(void) setupWorld {
     
+    self.player2vmax2scale = .025;
+    
     // THE WORLD IS FLAT
     self.world2mode = 1;
     
@@ -101,6 +103,10 @@
 }
 
 -(void) setupPlayer {
+    
+    // FIXME
+    self.player2vmax = self.player2vmax2scale * self.world2max.x;
+    
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
     
     sprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)) ;
@@ -176,7 +182,18 @@
 
 - (void) update:(NSTimeInterval)currentTime {
     
-    
+    // MAX SPEED
+    float curV = hypot(self.world2player.physicsBody.velocity.dx,
+                       self.world2player.physicsBody.velocity.dy);
+    if (curV > self.player2vmax) {
+        //NSLog(@"%.2f", curV);
+        
+        self.world2player.physicsBody.velocity =
+            CGVectorMake(self.player2vmax * cos(self.world2player.zRotation),
+                         self.player2vmax * sin(self.world2player.zRotation));
+        self.world2player.physicsBody.angularVelocity = 0;
+
+    }
 }
 
 - (void) didSimulatePhysics

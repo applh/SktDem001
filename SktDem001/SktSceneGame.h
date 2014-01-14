@@ -25,6 +25,10 @@
 @property CGPoint world2max;
 @property int     world2mode;   // 0 = round, 1 = flat
 
+
+@property float   player2vmax;  // Velocity max
+@property float   player2vmax2scale;  // Velocity max factor
+
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
