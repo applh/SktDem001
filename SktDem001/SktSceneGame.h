@@ -40,5 +40,6 @@
 
 -(void) centerOnNode: (SKNode *) node;
 -(void) manageWorldLimit;
+-(void) addRandomRobotAt:(CGPoint) location;
 
 @end

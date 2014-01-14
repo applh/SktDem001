@@ -146,26 +146,29 @@
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self.world2fg];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship2"];
-        
-        sprite.position = location;
-        
-        float angle = arc4random_uniform(360) * M_PI / 180;
-        float speed = 100;
-        float dx = speed * cos(angle);
-        float dy = speed * sin(angle);
-        
-        // warning: apply scaling also to physics body
-        sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
-        sprite.physicsBody.dynamic = YES;
-        sprite.physicsBody.velocity = CGVectorMake(dx,dy);
-
-        SKAction *action = [SKAction rotateByAngle:angle duration:.5];
-        [sprite runAction:action];
-        
-        [self.world2fg addChild:sprite];
     }
+}
+
+-(void) addRandomRobotAt:(CGPoint) location {
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship2"];
+    
+    sprite.position = location;
+    
+    float angle = arc4random_uniform(360) * M_PI / 180;
+    float speed = 100;
+    float dx = speed * cos(angle);
+    float dy = speed * sin(angle);
+    
+    // warning: apply scaling also to physics body
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
+    sprite.physicsBody.dynamic = YES;
+    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
+    
+    SKAction *action = [SKAction rotateByAngle:angle duration:.5];
+    [sprite runAction:action];
+    
+    [self.world2fg addChild:sprite];
+
 }
 
 -(void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -194,6 +197,19 @@
         self.world2player.physicsBody.angularVelocity = 0;
 
     }
+    
+    // add random robot
+    float random = arc4random_uniform(100);
+    float robot2random  = 2;
+    if (random < robot2random) {
+        float radius = arc4random_uniform(self.world2max.x);
+        float theta = 2 * M_PI * arc4random_uniform(360) / 360;
+        float x = radius * cos(theta);
+        float y = radius * sin(theta);
+        CGPoint newPos = CGPointMake(x,y);
+        [self addRandomRobotAt:newPos];
+    }
+    
 }
 
 - (void) didSimulatePhysics
@@ -252,7 +268,6 @@
             
         }
         else {
-            // FIXME: NOT WORKING :-/
             // THE WORLD IS FLAT
             if (curX < self.world2min.x) {
                 curX = self.world2min.x;
