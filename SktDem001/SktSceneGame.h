@@ -8,10 +8,16 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface SktSceneGame : SKScene
+@interface SktSceneGame : SKScene <SKPhysicsContactDelegate>
 
-@property SKNode* hud;          // HEAD UP DISPLAY
-@property SKNode* hud2fg;       // HUD FOREGROUND
+@property uint32_t ccPlayer;
+@property uint32_t ccOrb;
+@property uint32_t ccRobot;
+@property uint32_t ccBonus;
+
+@property SKNode* hud;              // HEAD UP DISPLAY
+@property SKNode* hud2fg;           // HUD FOREGROUND
+@property SKLabelNode* hud2center;   // HUD FOREGROUND
 
 @property float   world2scale;  // ZOOM FACTOR
 @property SKNode* world;        // WORLD
@@ -37,9 +43,13 @@
 @property double  lastMissileT; // MISSILE FPS
 @property double  minMissileT; // MISSILE FPS
 
+@property int playerEnergy;
+@property int playerScore;
+
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
+-(void) didBeginContact: (SKPhysicsContact *) contact;
 
 // CUSTOM
 -(void) setupHud;

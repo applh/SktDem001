@@ -26,6 +26,9 @@
         // NO GRAVITY
         self.physicsWorld.gravity = CGVectorMake(0, 0);
         
+        // CONTACT DELEGATE
+        self.physicsWorld.contactDelegate = self;
+        
         // add to the scene
         [self addChild:self.world];
         [self addChild:self.hud];
@@ -56,12 +59,18 @@
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    CGRectGetMidY(self.frame));
+    self.hud2center = myLabel;
     
     [self.hud2fg addChild:myLabel];
 
 }
 
 -(void) setupWorld {
+    
+    self.ccPlayer   =  0x1 << 0;
+    self.ccOrb      =  0x1 << 1;
+    self.ccRobot    =  0x1 << 2;
+    self.ccBonus    =  0x1 << 3;
     
     self.player2vmax2scale = .025;
     
@@ -104,6 +113,9 @@
 
 -(void) setupPlayer {
     
+    self.playerEnergy = 100;
+    self.playerScore = 0;
+    
     // FIXME
     self.player2vmax = self.player2vmax2scale * self.world2max.x;
     
@@ -125,6 +137,10 @@
     sprite.physicsBody.angularDamping = 0;
     sprite.physicsBody.restitution = 0;
 
+    // CONTACT AND COLLISION
+    sprite.physicsBody.categoryBitMask = self.ccPlayer;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
+    
     SKAction *action = [SKAction rotateByAngle:angle duration:.5];
     [sprite runAction:action];
     
@@ -140,7 +156,7 @@
     self.world2camera.position = self.world2player.position;
     
     // SETUP MISSILE
-    self.minMissileT = 1; // ONE MISSILE PER SECOND
+    self.minMissileT = .5; // ONE MISSILE PER SECOND
 
 }
 
@@ -185,6 +201,10 @@
     sprite.physicsBody.restitution = 0.5;
     sprite.physicsBody.density = 50;   // HARD
     
+    // CONTACT AND COLLISION
+    sprite.physicsBody.categoryBitMask = self.ccOrb;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
+
     SKAction *action0 = [SKAction waitForDuration:10];
     SKAction *action1 = [SKAction fadeOutWithDuration:.5];
     SKAction *action2 = [SKAction removeFromParent];
@@ -211,9 +231,13 @@
     sprite.physicsBody.linearDamping = 0;
     sprite.physicsBody.angularDamping = 0;
     sprite.physicsBody.restitution = 0;
+
+    // CONTACT AND COLLISION
+    sprite.physicsBody.categoryBitMask = self.ccRobot;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
     
     SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
-    SKAction *action1 = [SKAction waitForDuration:100];
+    SKAction *action1 = [SKAction waitForDuration:500];
     SKAction *action2 = [SKAction fadeOutWithDuration:.5];
     SKAction *action3 = [SKAction removeFromParent];
     [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
@@ -243,9 +267,13 @@
     sprite.physicsBody.linearDamping = 0;
     sprite.physicsBody.angularDamping = 0;
     sprite.physicsBody.restitution = 0;
+
+    // CONTACT AND COLLISION
+    sprite.physicsBody.categoryBitMask = self.ccBonus;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
     
     SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
-    SKAction *action1 = [SKAction waitForDuration:200];
+    SKAction *action1 = [SKAction waitForDuration:500];
     SKAction *action2 = [SKAction fadeOutWithDuration:.5];
     SKAction *action3 = [SKAction removeFromParent];
     [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
@@ -296,7 +324,7 @@
         
         // add random robot
         random = arc4random_uniform(10000);
-        float robot2random  = 200;
+        float robot2random  = 1000;
         if (random < robot2random) {
             float radius = arc4random_uniform(self.world2max.x);
             float theta = 2 * M_PI * arc4random_uniform(360) / 360;
@@ -323,6 +351,12 @@
         NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
     }
     
+    // SCORE
+    if (self.playerScore < 0) self.playerScore = 0;
+    if (self.playerEnergy < 0) self.playerEnergy = 0;
+
+    self.hud2center.text = [NSString stringWithFormat:@"ENERGY: %d / SCORE %d",
+                                            self.playerEnergy, self.playerScore];
 }
 
 - (void) didSimulatePhysics
@@ -394,6 +428,63 @@
             if (curY < self.world2min.y) curN.position = CGPointMake(curX, self.world2min.y);
             else if (curY > self.world2max.y) curN.position = CGPointMake(curX, self.world2max.y);
             
+        }
+    }
+}
+
+
+- (void) didBeginContact:(SKPhysicsContact *)contact
+{
+    SKPhysicsBody *firstBody, *secondBody;
+    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
+    {
+        firstBody = contact.bodyA;
+        secondBody = contact.bodyB;
+    }
+    else {
+        firstBody = contact.bodyB;
+        secondBody = contact.bodyA;
+    }
+    
+    if (firstBody.categoryBitMask == self.ccPlayer) {
+        //NSLog(@"CONTACT/PLAYER");
+        if (secondBody.categoryBitMask == self.ccBonus) {
+            SKAction* act0 = [SKAction fadeOutWithDuration:.5];
+            SKAction* act1 = [SKAction removeFromParent];
+            
+            [secondBody.node runAction:[SKAction sequence:@[act0, act1]]];
+            
+            // SCORE
+            self.playerScore += 10;
+        }
+        else if (secondBody.categoryBitMask == self.ccOrb) {
+            // SCORE
+            self.playerEnergy -= 1;
+        }
+        else if (secondBody.categoryBitMask == self.ccRobot) {
+            // SCORE
+            self.playerEnergy -= 1;
+        }
+    }
+    else if (firstBody.categoryBitMask == self.ccOrb) {
+        //NSLog(@"CONTACT/ORB");
+        if (secondBody.categoryBitMask == self.ccRobot) {
+            SKAction* act0 = [SKAction fadeOutWithDuration:.5];
+            SKAction* act1 = [SKAction removeFromParent];
+            
+            [secondBody.node runAction:[SKAction sequence:@[act0, act1]]];
+            
+            // SCORE
+            self.playerScore += 1;
+        }
+        else if (secondBody.categoryBitMask == self.ccBonus) {
+            SKAction* act0 = [SKAction fadeOutWithDuration:.5];
+            SKAction* act1 = [SKAction removeFromParent];
+            
+            [secondBody.node runAction:[SKAction sequence:@[act0, act1]]];
+            
+            // SCORE
+            self.playerScore += 10;
         }
     }
 }
