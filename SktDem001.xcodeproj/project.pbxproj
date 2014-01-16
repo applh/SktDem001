@@ -27,6 +27,7 @@
 		2827233C1883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
 		282723441883E40E00759DC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282723421883E40E00759DC7 /* InfoPlist.strings */; };
 		282723461883E40E00759DC7 /* SktDem001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 282723451883E40E00759DC7 /* SktDem001Tests.m */; };
+		2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2894796E18881BA500F19CE1 /* SktSceneStart.m */; };
 		28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CB8C9C188546E100AAFEF7 /* world-bg-512.png */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,8 @@
 		282723411883E40E00759DC7 /* SktDem001Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SktDem001Tests-Info.plist"; sourceTree = "<group>"; };
 		282723431883E40E00759DC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		282723451883E40E00759DC7 /* SktDem001Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SktDem001Tests.m; sourceTree = "<group>"; };
+		2894796D18881BA500F19CE1 /* SktSceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktSceneStart.h; sourceTree = "<group>"; };
+		2894796E18881BA500F19CE1 /* SktSceneStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktSceneStart.m; sourceTree = "<group>"; };
 		28CB8C9C188546E100AAFEF7 /* world-bg-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-bg-512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +147,8 @@
 				2827231C1883E40E00759DC7 /* Supporting Files */,
 				281621041883EF9200C9170E /* SktSceneGame.h */,
 				281621051883EF9200C9170E /* SktSceneGame.m */,
+				2894796D18881BA500F19CE1 /* SktSceneStart.h */,
+				2894796E18881BA500F19CE1 /* SktSceneStart.m */,
 			);
 			path = SktDem001;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				2827232F1883E40E00759DC7 /* SktMyScene.m in Sources */,
 				282723221883E40E00759DC7 /* main.m in Sources */,
 				282723261883E40E00759DC7 /* SktAppDelegate.m in Sources */,
+				2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */,
 				281621061883EF9200C9170E /* SktSceneGame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

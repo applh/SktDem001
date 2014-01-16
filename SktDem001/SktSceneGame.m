@@ -65,8 +65,8 @@
     
     self.player2vmax2scale = .025;
     
-    // THE WORLD IS FLAT
-    self.world2mode = 1;
+    // THE WORLD IS ROUND
+    self.world2mode = 0;
     
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
@@ -144,9 +144,9 @@
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
     /* Called when a touch begins */
     
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self.world2fg];
-    }
+//    for (UITouch *touch in touches) {
+//        CGPoint location = [touch locationInNode:self.world2fg];
+//    }
 }
 
 -(void) addRandomRobotAt:(CGPoint) location {
@@ -163,6 +163,10 @@
     sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
     sprite.physicsBody.dynamic = YES;
     sprite.physicsBody.velocity = CGVectorMake(dx,dy);
+    sprite.physicsBody.angularVelocity = 0;
+    sprite.physicsBody.linearDamping = 0;
+    sprite.physicsBody.angularDamping = 0;
+    sprite.physicsBody.restitution = 0;
     
     SKAction *action = [SKAction rotateByAngle:angle duration:.5];
     [sprite runAction:action];

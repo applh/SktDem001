@@ -7,7 +7,7 @@
 //
 
 #import "SktMyScene.h"
-#import "SktSceneGame.h"
+#import "SktSceneStart.h"
 
 @implementation SktMyScene
 
@@ -51,7 +51,7 @@
     // Create and configure the scene.
     SKView * skView = (SKView *)self.view;
 
-    SktSceneGame * scene = [SktSceneGame sceneWithSize:skView.bounds.size];
+    SktSceneStart * scene = [SktSceneStart sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFit;
 
     // ADD TRANSITION EFFECT
