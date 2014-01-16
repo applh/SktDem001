@@ -143,13 +143,7 @@
 		2827231B1883E40E00759DC7 /* SktDem001 */ = {
 			isa = PBXGroup;
 			children = (
-				28947974188850D500F19CE1 /* gem1.png */,
-				28947975188850D500F19CE1 /* gem2.png */,
-				28947976188850D500F19CE1 /* gem3.png */,
-				289479721888416000F19CE1 /* disk-256x256.png */,
-				2894797018883E6E00F19CE1 /* orb-42x42.png */,
-				28CB8C9C188546E100AAFEF7 /* world-bg-512.png */,
-				2816210718841B4100C9170E /* Spaceship2.png */,
+				2894797A1888569400F19CE1 /* images.atlas */,
 				282723241883E40E00759DC7 /* SktAppDelegate.h */,
 				282723251883E40E00759DC7 /* SktAppDelegate.m */,
 				282723271883E40E00759DC7 /* Main.storyboard */,
@@ -157,7 +151,6 @@
 				2827232B1883E40E00759DC7 /* SktViewController.m */,
 				2827232D1883E40E00759DC7 /* SktMyScene.h */,
 				2827232E1883E40E00759DC7 /* SktMyScene.m */,
-				282723301883E40E00759DC7 /* Spaceship.png */,
 				282723321883E40E00759DC7 /* Images.xcassets */,
 				2827231C1883E40E00759DC7 /* Supporting Files */,
 				281621041883EF9200C9170E /* SktSceneGame.h */,
@@ -196,6 +189,21 @@
 				282723421883E40E00759DC7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2894797A1888569400F19CE1 /* images.atlas */ = {
+			isa = PBXGroup;
+			children = (
+				28947974188850D500F19CE1 /* gem1.png */,
+				28947975188850D500F19CE1 /* gem2.png */,
+				28947976188850D500F19CE1 /* gem3.png */,
+				289479721888416000F19CE1 /* disk-256x256.png */,
+				2894797018883E6E00F19CE1 /* orb-42x42.png */,
+				28CB8C9C188546E100AAFEF7 /* world-bg-512.png */,
+				2816210718841B4100C9170E /* Spaceship2.png */,
+				282723301883E40E00759DC7 /* Spaceship.png */,
+			);
+			name = images.atlas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
