@@ -32,7 +32,7 @@
         myLabel2.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 
         myLabel2.position = CGPointMake(CGRectGetMidX(self.frame), 0);
-        SKAction* action = [SKAction moveByX:0 y:-CGRectGetMidY(self.frame) duration:1];
+        SKAction* action = [SKAction moveByX:0 y:-CGRectGetMidY(self.frame) duration:2];
         SKAction* action2 = [SKAction moveByX:0 y:CGRectGetMidY(self.frame)/2 duration:2];
         
         [myLabel runAction: action];

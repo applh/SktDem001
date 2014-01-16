@@ -86,9 +86,9 @@
                                         blue: .15 * arc4random_uniform(5)
                                        alpha: .8 ];
     
-    choice.position = CGPointMake(CGRectGetMidX(self.frame), 0);
+    choice.position = CGPointMake(CGRectGetMidX(self.frame), -2*CGRectGetMidY(self.frame));
     SKAction* action = [SKAction moveByX: 0
-                                       y: (5 - self.nbChoice) * .3 * CGRectGetMidY(self.frame)
+                                       y: (((5 - self.nbChoice) * .3) +2) * CGRectGetMidY(self.frame)
                                 duration: 2];
     [choice runAction: action];
     [self addChild:choice];

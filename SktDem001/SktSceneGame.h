@@ -29,6 +29,14 @@
 @property float   player2vmax;  // Velocity max
 @property float   player2vmax2scale;  // Velocity max factor
 
+@property float   game2fps;     // REALTIME FPS
+@property double  lastUpdateT;  // REALTIME FPS
+@property double  curUpdateT;   // REALTIME FPS
+@property double  deltaUpdateT; // REALTIME FPS
+
+@property double  lastMissileT; // MISSILE FPS
+@property double  minMissileT; // MISSILE FPS
+
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;

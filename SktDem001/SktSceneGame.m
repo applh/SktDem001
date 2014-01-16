@@ -138,6 +138,9 @@
     [self.world addChild:camera];
     self.world2camera = camera;
     self.world2camera.position = self.world2player.position;
+    
+    // SETUP MISSILE
+    self.minMissileT = 1; // ONE MISSILE PER SECOND
 
 }
 
@@ -149,8 +152,49 @@
 //    }
 }
 
+-(void) launchMissile:(SKNode*) from Time: (NSTimeInterval) currentTime
+{
+    // MISSILE FPS
+    if ((currentTime - self.lastMissileT) < self.minMissileT)
+        return;
+    
+    self.lastMissileT = currentTime;
+    
+    // LAUNCH NEW MISSILE
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"orb-42x42"];
+    
+    
+    float speed = 2;
+    float dx = speed * from.physicsBody.velocity.dx;
+    float dy = speed * from.physicsBody.velocity.dy;
+    float angle = atan2f(dy, dx);
+
+    sprite.position = CGPointMake(from.position.x + dx, from.position.y + dy) ;
+
+    dx += cos(angle) * 2 * self.player2vmax;
+    dy += sin(angle) * 2 * self.player2vmax;;
+
+    
+    // warning: apply scaling also to physics body
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
+    sprite.physicsBody.dynamic = YES;
+    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
+    sprite.physicsBody.angularVelocity = 0;
+    sprite.physicsBody.linearDamping = 0;
+    sprite.physicsBody.angularDamping = 0;
+    sprite.physicsBody.restitution = 0.5;
+    sprite.physicsBody.density = 50;   // HARD
+    
+    SKAction *action0 = [SKAction waitForDuration:10];
+    SKAction *action1 = [SKAction fadeOutWithDuration:.5];
+    SKAction *action2 = [SKAction removeFromParent];
+    [sprite runAction: [SKAction sequence: @[action0, action1, action2]]];
+    
+    [self.world2fg addChild:sprite];
+}
+
 -(void) addRandomRobotAt:(CGPoint) location {
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship2"];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"disk-256x256"];
     
     sprite.position = location;
     
@@ -168,11 +212,46 @@
     sprite.physicsBody.angularDamping = 0;
     sprite.physicsBody.restitution = 0;
     
-    SKAction *action = [SKAction rotateByAngle:angle duration:.5];
-    [sprite runAction:action];
+    SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
+    SKAction *action1 = [SKAction waitForDuration:100];
+    SKAction *action2 = [SKAction fadeOutWithDuration:.5];
+    SKAction *action3 = [SKAction removeFromParent];
+    [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
     
     [self.world2fg addChild:sprite];
 
+}
+
+-(void) addRandomBonusAt:(CGPoint) location {
+    
+    uint index = 1 + arc4random_uniform(3);
+    NSString * gemName = [NSString stringWithFormat:@"gem%d", index];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:gemName];
+    
+    sprite.position = location;
+    
+    float angle = arc4random_uniform(360) * M_PI / 180;
+    float speed = 100;
+    float dx = speed * cos(angle);
+    float dy = speed * sin(angle);
+    
+    // warning: apply scaling also to physics body
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
+    sprite.physicsBody.dynamic = YES;
+    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
+    sprite.physicsBody.angularVelocity = 0;
+    sprite.physicsBody.linearDamping = 0;
+    sprite.physicsBody.angularDamping = 0;
+    sprite.physicsBody.restitution = 0;
+    
+    SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
+    SKAction *action1 = [SKAction waitForDuration:200];
+    SKAction *action2 = [SKAction fadeOutWithDuration:.5];
+    SKAction *action3 = [SKAction removeFromParent];
+    [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
+    
+    [self.world2fg addChild:sprite];
+    
 }
 
 -(void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -189,6 +268,11 @@
 
 - (void) update:(NSTimeInterval)currentTime {
     
+    // UPDATE FPS COMPUTING
+    self.lastUpdateT = self.curUpdateT;
+    self.curUpdateT = currentTime;
+    self.deltaUpdateT = self.curUpdateT - self.lastUpdateT;
+    
     // MAX SPEED
     float curV = hypot(self.world2player.physicsBody.velocity.dx,
                        self.world2player.physicsBody.velocity.dy);
@@ -202,16 +286,41 @@
 
     }
     
-    // add random robot
-    float random = arc4random_uniform(100);
-    float robot2random  = 2;
-    if (random < robot2random) {
-        float radius = arc4random_uniform(self.world2max.x);
-        float theta = 2 * M_PI * arc4random_uniform(360) / 360;
-        float x = radius * cos(theta);
-        float y = radius * sin(theta);
-        CGPoint newPos = CGPointMake(x,y);
-        [self addRandomRobotAt:newPos];
+    // LAUNCH MISSILE
+    [self launchMissile:self.world2player Time:currentTime];
+    
+    // KEEP FPS > 25
+    if (self.deltaUpdateT < .04) {
+        
+        float random = 0;
+        
+        // add random robot
+        random = arc4random_uniform(10000);
+        float robot2random  = 200;
+        if (random < robot2random) {
+            float radius = arc4random_uniform(self.world2max.x);
+            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
+            float x = radius * cos(theta);
+            float y = radius * sin(theta);
+            CGPoint newPos = CGPointMake(x,y);
+            [self addRandomRobotAt:newPos];
+        }
+
+        // add random bonus
+        random = arc4random_uniform(10000);
+        float bonus2random  = 10;
+        if (random < bonus2random) {
+            float radius = arc4random_uniform(self.world2max.x);
+            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
+            float x = radius * cos(theta);
+            float y = radius * sin(theta);
+            CGPoint newPos = CGPointMake(x,y);
+            [self addRandomBonusAt:newPos];
+        }
+    
+    }
+    else {
+        NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
     }
     
 }

@@ -28,6 +28,11 @@
 		282723441883E40E00759DC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282723421883E40E00759DC7 /* InfoPlist.strings */; };
 		282723461883E40E00759DC7 /* SktDem001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 282723451883E40E00759DC7 /* SktDem001Tests.m */; };
 		2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2894796E18881BA500F19CE1 /* SktSceneStart.m */; };
+		2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */ = {isa = PBXBuildFile; fileRef = 2894797018883E6E00F19CE1 /* orb-42x42.png */; };
+		289479731888416000F19CE1 /* disk-256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 289479721888416000F19CE1 /* disk-256x256.png */; };
+		28947977188850D500F19CE1 /* gem1.png in Resources */ = {isa = PBXBuildFile; fileRef = 28947974188850D500F19CE1 /* gem1.png */; };
+		28947978188850D500F19CE1 /* gem2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28947975188850D500F19CE1 /* gem2.png */; };
+		28947979188850D500F19CE1 /* gem3.png in Resources */ = {isa = PBXBuildFile; fileRef = 28947976188850D500F19CE1 /* gem3.png */; };
 		28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CB8C9C188546E100AAFEF7 /* world-bg-512.png */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +76,11 @@
 		282723451883E40E00759DC7 /* SktDem001Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SktDem001Tests.m; sourceTree = "<group>"; };
 		2894796D18881BA500F19CE1 /* SktSceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktSceneStart.h; sourceTree = "<group>"; };
 		2894796E18881BA500F19CE1 /* SktSceneStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktSceneStart.m; sourceTree = "<group>"; };
+		2894797018883E6E00F19CE1 /* orb-42x42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orb-42x42.png"; sourceTree = "<group>"; };
+		289479721888416000F19CE1 /* disk-256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "disk-256x256.png"; sourceTree = "<group>"; };
+		28947974188850D500F19CE1 /* gem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem1.png; sourceTree = "<group>"; };
+		28947975188850D500F19CE1 /* gem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem2.png; sourceTree = "<group>"; };
+		28947976188850D500F19CE1 /* gem3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem3.png; sourceTree = "<group>"; };
 		28CB8C9C188546E100AAFEF7 /* world-bg-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-bg-512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +143,11 @@
 		2827231B1883E40E00759DC7 /* SktDem001 */ = {
 			isa = PBXGroup;
 			children = (
+				28947974188850D500F19CE1 /* gem1.png */,
+				28947975188850D500F19CE1 /* gem2.png */,
+				28947976188850D500F19CE1 /* gem3.png */,
+				289479721888416000F19CE1 /* disk-256x256.png */,
+				2894797018883E6E00F19CE1 /* orb-42x42.png */,
 				28CB8C9C188546E100AAFEF7 /* world-bg-512.png */,
 				2816210718841B4100C9170E /* Spaceship2.png */,
 				282723241883E40E00759DC7 /* SktAppDelegate.h */,
@@ -261,12 +276,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */,
+				28947977188850D500F19CE1 /* gem1.png in Resources */,
+				28947978188850D500F19CE1 /* gem2.png in Resources */,
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
 				2816210818841B4100C9170E /* Spaceship2.png in Resources */,
 				282723331883E40E00759DC7 /* Images.xcassets in Resources */,
+				2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */,
 				281621031883EC8000C9170E /* README.md in Resources */,
+				289479731888416000F19CE1 /* disk-256x256.png in Resources */,
 				282723311883E40E00759DC7 /* Spaceship.png in Resources */,
 				282723291883E40E00759DC7 /* Main.storyboard in Resources */,
+				28947979188850D500F19CE1 /* gem3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
