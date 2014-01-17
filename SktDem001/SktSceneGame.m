@@ -45,6 +45,8 @@
 
 // CUSTOM
 -(void) setupHud {
+    float fontSize1 = 50;
+    
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
     [self.hud addChild:bg];
@@ -52,15 +54,33 @@
     
     self.hud2fg = fg;
     
-    SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
+    SKLabelNode *myLabel;
     
+    myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
+    myLabel.text = @"LEVEL 1";
+    myLabel.fontSize = fontSize1;
+    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                   CGRectGetMaxY(self.frame)-1.2*fontSize1);
+    self.hud2top = myLabel;
+    [self.hud2fg addChild:myLabel];
+
+    myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
     myLabel.text = @"LEVEL 1";
     myLabel.fontSize = 50;
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    CGRectGetMidY(self.frame));
     self.hud2center = myLabel;
-    
+    [self.hud2fg addChild:myLabel];
+
+    myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
+    myLabel.text = @"LEVEL 1";
+    myLabel.fontSize = 50;
+    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
+                                   CGRectGetMinY(self.frame)+1.2*fontSize1);
+    self.hud2bottom = myLabel;
     [self.hud2fg addChild:myLabel];
 
 }
@@ -71,6 +91,7 @@
     self.ccOrb      =  0x1 << 1;
     self.ccRobot    =  0x1 << 2;
     self.ccBonus    =  0x1 << 3;
+    self.ccRock     =  0x1 << 4;
     
     self.player2vmax2scale = .025;
     
@@ -163,9 +184,15 @@
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
     /* Called when a touch begins */
     
-//    for (UITouch *touch in touches) {
-//        CGPoint location = [touch locationInNode:self.world2fg];
-//    }
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self.world2fg];
+        CGPoint curLoc = self.world2player.position;
+        float dx = location.x - curLoc.x;
+        float dy = location.y - curLoc.y;
+        self.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
+        self.world2player.physicsBody.angularVelocity = 0;
+        self.world2player.zRotation = atan2f(dy, dx);
+    }
 }
 
 -(void) launchMissile:(SKNode*) from Time: (NSTimeInterval) currentTime
@@ -205,7 +232,7 @@
     sprite.physicsBody.categoryBitMask = self.ccOrb;
     sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
 
-    SKAction *action0 = [SKAction waitForDuration:10];
+    SKAction *action0 = [SKAction waitForDuration:5];
     SKAction *action1 = [SKAction fadeOutWithDuration:.5];
     SKAction *action2 = [SKAction removeFromParent];
     [sprite runAction: [SKAction sequence: @[action0, action1, action2]]];
@@ -246,6 +273,43 @@
 
 }
 
+-(void) addRandomRockAt:(CGPoint) location {
+    NSString * spriteName = [NSString stringWithFormat:@"rock%d",
+                             (int) (1+floor(sqrt(arc4random_uniform(9))))];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:spriteName];
+    
+    sprite.position = location;
+    
+    float angle = arc4random_uniform(360) * M_PI / 180;
+    float speed = 100;
+    float dx = speed * cos(angle);
+    float dy = speed * sin(angle);
+    
+    // warning: apply scaling also to physics body
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
+    sprite.physicsBody.dynamic = YES;
+    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
+    sprite.physicsBody.angularVelocity = 0;
+    sprite.physicsBody.linearDamping = 0;
+    sprite.physicsBody.angularDamping = 0;
+    sprite.physicsBody.restitution = 0;
+    sprite.physicsBody.density = 100;   // HARD
+
+    // CONTACT AND COLLISION
+    sprite.physicsBody.categoryBitMask = self.ccRock;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
+    
+    SKAction *action0 = [SKAction rotateByAngle:angle duration: arc4random_uniform(10)];
+    SKAction *action1 = [SKAction waitForDuration:5000];
+    SKAction *action2 = [SKAction fadeOutWithDuration:.5];
+    SKAction *action3 = [SKAction removeFromParent];
+    [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
+    
+    [self.world2fg addChild:sprite];
+    
+}
+
+
 -(void) addRandomBonusAt:(CGPoint) location {
     
     uint index = 1 + arc4random_uniform(3);
@@ -273,7 +337,7 @@
     sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
     
     SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
-    SKAction *action1 = [SKAction waitForDuration:500];
+    SKAction *action1 = [SKAction waitForDuration:600];
     SKAction *action2 = [SKAction fadeOutWithDuration:.5];
     SKAction *action3 = [SKAction removeFromParent];
     [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
@@ -324,7 +388,19 @@
         
         // add random robot
         random = arc4random_uniform(10000);
-        float robot2random  = 1000;
+        float rock2random  = 50;
+        if (random < rock2random) {
+            float radius = arc4random_uniform(self.world2max.x);
+            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
+            float x = radius * cos(theta);
+            float y = radius * sin(theta);
+            CGPoint newPos = CGPointMake(x,y);
+            [self addRandomRockAt:newPos];
+        }
+
+        // add random robot
+        random = arc4random_uniform(10000);
+        float robot2random  = 500;
         if (random < robot2random) {
             float radius = arc4random_uniform(self.world2max.x);
             float theta = 2 * M_PI * arc4random_uniform(360) / 360;
@@ -336,7 +412,7 @@
 
         // add random bonus
         random = arc4random_uniform(10000);
-        float bonus2random  = 10;
+        float bonus2random  = 20;
         if (random < bonus2random) {
             float radius = arc4random_uniform(self.world2max.x);
             float theta = 2 * M_PI * arc4random_uniform(360) / 360;
@@ -348,15 +424,17 @@
     
     }
     else {
-        NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
+        //NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
     }
     
     // SCORE
     if (self.playerScore < 0) self.playerScore = 0;
     if (self.playerEnergy < 0) self.playerEnergy = 0;
-
-    self.hud2center.text = [NSString stringWithFormat:@"ENERGY: %d / SCORE %d",
-                                            self.playerEnergy, self.playerScore];
+    
+    self.hud2center.text = @"";
+    self.hud2top.text = [NSString stringWithFormat:@"ENERGY: %d", self.playerEnergy];
+    self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d", self.playerScore];
+    
 }
 
 - (void) didSimulatePhysics
@@ -454,6 +532,17 @@
             
             [secondBody.node runAction:[SKAction sequence:@[act0, act1]]];
             
+            // PARTICLE
+            NSString * particlePath = [[NSBundle mainBundle] pathForResource:@"magic1" ofType:@"sks"];
+            SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
+            emitter.position = firstBody.node.position;
+            
+            SKAction* act2 = [SKAction waitForDuration:1+arc4random_uniform(2)];
+            SKAction* act3 = [SKAction removeFromParent];
+            [emitter runAction:[SKAction sequence: @[act2, act3]]];
+            
+            [self.world2fg addChild:emitter];
+
             // SCORE
             self.playerScore += 10;
         }
@@ -462,6 +551,10 @@
             self.playerEnergy -= 1;
         }
         else if (secondBody.categoryBitMask == self.ccRobot) {
+            // SCORE
+            self.playerEnergy -= 1;
+        }
+        else if (secondBody.categoryBitMask == self.ccRock) {
             // SCORE
             self.playerEnergy -= 1;
         }
@@ -474,6 +567,17 @@
             
             [secondBody.node runAction:[SKAction sequence:@[act0, act1]]];
             
+            // PARTICLE
+            NSString * particlePath = [[NSBundle mainBundle] pathForResource:@"spark1" ofType:@"sks"];
+            SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
+            emitter.position = firstBody.node.position;
+            
+            SKAction* act2 = [SKAction waitForDuration:1+arc4random_uniform(2)];
+            SKAction* act3 = [SKAction removeFromParent];
+            [emitter runAction:[SKAction sequence: @[act2, act3]]];
+            
+            [self.world2fg addChild:emitter];
+            
             // SCORE
             self.playerScore += 1;
         }
@@ -483,6 +587,17 @@
             
             [secondBody.node runAction:[SKAction sequence:@[act0, act1]]];
             
+            // PARTICLE
+            NSString * particlePath = [[NSBundle mainBundle] pathForResource:@"flies1" ofType:@"sks"];
+            SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
+            emitter.position = firstBody.node.position;
+            
+            SKAction* act2 = [SKAction waitForDuration:1+arc4random_uniform(2)];
+            SKAction* act3 = [SKAction removeFromParent];
+            [emitter runAction:[SKAction sequence: @[act2, act3]]];
+            
+            [self.world2fg addChild:emitter];
+
             // SCORE
             self.playerScore += 10;
         }

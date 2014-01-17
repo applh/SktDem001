@@ -14,10 +14,14 @@
 @property uint32_t ccOrb;
 @property uint32_t ccRobot;
 @property uint32_t ccBonus;
+@property uint32_t ccRock;
 
 @property SKNode* hud;              // HEAD UP DISPLAY
 @property SKNode* hud2fg;           // HUD FOREGROUND
-@property SKLabelNode* hud2center;   // HUD FOREGROUND
+
+@property SKLabelNode* hud2top;     // HUD TOP
+@property SKLabelNode* hud2center;  // HUD CENTER
+@property SKLabelNode* hud2bottom;  // HUD BOTTOM
 
 @property float   world2scale;  // ZOOM FACTOR
 @property SKNode* world;        // WORLD

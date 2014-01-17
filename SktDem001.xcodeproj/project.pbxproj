@@ -33,6 +33,13 @@
 		28947977188850D500F19CE1 /* gem1.png in Resources */ = {isa = PBXBuildFile; fileRef = 28947974188850D500F19CE1 /* gem1.png */; };
 		28947978188850D500F19CE1 /* gem2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28947975188850D500F19CE1 /* gem2.png */; };
 		28947979188850D500F19CE1 /* gem3.png in Resources */ = {isa = PBXBuildFile; fileRef = 28947976188850D500F19CE1 /* gem3.png */; };
+		289B48AF188897C300C0CB1F /* rock1.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B48AD188897C300C0CB1F /* rock1.png */; };
+		289B48B0188897C300C0CB1F /* rock2.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B48AE188897C300C0CB1F /* rock2.png */; };
+		289B48B21888A98200C0CB1F /* rock3.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B48B11888A98200C0CB1F /* rock3.png */; };
+		289B48B51888B08400C0CB1F /* spark1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 289B48B31888B08400C0CB1F /* spark1.sks */; };
+		289B48B61888B08400C0CB1F /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B48B41888B08400C0CB1F /* spark.png */; };
+		289B48B81888B4B100C0CB1F /* magic1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 289B48B71888B4B100C0CB1F /* magic1.sks */; };
+		289B48BA1888B63F00C0CB1F /* flies1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 289B48B91888B63F00C0CB1F /* flies1.sks */; };
 		28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CB8C9C188546E100AAFEF7 /* world-bg-512.png */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +88,13 @@
 		28947974188850D500F19CE1 /* gem1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem1.png; sourceTree = "<group>"; };
 		28947975188850D500F19CE1 /* gem2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem2.png; sourceTree = "<group>"; };
 		28947976188850D500F19CE1 /* gem3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gem3.png; sourceTree = "<group>"; };
+		289B48AD188897C300C0CB1F /* rock1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock1.png; sourceTree = "<group>"; };
+		289B48AE188897C300C0CB1F /* rock2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock2.png; sourceTree = "<group>"; };
+		289B48B11888A98200C0CB1F /* rock3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock3.png; sourceTree = "<group>"; };
+		289B48B31888B08400C0CB1F /* spark1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark1.sks; sourceTree = "<group>"; };
+		289B48B41888B08400C0CB1F /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		289B48B71888B4B100C0CB1F /* magic1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic1.sks; sourceTree = "<group>"; };
+		289B48B91888B63F00C0CB1F /* flies1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = flies1.sks; sourceTree = "<group>"; };
 		28CB8C9C188546E100AAFEF7 /* world-bg-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-bg-512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +171,10 @@
 				281621051883EF9200C9170E /* SktSceneGame.m */,
 				2894796D18881BA500F19CE1 /* SktSceneStart.h */,
 				2894796E18881BA500F19CE1 /* SktSceneStart.m */,
+				289B48B31888B08400C0CB1F /* spark1.sks */,
+				289B48B41888B08400C0CB1F /* spark.png */,
+				289B48B71888B4B100C0CB1F /* magic1.sks */,
+				289B48B91888B63F00C0CB1F /* flies1.sks */,
 			);
 			path = SktDem001;
 			sourceTree = "<group>";
@@ -194,6 +212,9 @@
 		2894797A1888569400F19CE1 /* images.atlas */ = {
 			isa = PBXGroup;
 			children = (
+				289B48B11888A98200C0CB1F /* rock3.png */,
+				289B48AD188897C300C0CB1F /* rock1.png */,
+				289B48AE188897C300C0CB1F /* rock2.png */,
 				28947974188850D500F19CE1 /* gem1.png */,
 				28947975188850D500F19CE1 /* gem2.png */,
 				28947976188850D500F19CE1 /* gem3.png */,
@@ -283,18 +304,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289B48B21888A98200C0CB1F /* rock3.png in Resources */,
 				28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */,
+				289B48B0188897C300C0CB1F /* rock2.png in Resources */,
 				28947977188850D500F19CE1 /* gem1.png in Resources */,
 				28947978188850D500F19CE1 /* gem2.png in Resources */,
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
 				2816210818841B4100C9170E /* Spaceship2.png in Resources */,
 				282723331883E40E00759DC7 /* Images.xcassets in Resources */,
+				289B48AF188897C300C0CB1F /* rock1.png in Resources */,
 				2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */,
 				281621031883EC8000C9170E /* README.md in Resources */,
+				289B48B51888B08400C0CB1F /* spark1.sks in Resources */,
 				289479731888416000F19CE1 /* disk-256x256.png in Resources */,
+				289B48B81888B4B100C0CB1F /* magic1.sks in Resources */,
 				282723311883E40E00759DC7 /* Spaceship.png in Resources */,
 				282723291883E40E00759DC7 /* Main.storyboard in Resources */,
 				28947979188850D500F19CE1 /* gem3.png in Resources */,
+				289B48B61888B08400C0CB1F /* spark.png in Resources */,
+				289B48BA1888B63F00C0CB1F /* flies1.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

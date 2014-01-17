@@ -81,9 +81,9 @@
 
     choice.name = code;
     choice.fontSize = 30;
-    choice.fontColor = [SKColor colorWithRed: .2 * (self.nbChoice % 5)
-                                       green: .15 * arc4random_uniform(5)
-                                        blue: .15 * arc4random_uniform(5)
+    choice.fontColor = [SKColor colorWithRed: .30 + .10 * arc4random_uniform(50)
+                                       green: .30 + .10 * arc4random_uniform(50)
+                                        blue: .30 + .10 * arc4random_uniform(50)
                                        alpha: .8 ];
     
     choice.position = CGPointMake(CGRectGetMidX(self.frame), -2*CGRectGetMidY(self.frame));
