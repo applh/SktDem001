@@ -297,7 +297,7 @@
 
     // CONTACT AND COLLISION
     sprite.physicsBody.categoryBitMask = self.ccRock;
-    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus | self.ccRock;
     
     SKAction *action0 = [SKAction rotateByAngle:angle duration: arc4random_uniform(10)];
     SKAction *action1 = [SKAction waitForDuration:5000];
@@ -400,7 +400,7 @@
 
         // add random robot
         random = arc4random_uniform(10000);
-        float robot2random  = 500;
+        float robot2random  = 300;
         if (random < robot2random) {
             float radius = arc4random_uniform(self.world2max.x);
             float theta = 2 * M_PI * arc4random_uniform(360) / 360;
@@ -431,8 +431,12 @@
     if (self.playerScore < 0) self.playerScore = 0;
     if (self.playerEnergy < 0) self.playerEnergy = 0;
     
-    self.hud2center.text = @"";
-    self.hud2top.text = [NSString stringWithFormat:@"ENERGY: %d", self.playerEnergy];
+    if (self.playerEnergy == 0)
+        self.hud2center.text = @"GAME OVER";
+    else
+        self.hud2center.text = @"";
+    
+    self.hud2top.text = [NSString stringWithFormat:@"ENERGY %d", self.playerEnergy];
     self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d", self.playerScore];
     
 }
@@ -514,14 +518,13 @@
 - (void) didBeginContact:(SKPhysicsContact *)contact
 {
     SKPhysicsBody *firstBody, *secondBody;
-    if (contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask)
-    {
+    
+    firstBody = contact.bodyA;
+    secondBody = contact.bodyB;
+    
+    if (contact.bodyA.categoryBitMask > contact.bodyB.categoryBitMask) {
         firstBody = contact.bodyA;
         secondBody = contact.bodyB;
-    }
-    else {
-        firstBody = contact.bodyB;
-        secondBody = contact.bodyA;
     }
     
     if (firstBody.categoryBitMask == self.ccPlayer) {
@@ -537,7 +540,7 @@
             SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
             emitter.position = firstBody.node.position;
             
-            SKAction* act2 = [SKAction waitForDuration:1+arc4random_uniform(2)];
+            SKAction* act2 = [SKAction waitForDuration:1+.1*arc4random_uniform(10)];
             SKAction* act3 = [SKAction removeFromParent];
             [emitter runAction:[SKAction sequence: @[act2, act3]]];
             
@@ -572,7 +575,7 @@
             SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
             emitter.position = firstBody.node.position;
             
-            SKAction* act2 = [SKAction waitForDuration:1+arc4random_uniform(2)];
+            SKAction* act2 = [SKAction waitForDuration:1+.1*arc4random_uniform(10)];
             SKAction* act3 = [SKAction removeFromParent];
             [emitter runAction:[SKAction sequence: @[act2, act3]]];
             
@@ -592,7 +595,7 @@
             SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
             emitter.position = firstBody.node.position;
             
-            SKAction* act2 = [SKAction waitForDuration:1+arc4random_uniform(2)];
+            SKAction* act2 = [SKAction waitForDuration:1+.1*arc4random_uniform(10)];
             SKAction* act3 = [SKAction removeFromParent];
             [emitter runAction:[SKAction sequence: @[act2, act3]]];
             
@@ -601,6 +604,18 @@
             // SCORE
             self.playerScore += 10;
         }
+    }
+    else if (firstBody.categoryBitMask == self.ccRock) {
+        // PARTICLE
+        NSString * particlePath = [[NSBundle mainBundle] pathForResource:@"fire1" ofType:@"sks"];
+        SKEmitterNode *emitter = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
+        emitter.position = firstBody.node.position;
+        
+        SKAction* act2 = [SKAction waitForDuration:1+.1*arc4random_uniform(10)];
+        SKAction* act3 = [SKAction removeFromParent];
+        [emitter runAction:[SKAction sequence: @[act2, act3]]];
+        
+        [self.world2fg addChild:emitter];
     }
 }
 
