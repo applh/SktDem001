@@ -102,7 +102,7 @@
     SKView * skView = (SKView *)self.view;
     
     SktSceneGame * scene = [SktSceneGame sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFit;
+    scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // ADD TRANSITION EFFECT
     SKTransition *doors = [SKTransition

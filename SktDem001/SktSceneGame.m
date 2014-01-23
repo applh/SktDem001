@@ -7,6 +7,7 @@
 //
 
 #import "SktSceneGame.h"
+#import "SktPopup.h"
 
 @implementation SktSceneGame
 
@@ -48,6 +49,8 @@
     [self.world removeAllChildren];
     [self setupWorld];
     self.userRestart = 0;
+    self.userPause = 0;
+    
 }
 
 // CUSTOM
@@ -55,15 +58,20 @@
 {
     
     self.userRestart = 0;
+    self.userPause = 0;
     
     float fontSize1 = 50;
     
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
+    SKNode* pop = [SKNode node];
     [self.hud addChild:bg];
     [self.hud addChild:fg];
+    [self.hud addChild:pop];
     
+    self.hud2bg = bg;
     self.hud2fg = fg;
+    self.hud2popup = pop;
     
     SKLabelNode *myLabel;
     
@@ -175,7 +183,7 @@
 
     // CONTACT AND COLLISION
     sprite.physicsBody.categoryBitMask = self.ccPlayer;
-    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
+    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus | self.ccRock;
     
     SKAction *action = [SKAction rotateByAngle:angle duration:.5];
     [sprite runAction:action];
@@ -366,16 +374,51 @@
     /* Called when a touch ends */
     
     for (UITouch *touch in touches) {
-        NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self.hud2fg]];
-        for (SKNode *node in nodes) {
-            // GET THE BUTTON
-            if ([node.name isEqualToString:@"bottom label"]) {
-                self.userRestart = 1;
+        if (self.popup) {
+            SKNode* popup = [self.hud2popup childNodeWithName: @"popup"];
+            NSArray *nodes = [popup nodesAtPoint:[touch locationInNode:popup]];
+            for (SKNode *node in nodes) {
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"OK"]) {
+                    self.userRestart = 1;
+                    self.userPause = 1;
+                    self.popup = [self.popup close];
+                }
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"CANCEL"]) {
+                    self.userRestart = 0;
+                    self.userPause = 0;
+                    self.popup = [self.popup close];
+                }
             }
         }
-        
+        else {
+            NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self.hud2fg]];
+            for (SKNode *node in nodes) {
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"bottom label"]) {
+                    self.userPause = 1;
+                    [self pausePopup];
+                }
+            }
+        }
     }
 
+}
+
+
+-(void) pausePopup
+{
+    if (self.popup == nil) {
+        self.popup =
+        [SktPopup initWithName:@"popup"
+                      showText:@"START A NEW GAME ?"
+                        showOk:@"Restart"
+                    showCancel:@"Back"
+                       inScene:self
+                    parentNode:self.hud2popup];
+    }
+    
 }
 
 -(void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -391,6 +434,8 @@
 }
 
 -(void) updateNextFrame:(NSTimeInterval)currentTime {
+    if (self.userPause > 0) return;
+    
     // UPDATE FPS COMPUTING
     self.lastUpdateT = self.curUpdateT;
     self.curUpdateT = currentTime;
@@ -457,15 +502,22 @@
         //NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
     }
     
+
+}
+
+
+-(void) updateHud
+{
     // SCORE
     if (self.playerScore < 0) self.playerScore = 0;
+    // ENERGY
     if (self.playerEnergy < 0) self.playerEnergy = 0;
-    
+
     if (self.playerEnergy == 0)
         self.hud2center.text = @"GAME OVER";
     else
         self.hud2center.text = @"";
-    
+
     self.hud2top.text = [NSString stringWithFormat:@"ENERGY %d", self.playerEnergy];
     self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d", self.playerScore];
 }
@@ -473,11 +525,29 @@
 - (void) update:(NSTimeInterval)currentTime {
     
     if (self.userRestart == 1) {
+        // RESTART NEW GAME
         [self setupNewGame];
     }
     else {
-        [self updateNextFrame:currentTime];
+        if (self.playerEnergy <= 0) {
+            // GAME END
+            self.userPause = 1;
+            [self pausePopup];
+        }
+        
+        // PAUSE
+        if (self.userPause > 0) {
+            self.physicsWorld.speed = 0;
+        }
+        else {
+            self.physicsWorld.speed = 1;
+            // GAME PLAY
+            [self updateNextFrame:currentTime];
+        }
     }
+    
+    // KEEP USER UP TO DATE
+    [self updateHud];
     
 }
 

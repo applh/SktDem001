@@ -7,6 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "SktPopup.h"    
 
 @interface SktSceneGame : SKScene <SKPhysicsContactDelegate>
 
@@ -17,7 +18,11 @@
 @property uint32_t ccRock;
 
 @property SKNode* hud;              // HEAD UP DISPLAY
+@property SKNode* hud2bg;           // HUD BACKGROUND
 @property SKNode* hud2fg;           // HUD FOREGROUND
+@property SKNode* hud2popup;        // HUD POPUP
+
+@property SktPopup* popup;          // POPUP
 
 @property SKLabelNode* hud2top;     // HUD TOP
 @property SKLabelNode* hud2center;  // HUD CENTER
@@ -51,6 +56,7 @@
 @property int playerScore;
 
 @property int userRestart;
+@property int userPause;
 
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
@@ -68,5 +74,6 @@
 -(void) addRandomRobotAt:(CGPoint) location;
 
 -(void) updateNextFrame:(NSTimeInterval)currentTime;
-    
+-(void) updateHud;
+
 @end
