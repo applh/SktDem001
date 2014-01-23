@@ -43,8 +43,19 @@
     return self;
 }
 
+-(void) setupNewGame
+{
+    [self.world removeAllChildren];
+    [self setupWorld];
+    self.userRestart = 0;
+}
+
 // CUSTOM
--(void) setupHud {
+-(void) setupHud
+{
+    
+    self.userRestart = 0;
+    
     float fontSize1 = 50;
     
     SKNode* bg = [SKNode node];
@@ -80,6 +91,7 @@
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    CGRectGetMinY(self.frame)+1.2*fontSize1);
+    myLabel.name = @"bottom label";
     self.hud2bottom = myLabel;
     [self.hud2fg addChild:myLabel];
 
@@ -98,6 +110,9 @@
     // THE WORLD IS ROUND
     self.world2mode = 0;
     
+    SKAction* scale0 = [SKAction scaleTo:1 duration:0];
+    [self.world runAction:scale0];
+
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
     
@@ -126,7 +141,7 @@
     
     [self setupPlayer]; // player and camera
     
-    SKAction* scale = [SKAction scaleBy:self.world2scale duration:1];
+    SKAction* scale = [SKAction scaleTo:self.world2scale duration:1];
     [self.world runAction:scale];
     
     
@@ -199,6 +214,8 @@
 {
     // MISSILE FPS
     if ((currentTime - self.lastMissileT) < self.minMissileT)
+        return;
+    if (self.playerEnergy < 1)
         return;
     
     self.lastMissileT = currentTime;
@@ -345,6 +362,21 @@
     [self.world2fg addChild:sprite];
     
 }
+-(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    /* Called when a touch ends */
+    
+    for (UITouch *touch in touches) {
+        NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self.hud2fg]];
+        for (SKNode *node in nodes) {
+            // GET THE BUTTON
+            if ([node.name isEqualToString:@"bottom label"]) {
+                self.userRestart = 1;
+            }
+        }
+        
+    }
+
+}
 
 -(void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
     for (UITouch *touch in touches) {
@@ -358,8 +390,7 @@
     }
 }
 
-- (void) update:(NSTimeInterval)currentTime {
-    
+-(void) updateNextFrame:(NSTimeInterval)currentTime {
     // UPDATE FPS COMPUTING
     self.lastUpdateT = self.curUpdateT;
     self.curUpdateT = currentTime;
@@ -372,10 +403,9 @@
         //NSLog(@"%.2f", curV);
         
         self.world2player.physicsBody.velocity =
-            CGVectorMake(self.player2vmax * cos(self.world2player.zRotation),
-                         self.player2vmax * sin(self.world2player.zRotation));
+        CGVectorMake(self.player2vmax * cos(self.world2player.zRotation),
+                     self.player2vmax * sin(self.world2player.zRotation));
         self.world2player.physicsBody.angularVelocity = 0;
-
     }
     
     // LAUNCH MISSILE
@@ -397,7 +427,7 @@
             CGPoint newPos = CGPointMake(x,y);
             [self addRandomRockAt:newPos];
         }
-
+        
         // add random robot
         random = arc4random_uniform(10000);
         float robot2random  = 300;
@@ -409,7 +439,7 @@
             CGPoint newPos = CGPointMake(x,y);
             [self addRandomRobotAt:newPos];
         }
-
+        
         // add random bonus
         random = arc4random_uniform(10000);
         float bonus2random  = 20;
@@ -421,7 +451,7 @@
             CGPoint newPos = CGPointMake(x,y);
             [self addRandomBonusAt:newPos];
         }
-    
+        
     }
     else {
         //NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
@@ -438,6 +468,16 @@
     
     self.hud2top.text = [NSString stringWithFormat:@"ENERGY %d", self.playerEnergy];
     self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d", self.playerScore];
+}
+
+- (void) update:(NSTimeInterval)currentTime {
+    
+    if (self.userRestart == 1) {
+        [self setupNewGame];
+    }
+    else {
+        [self updateNextFrame:currentTime];
+    }
     
 }
 

@@ -50,12 +50,15 @@
 @property int playerEnergy;
 @property int playerScore;
 
+@property int userRestart;
+
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
 -(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
 -(void) didBeginContact: (SKPhysicsContact *) contact;
 
 // CUSTOM
+-(void) setupNewGame;
 -(void) setupHud;
 -(void) setupWorld;
 -(void) setupPlayer;
@@ -64,4 +67,6 @@
 -(void) manageWorldLimit;
 -(void) addRandomRobotAt:(CGPoint) location;
 
+-(void) updateNextFrame:(NSTimeInterval)currentTime;
+    
 @end
