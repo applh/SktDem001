@@ -52,8 +52,12 @@
 @property double  lastMissileT; // MISSILE FPS
 @property double  minMissileT; // MISSILE FPS
 
+@property int playerLevel;
+@property int playerWinner;
+
 @property int playerEnergy;
 @property int playerScore;
+@property int playerScoreWin;
 
 @property int userRestart;
 @property int userPause;

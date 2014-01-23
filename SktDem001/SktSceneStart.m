@@ -58,7 +58,7 @@
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    2*CGRectGetMidY(self.frame));
-    SKAction* action = [SKAction moveByX:0 y: -0.30 * CGRectGetMidY(self.frame) duration:1];
+    SKAction* action = [SKAction moveByX:0 y: -0.30 * CGRectGetMidY(self.frame) duration:.5];
     [myLabel runAction: action];
     [self addChild:myLabel];
     
@@ -89,7 +89,7 @@
     choice.position = CGPointMake(CGRectGetMidX(self.frame), -2*CGRectGetMidY(self.frame));
     SKAction* action = [SKAction moveByX: 0
                                        y: (((5 - self.nbChoice) * .3) +2) * CGRectGetMidY(self.frame)
-                                duration: 2];
+                                duration: 1];
     [choice runAction: action];
     [self addChild:choice];
 

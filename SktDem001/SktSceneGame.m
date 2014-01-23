@@ -31,6 +31,11 @@
         // SETUP
         self.init2size = size;
         
+        self.playerWinner = 0;
+        self.playerLevel = 1;
+        // SCORE TO WIN
+        self.playerScoreWin = 100;
+        
         [self setupHud];
         [self setupNewGame];
 
@@ -44,6 +49,14 @@
     [self setupWorld];
     self.userRestart = 0;
     self.userPause = 0;
+
+    if (self.playerWinner > 0) {
+        self.playerLevel++;
+        self.playerWinner = 0;
+    }
+    
+    // SCORE TO WIN
+    self.playerScoreWin = self.playerLevel * 100;
 
     // NO GRAVITY
     self.physicsWorld.gravity = CGVectorMake(0, 0);
@@ -512,13 +525,20 @@
     // ENERGY
     if (self.playerEnergy < 0) self.playerEnergy = 0;
 
-    if (self.playerEnergy == 0)
+    if (self.playerScore >= self.playerScoreWin)
+        self.hud2center.text = @"YOU WIN";
+    else if (self.playerEnergy == 0)
         self.hud2center.text = @"GAME OVER";
     else
         self.hud2center.text = @"";
 
-    self.hud2top.text = [NSString stringWithFormat:@"ENERGY %d", self.playerEnergy];
-    self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d", self.playerScore];
+    self.hud2top.text = [NSString stringWithFormat:@"LEVEL %d - ENERGY %d",
+                                self.playerLevel,
+                                self.playerEnergy];
+    
+    self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d/%d",
+                                self.playerScore,
+                                self.playerScoreWin];
 }
 
 - (void) update:(NSTimeInterval)currentTime {
@@ -527,8 +547,15 @@
         // RESTART NEW GAME
         [self setupNewGame];
     }
-    else {
+    else if (self.playerWinner < 1) {
         if (self.playerEnergy <= 0) {
+            // GAME END
+            self.userPause = 1;
+            [self pausePopup];
+        }
+        else if (self.playerScore >= self.playerScoreWin) {
+            // NEXT LEVEL
+            self.playerWinner++;
             // GAME END
             self.userPause = 1;
             [self pausePopup];
