@@ -15,13 +15,19 @@
 {
     [super viewDidLoad];
 
+    Boolean debug = YES;
+    
     // Configure the view.
     SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+    
+    // DEBUG
+    if (debug) {
+        skView.showsFPS = YES;
+        skView.showsNodeCount = YES;
+    }
     
     // Create and configure the scene.
-    SKScene * scene = [SktMyScene sceneWithSize:skView.bounds.size];
+    SktMyScene * scene = [SktMyScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

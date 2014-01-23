@@ -7,6 +7,7 @@
 //
 
 #import "SktSceneGame.h"
+#import "SktSceneStart.h"
 #import "SktPopup.h"
 
 @implementation SktSceneGame
@@ -15,6 +16,8 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
+        self.userGameChoice = 0;
+        
         self.backgroundColor = [SKColor colorWithRed:0.05 green:0.05 blue:0.20 alpha:1.0];
         
         // create the parent nodes
@@ -22,7 +25,7 @@
         self.world = [SKNode node];
         
         self.anchorPoint = CGPointMake(.5, .5);
-        self.world2scale = .1;
+        self.world2scale = .2;
 
         // add to the scene
         [self addChild:self.world];
@@ -31,20 +34,57 @@
         // SETUP
         self.init2size = size;
         
-        self.playerWinner = 0;
-        self.playerLevel = 1;
-        // SCORE TO WIN
-        self.playerScoreWin = 100;
-        
-        [self setupHud];
-        [self setupNewGame];
 
     }
     return self;
 }
 
+-(void) didMoveToView:(SKView *)view
+{
+    self.playerWinner = 0;
+    self.playerLevel = 1;
+    // SCORE TO WIN
+    self.playerScoreWin = 100;
+    
+    [self setupHud];
+    [self setupNewGame];
+}
+
 -(void) setupNewGame
 {
+    if (self.userGameChoice == 0) {
+        // SCALE THE MAP
+        self.world2scale = .2;
+        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
+        
+        // THE WORLD IS ROUND
+        self.world2mode = 0;
+    }
+    else if (self.userGameChoice == 1) {
+        // SCALE THE MAP
+        self.world2scale = .2;
+        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
+        
+        // THE WORLD IS ROUND
+        self.world2mode = 0;
+    }
+    else if (self.userGameChoice == 2) {
+        // SCALE THE MAP
+        self.world2scale = .1;
+        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
+        
+        // THE WORLD IS ROUND
+        self.world2mode = 0;
+    }
+    else if (self.userGameChoice == 3) {
+        // SCALE THE MAP
+        self.world2scale = .05;
+        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
+        
+        // THE WORLD IS ROUND
+        self.world2mode = 0;
+    }
+    
     [self.world removeAllChildren];
     [self setupWorld];
     self.userRestart = 0;
@@ -72,7 +112,7 @@
     self.userRestart = 0;
     self.userPause = 0;
     
-    float fontSize1 = 50;
+    float fontSize1 = 30;
     
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
@@ -92,7 +132,7 @@
     myLabel.fontSize = fontSize1;
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   CGRectGetMaxY(self.frame)-1.2*fontSize1);
+                                   CGRectGetMaxY(self.frame)-1.5*fontSize1);
     self.hud2top = myLabel;
     [self.hud2fg addChild:myLabel];
 
@@ -107,10 +147,10 @@
 
     myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
     myLabel.text = @"LEVEL 1";
-    myLabel.fontSize = 50;
+    myLabel.fontSize = fontSize1;
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   CGRectGetMinY(self.frame)+1.2*fontSize1);
+                                   CGRectGetMinY(self.frame) + 1.0*fontSize1);
     myLabel.name = @"bottom label";
     self.hud2bottom = myLabel;
     [self.hud2fg addChild:myLabel];
@@ -124,11 +164,7 @@
     self.ccRobot    =  0x1 << 2;
     self.ccBonus    =  0x1 << 3;
     self.ccRock     =  0x1 << 4;
-    
-    self.player2vmax2scale = .025;
-    
-    // THE WORLD IS ROUND
-    self.world2mode = 0;
+
     
     SKAction* scale0 = [SKAction scaleTo:1 duration:0];
     [self.world runAction:scale0];
@@ -382,6 +418,24 @@
     [self.world2fg addChild:sprite];
     
 }
+
+
+-(void) showGameStart
+{
+    // Create and configure the scene.
+    SKView * skView = (SKView *)self.view;
+    
+    SktSceneStart * scene = [SktSceneStart sceneWithSize:skView.bounds.size];
+    scene.scaleMode = SKSceneScaleModeAspectFit;
+    
+    // ADD TRANSITION EFFECT
+    SKTransition *doors = [SKTransition
+                           flipHorizontalWithDuration:1.0];
+    // Present the scene.
+    [skView presentScene:scene transition:doors];
+
+}
+
 -(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch ends */
     
@@ -401,6 +455,14 @@
                     self.userRestart = 0;
                     self.userPause = 0;
                     self.popup = [self.popup close];
+                }
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"EXIT"]) {
+                    self.userRestart = 1;
+                    self.userPause = 1;
+                    self.popup = [self.popup close];
+                    
+                    [self showGameStart];
                 }
             }
         }
@@ -427,6 +489,7 @@
                       showText:@"START A NEW GAME ?"
                         showOk:@"Restart"
                     showCancel:@"Back"
+                      showExit:@"exit"
                        inScene:self
                     parentNode:self.hud2popup];
     }
@@ -525,12 +588,17 @@
     // ENERGY
     if (self.playerEnergy < 0) self.playerEnergy = 0;
 
-    if (self.playerScore >= self.playerScoreWin)
+    if (self.playerScore >= self.playerScoreWin) {
         self.hud2center.text = @"YOU WIN";
-    else if (self.playerEnergy == 0)
+        self.hud2center.fontColor = [SKColor colorWithRed:0 green:1 blue:0 alpha:1];
+    }
+    else if (self.playerEnergy == 0) {
         self.hud2center.text = @"GAME OVER";
-    else
+        self.hud2center.fontColor = [SKColor colorWithRed:1 green:0 blue:0 alpha:1];
+    }
+    else {
         self.hud2center.text = @"";
+    }
 
     self.hud2top.text = [NSString stringWithFormat:@"LEVEL %d - ENERGY %d",
                                 self.playerLevel,

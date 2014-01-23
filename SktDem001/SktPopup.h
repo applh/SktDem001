@@ -18,6 +18,7 @@
           showText:(NSString*)  text
             showOk:(NSString*)  textOk
         showCancel:(NSString*)  textCancel
+          showExit:(NSString*)  textExit
            inScene:(SKScene*)   scene
         parentNode:(SKNode*)    parent;
 

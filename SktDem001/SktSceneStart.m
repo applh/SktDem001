@@ -104,6 +104,9 @@
     SktSceneGame * scene = [SktSceneGame sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
+    // SET THE GMAE CHOICE
+    scene.userGameChoice = self.gameChoice;
+    
     // ADD TRANSITION EFFECT
     SKTransition *doors = [SKTransition
                            flipHorizontalWithDuration:1.0];

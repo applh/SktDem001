@@ -61,6 +61,8 @@
 
 @property int userRestart;
 @property int userPause;
+@property int userGameChoice;
+
 
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;

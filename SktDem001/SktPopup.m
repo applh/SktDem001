@@ -15,6 +15,7 @@
           showText:(NSString*)  text
             showOk:(NSString*)  textOk
         showCancel:(NSString*)  textCancel
+          showExit:(NSString*)  textExit
            inScene:(SKScene *)  scene
         parentNode:(SKNode *)   parent
 {
@@ -36,25 +37,39 @@
         res.popupRootNode.position = CGPointMake(CGRectGetMidX(res.parentNode.frame),
                                    CGRectGetMidY(res.parentNode.frame));
         
+        res.popupRootNode.fillColor = [SKColor colorWithWhite:.5 alpha:.5];
+        if (text) {
+            SKLabelNode* label0 = [SKLabelNode new];
+            label0.text = text;
+            label0.name = @"text";
+            label0.position = CGPointMake(0, +100);
+            [res.popupRootNode addChild:label0];
+        }
         
-        SKLabelNode* label0 = [SKLabelNode new];
-        label0.text = text;
-        label0.name = @"text";
-        label0.position = CGPointMake(0, +100);
-        [res.popupRootNode addChild:label0];
+        if (textCancel) {
+            SKLabelNode* label1 = [SKLabelNode new];
+            label1.text = textCancel;
+            label1.name = @"CANCEL";
+            label1.position = CGPointMake(-100, -100);
+            [res.popupRootNode addChild:label1];
+        }
 
-        SKLabelNode* label1 = [SKLabelNode new];
-        label1.text = textCancel;
-        label1.name = @"CANCEL";
-        label1.position = CGPointMake(-100, -100);
-        [res.popupRootNode addChild:label1];
+        if (textOk) {
+            SKLabelNode* label2 = [SKLabelNode new];
+            label2.text = textOk;
+            label2.name = @"OK";
+            label2.position = CGPointMake(100, -100);
+            [res.popupRootNode addChild:label2];
+        }
 
-        SKLabelNode* label2 = [SKLabelNode new];
-        label2.text = textOk;
-        label2.name = @"OK";
-        label2.position = CGPointMake(100, -100);
-        [res.popupRootNode addChild:label2];
-        
+        if (textExit) {
+            SKLabelNode* label3 = [SKLabelNode new];
+            label3.text = textExit;
+            label3.name = @"EXIT";
+            label3.position = CGPointMake(0, -200);
+            [res.popupRootNode addChild:label3];
+        }
+
         [res.parentNode addChild:res.popupRootNode];
     }
     return res;
