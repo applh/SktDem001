@@ -24,12 +24,6 @@
         self.anchorPoint = CGPointMake(.5, .5);
         self.world2scale = .1;
 
-        // NO GRAVITY
-        self.physicsWorld.gravity = CGVectorMake(0, 0);
-        
-        // CONTACT DELEGATE
-        self.physicsWorld.contactDelegate = self;
-        
         // add to the scene
         [self addChild:self.world];
         [self addChild:self.hud];
@@ -38,7 +32,7 @@
         self.init2size = size;
         
         [self setupHud];
-        [self setupWorld];
+        [self setupNewGame];
 
     }
     return self;
@@ -50,6 +44,11 @@
     [self setupWorld];
     self.userRestart = 0;
     self.userPause = 0;
+
+    // NO GRAVITY
+    self.physicsWorld.gravity = CGVectorMake(0, 0);
+    // CONTACT DELEGATE
+    self.physicsWorld.contactDelegate = self;
     
 }
 
