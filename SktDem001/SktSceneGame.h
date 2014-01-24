@@ -7,7 +7,12 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "SktPopup.h"    
+
+
+// CLASS DECLARATION FORWARD
+@class SktPopup;
+@class SktGame;
+
 
 @interface SktSceneGame : SKScene <SKPhysicsContactDelegate>
 
@@ -63,6 +68,7 @@
 @property int userPause;
 @property int userGameChoice;
 
+@property SktGame* userGame;
 
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;

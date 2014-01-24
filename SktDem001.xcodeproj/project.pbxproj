@@ -45,6 +45,10 @@
 		289B48BF1888C32600C0CB1F /* bokeh1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 289B48BD1888C32600C0CB1F /* bokeh1.sks */; };
 		289B48C01888C32600C0CB1F /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 289B48BE1888C32600C0CB1F /* bokeh.png */; };
 		289B48C31888C39E00C0CB1F /* fire1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 289B48C21888C39E00C0CB1F /* fire1.sks */; };
+		28BFF1E71892656B00B6C6FD /* SktGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFF1E61892656B00B6C6FD /* SktGame.m */; };
+		28BFF1EA1892660A00B6C6FD /* SktGameMapShoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFF1E91892660A00B6C6FD /* SktGameMapShoot.m */; };
+		28BFF1ED1892665900B6C6FD /* SktGameMapRpg.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFF1EC1892665900B6C6FD /* SktGameMapRpg.m */; };
+		28BFF1F01892693400B6C6FD /* SktGameGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFF1EF1892693400B6C6FD /* SktGameGravity.m */; };
 		28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CB8C9C188546E100AAFEF7 /* world-bg-512.png */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +110,15 @@
 		289B48BD1888C32600C0CB1F /* bokeh1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bokeh1.sks; sourceTree = "<group>"; };
 		289B48BE1888C32600C0CB1F /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
 		289B48C21888C39E00C0CB1F /* fire1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fire1.sks; sourceTree = "<group>"; };
+		28BFF1E51892656B00B6C6FD /* SktGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGame.h; sourceTree = "<group>"; };
+		28BFF1E61892656B00B6C6FD /* SktGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktGame.m; sourceTree = "<group>"; };
+		28BFF1E81892660A00B6C6FD /* SktGameMapShoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGameMapShoot.h; sourceTree = "<group>"; };
+		28BFF1E91892660A00B6C6FD /* SktGameMapShoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktGameMapShoot.m; sourceTree = "<group>"; };
+		28BFF1EB1892665900B6C6FD /* SktGameMapRpg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGameMapRpg.h; sourceTree = "<group>"; };
+		28BFF1EC1892665900B6C6FD /* SktGameMapRpg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktGameMapRpg.m; sourceTree = "<group>"; };
+		28BFF1EE1892693400B6C6FD /* SktGameGravity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGameGravity.h; sourceTree = "<group>"; };
+		28BFF1EF1892693400B6C6FD /* SktGameGravity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktGameGravity.m; sourceTree = "<group>"; };
+		28BFF1F1189269A300B6C6FD /* SktGameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGameInterface.h; sourceTree = "<group>"; };
 		28CB8C9C188546E100AAFEF7 /* world-bg-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-bg-512.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +198,15 @@
 				289B48C11888C37100C0CB1F /* particles */,
 				280B3A2C1891613D00B39F3C /* SktPopup.h */,
 				280B3A2D1891613D00B39F3C /* SktPopup.m */,
+				28BFF1E51892656B00B6C6FD /* SktGame.h */,
+				28BFF1E61892656B00B6C6FD /* SktGame.m */,
+				28BFF1E81892660A00B6C6FD /* SktGameMapShoot.h */,
+				28BFF1E91892660A00B6C6FD /* SktGameMapShoot.m */,
+				28BFF1EB1892665900B6C6FD /* SktGameMapRpg.h */,
+				28BFF1EC1892665900B6C6FD /* SktGameMapRpg.m */,
+				28BFF1EE1892693400B6C6FD /* SktGameGravity.h */,
+				28BFF1EF1892693400B6C6FD /* SktGameGravity.m */,
+				28BFF1F1189269A300B6C6FD /* SktGameInterface.h */,
 			);
 			path = SktDem001;
 			sourceTree = "<group>";
@@ -370,13 +392,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BFF1E71892656B00B6C6FD /* SktGame.m in Sources */,
 				2827232C1883E40E00759DC7 /* SktViewController.m in Sources */,
 				2827232F1883E40E00759DC7 /* SktMyScene.m in Sources */,
+				28BFF1ED1892665900B6C6FD /* SktGameMapRpg.m in Sources */,
 				280B3A2E1891613D00B39F3C /* SktPopup.m in Sources */,
 				282723221883E40E00759DC7 /* main.m in Sources */,
+				28BFF1EA1892660A00B6C6FD /* SktGameMapShoot.m in Sources */,
 				282723261883E40E00759DC7 /* SktAppDelegate.m in Sources */,
 				2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */,
 				281621061883EF9200C9170E /* SktSceneGame.m in Sources */,
+				28BFF1F01892693400B6C6FD /* SktGameGravity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

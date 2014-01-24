@@ -9,6 +9,7 @@
 #import "SktSceneGame.h"
 #import "SktSceneStart.h"
 #import "SktPopup.h"
+#import "SktGame.h"
 
 @implementation SktSceneGame
 
@@ -41,6 +42,11 @@
 
 -(void) didMoveToView:(SKView *)view
 {
+    // FORMER SCENE HAS SETUP USER CHOICES
+    
+    self.userGame = [SktGame new];
+    [self.userGame setupGame:self.userGameChoice];
+    
     self.playerWinner = 0;
     self.playerLevel = 1;
     // SCORE TO WIN
@@ -52,6 +58,8 @@
 
 -(void) setupNewGame
 {
+    [self.userGame restartGame];
+    
     if (self.userGameChoice == 0) {
         // SCALE THE MAP
         self.world2scale = .2;
