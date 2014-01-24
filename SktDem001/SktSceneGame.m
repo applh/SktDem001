@@ -83,98 +83,15 @@
 // CUSTOM
 -(void) setupHud
 {
-    
     self.userRestart = 0;
     self.userPause = 0;
     
-    float fontSize1 = 30;
-    
-    SKNode* bg = [SKNode node];
-    SKNode* fg = [SKNode node];
-    SKNode* pop = [SKNode node];
-    [self.hud addChild:bg];
-    [self.hud addChild:fg];
-    [self.hud addChild:pop];
-    
-    self.hud2bg = bg;
-    self.hud2fg = fg;
-    self.hud2popup = pop;
-    
-    SKLabelNode *myLabel;
-    
-    myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
-    myLabel.text = @"LEVEL 1";
-    myLabel.fontSize = fontSize1;
-    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   CGRectGetMaxY(self.frame)-1.5*fontSize1);
-    self.hud2top = myLabel;
-    [self.hud2fg addChild:myLabel];
-
-    myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
-    myLabel.text = @"LEVEL 1";
-    myLabel.fontSize = 50;
-    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   CGRectGetMidY(self.frame));
-    self.hud2center = myLabel;
-    [self.hud2fg addChild:myLabel];
-
-    myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
-    myLabel.text = @"LEVEL 1";
-    myLabel.fontSize = fontSize1;
-    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-    myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   CGRectGetMinY(self.frame) + 1.0*fontSize1);
-    myLabel.name = @"bottom label";
-    self.hud2bottom = myLabel;
-    [self.hud2fg addChild:myLabel];
-
+    [self.userGame setupHud];
 }
 
--(void) setupWorld {
-    
-    self.ccPlayer   =  0x1 << 0;
-    self.ccOrb      =  0x1 << 1;
-    self.ccRobot    =  0x1 << 2;
-    self.ccBonus    =  0x1 << 3;
-    self.ccRock     =  0x1 << 4;
-
-    
-    SKAction* scale0 = [SKAction scaleTo:1 duration:0];
-    [self.world runAction:scale0];
-
-    SKNode* bg = [SKNode node];
-    SKNode* fg = [SKNode node];
-    
-    [self.world addChild:bg];
-    [self.world addChild:fg];
-    
-    self.world2bg = bg;
-    self.world2fg = fg;
-    
-    // build the world limits depending on screen resolution
-    float sizeMax = self.init2size.width;
-    if (sizeMax < self.init2size.height) sizeMax = self.init2size.height;
-    
-    self.world2min = CGPointMake(-sizeMax/self.world2scale, -sizeMax/self.world2scale);
-    self.world2max = CGPointMake(sizeMax/self.world2scale, sizeMax/self.world2scale);
-    
-    //NSLog(@"MIN: %.2f,%.2f", self.world2min.x, self.world2min.y);
-    //NSLog(@"MAX: %.2f,%.2f", self.world2max.x, self.world2max.y);
-    
-    SKSpriteNode *sprite2bg = [SKSpriteNode spriteNodeWithTexture:
-                               [SKTexture textureWithImageNamed: @"world-bg-512"]];
-    sprite2bg.size = CGSizeMake(self.world2max.x - self.world2min.x,
-                                self.world2max.y - self.world2min.y);
-    
-    [self.world2bg addChild:sprite2bg];
-    
-    [self setupPlayer]; // player and camera
-    
-    SKAction* scale = [SKAction scaleTo:self.world2scale duration:1];
-    [self.world runAction:scale];
-    
+-(void) setupWorld
+{
+    [self.userGame setupWorld];
     
 }
 

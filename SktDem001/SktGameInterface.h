@@ -17,5 +17,10 @@
 @required
 -(void) restartGame;
 
+@required
+-(void) setupHud;
+@required
+-(void) setupWorld;
+
 
 @end

@@ -14,14 +14,18 @@
 
 @interface SktGame : NSObject
 
+// ATTRIBUTES
 @property SktSceneGame*         scene;
 @property int                   userChoice;
 @property id <SktGameInterface> game;
 
 
+// METHODS
 -(void) setupGame:(int) g
         withScene:(SktSceneGame*) scene;
 
 -(void) restartGame;
+-(void) setupHud;
+-(void) setupWorld;
 
 @end

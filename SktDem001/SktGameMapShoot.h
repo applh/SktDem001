@@ -11,9 +11,19 @@
 
 @interface SktGameMapShoot : NSObject <SktGameInterface>
 
+// ATTRIBUTES
+@property uint32_t ccPlayer;
+@property uint32_t ccOrb;
+@property uint32_t ccRobot;
+@property uint32_t ccBonus;
+@property uint32_t ccRock;
+
 
 // METHODS
+-(id) init;
 -(void) restartGame;
+-(void) setupHud;
+-(void) setupWorld;
 
 
 @end

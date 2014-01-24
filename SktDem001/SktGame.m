@@ -24,10 +24,10 @@
     
     // CREATE DELEGATE DEPENDING ON USER CHOICE
     if (g == 1)  {
-        self.game = [SktGameMapShoot new];
+        self.game = [SktGameMapRpg new];
     }
     else if (g == 2)  {
-        self.game = [SktGameMapRpg new];
+        self.game = [SktGameMapShoot new];
     }
     else if (g == 3)  {
         self.game = [SktGameGravity new];
@@ -41,5 +41,16 @@
 {
     [self.game restartGame];
 }
+
+-(void) setupHud
+{
+    [self.game setupHud];
+}
+
+-(void) setupWorld
+{
+    [self.game setupWorld];
+}
+
 
 @end
