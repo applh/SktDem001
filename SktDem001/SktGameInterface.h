@@ -21,6 +21,14 @@
 -(void) setupHud;
 @required
 -(void) setupWorld;
+@required
+-(void) setupPlayer;
+@required
+-(void) updateHud;
+@required
+-(void) updateNextFrame:(NSTimeInterval)currentTime;
 
+@required
+-(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
 
 @end

@@ -19,10 +19,14 @@
 @property uint32_t ccRock;
 
 // METHODS
--(id) init;
+-(id)   init;
 -(void) restartGame;
 -(void) setupHud;
 -(void) setupWorld;
+-(void) setupPlayer;
+-(void) updateHud;
+-(void) updateNextFrame:(NSTimeInterval)currentTime;
 
+-(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
 
 @end

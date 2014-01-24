@@ -28,6 +28,7 @@
 		2827233C1883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
 		282723441883E40E00759DC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282723421883E40E00759DC7 /* InfoPlist.strings */; };
 		282723461883E40E00759DC7 /* SktDem001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 282723451883E40E00759DC7 /* SktDem001Tests.m */; };
+		28639E2A1892BD5500BE75F8 /* player1-256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 28639E291892BD5500BE75F8 /* player1-256x256.png */; };
 		2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2894796E18881BA500F19CE1 /* SktSceneStart.m */; };
 		2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */ = {isa = PBXBuildFile; fileRef = 2894797018883E6E00F19CE1 /* orb-42x42.png */; };
 		289479731888416000F19CE1 /* disk-256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 289479721888416000F19CE1 /* disk-256x256.png */; };
@@ -92,6 +93,7 @@
 		282723411883E40E00759DC7 /* SktDem001Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SktDem001Tests-Info.plist"; sourceTree = "<group>"; };
 		282723431883E40E00759DC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		282723451883E40E00759DC7 /* SktDem001Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SktDem001Tests.m; sourceTree = "<group>"; };
+		28639E291892BD5500BE75F8 /* player1-256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player1-256x256.png"; sourceTree = "<group>"; };
 		2894796D18881BA500F19CE1 /* SktSceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktSceneStart.h; sourceTree = "<group>"; };
 		2894796E18881BA500F19CE1 /* SktSceneStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktSceneStart.m; sourceTree = "<group>"; };
 		2894797018883E6E00F19CE1 /* orb-42x42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "orb-42x42.png"; sourceTree = "<group>"; };
@@ -181,6 +183,9 @@
 		2827231B1883E40E00759DC7 /* SktDem001 */ = {
 			isa = PBXGroup;
 			children = (
+				28639E281892BAE100BE75F8 /* gravity.atlas */,
+				28639E271892BAD800BE75F8 /* shoot.atlas */,
+				28639E261892BACE00BE75F8 /* rpg.atlas */,
 				2894797A1888569400F19CE1 /* images.atlas */,
 				282723241883E40E00759DC7 /* SktAppDelegate.h */,
 				282723251883E40E00759DC7 /* SktAppDelegate.m */,
@@ -239,6 +244,28 @@
 				282723421883E40E00759DC7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		28639E261892BACE00BE75F8 /* rpg.atlas */ = {
+			isa = PBXGroup;
+			children = (
+				28639E291892BD5500BE75F8 /* player1-256x256.png */,
+			);
+			name = rpg.atlas;
+			sourceTree = "<group>";
+		};
+		28639E271892BAD800BE75F8 /* shoot.atlas */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = shoot.atlas;
+			sourceTree = "<group>";
+		};
+		28639E281892BAE100BE75F8 /* gravity.atlas */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = gravity.atlas;
 			sourceTree = "<group>";
 		};
 		2894797A1888569400F19CE1 /* images.atlas */ = {
@@ -362,6 +389,7 @@
 				289B48AF188897C300C0CB1F /* rock1.png in Resources */,
 				2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */,
 				281621031883EC8000C9170E /* README.md in Resources */,
+				28639E2A1892BD5500BE75F8 /* player1-256x256.png in Resources */,
 				289B48B51888B08400C0CB1F /* spark1.sks in Resources */,
 				289B48C31888C39E00C0CB1F /* fire1.sks in Resources */,
 				289479731888416000F19CE1 /* disk-256x256.png in Resources */,

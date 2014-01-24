@@ -24,6 +24,10 @@
 -(void) restartGame;
 -(void) setupHud;
 -(void) setupWorld;
+-(void) setupPlayer;
+-(void) updateHud;
+-(void) updateNextFrame:(NSTimeInterval)currentTime;
 
+-(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
 
 @end

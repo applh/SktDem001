@@ -13,7 +13,8 @@
 
 @implementation SktSceneGame
 
--(id) initWithSize: (CGSize)size {
+-(id) initWithSize: (CGSize)size
+{
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
@@ -92,73 +93,23 @@
 -(void) setupWorld
 {
     [self.userGame setupWorld];
-    
 }
 
--(void) setupPlayer {
-    
-    self.playerEnergy = 100;
-    self.playerScore = 0;
-    
-    // FIXME
-    self.player2vmax = self.player2vmax2scale * self.world2max.x;
-    
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-    
-    sprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)) ;
-    
-    float angle = arc4random()%360*M_PI/180;
-    float speed = 100;
-    float dx = speed * cos(angle);
-    float dy = speed * sin(angle);
-    
-    // warning: apply scaling also to physics body
-    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.world2scale/2];
-    sprite.physicsBody.dynamic = YES;
-    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
-    sprite.physicsBody.angularVelocity = 0;
-    sprite.physicsBody.linearDamping = 0;
-    sprite.physicsBody.angularDamping = 0;
-    sprite.physicsBody.restitution = 0;
-
-    // CONTACT AND COLLISION
-    sprite.physicsBody.categoryBitMask = self.ccPlayer;
-    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus | self.ccRock;
-    
-    SKAction *action = [SKAction rotateByAngle:angle duration:.5];
-    [sprite runAction:action];
-    
-    [self.world2fg addChild:sprite];
-    
-    self.world2player = sprite;
-
-    // SETUP CAMERA
-    SKNode *camera = [SKNode node];
-    camera.name = @"camera";
-    [self.world addChild:camera];
-    self.world2camera = camera;
-    self.world2camera.position = self.world2player.position;
-    
-    // SETUP MISSILE
-    self.minMissileT = .5; // ONE MISSILE PER SECOND
-
+-(void) setupPlayer
+{
+    [self.userGame setupPlayer];
 }
 
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
+-(void) touchesBegan: (NSSet *)     touches
+           withEvent: (UIEvent *)   event
+{
     /* Called when a touch begins */
-    
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self.world2fg];
-        CGPoint curLoc = self.world2player.position;
-        float dx = location.x - curLoc.x;
-        float dy = location.y - curLoc.y;
-        self.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
-        self.world2player.physicsBody.angularVelocity = 0;
-        self.world2player.zRotation = atan2f(dy, dx);
-    }
+    [self.userGame touchesBegan:touches
+                      withEvent:event];  
 }
 
--(void) launchMissile:(SKNode*) from Time: (NSTimeInterval) currentTime
+-(void) launchMissile: (SKNode*)        from
+                 Time: (NSTimeInterval) currentTime
 {
     // MISSILE FPS
     if ((currentTime - self.lastMissileT) < self.minMissileT)
@@ -205,7 +156,8 @@
     [self.world2fg addChild:sprite];
 }
 
--(void) addRandomRobotAt:(CGPoint) location {
+-(void) addRandomRobotAt: (CGPoint) location
+{
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"disk-256x256"];
     
     sprite.position = location;
@@ -238,7 +190,8 @@
 
 }
 
--(void) addRandomRockAt:(CGPoint) location {
+-(void) addRandomRockAt: (CGPoint) location
+{
     NSString * spriteName = [NSString stringWithFormat:@"rock%d",
                              (int) (1+floor(sqrt(arc4random_uniform(9))))];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:spriteName];
@@ -275,7 +228,8 @@
 }
 
 
--(void) addRandomBonusAt:(CGPoint) location {
+-(void) addRandomBonusAt: (CGPoint) location
+{
     
     uint index = 1 + arc4random_uniform(3);
     NSString * gemName = [NSString stringWithFormat:@"gem%d", index];
@@ -328,7 +282,9 @@
 
 }
 
--(void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) touchesEnded: (NSSet *)     touches
+           withEvent: (UIEvent *)   event
+{
     /* Called when a touch ends */
     
     for (UITouch *touch in touches) {
@@ -388,7 +344,9 @@
     
 }
 
--(void) touchesMoved: (NSSet *) touches withEvent: (UIEvent *) event {
+-(void) touchesMoved: (NSSet *)     touches
+           withEvent: (UIEvent *)   event
+{
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self.world2fg];
         CGPoint curLoc = self.world2player.position;
@@ -400,7 +358,8 @@
     }
 }
 
--(void) updateNextFrame:(NSTimeInterval)currentTime {
+-(void) updateNextFrame: (NSTimeInterval) currentTime
+{
     if (self.userPause > 0) return;
     
     // UPDATE FPS COMPUTING
@@ -408,100 +367,17 @@
     self.curUpdateT = currentTime;
     self.deltaUpdateT = self.curUpdateT - self.lastUpdateT;
     
-    // MAX SPEED
-    float curV = hypot(self.world2player.physicsBody.velocity.dx,
-                       self.world2player.physicsBody.velocity.dy);
-    if (curV > self.player2vmax) {
-        //NSLog(@"%.2f", curV);
-        
-        self.world2player.physicsBody.velocity =
-        CGVectorMake(self.player2vmax * cos(self.world2player.zRotation),
-                     self.player2vmax * sin(self.world2player.zRotation));
-        self.world2player.physicsBody.angularVelocity = 0;
-    }
-    
-    // LAUNCH MISSILE
-    [self launchMissile:self.world2player Time:currentTime];
-    
-    // KEEP FPS > 25
-    if (self.deltaUpdateT < .04) {
-        
-        float random = 0;
-        
-        // add random robot
-        random = arc4random_uniform(10000);
-        float rock2random  = 50;
-        if (random < rock2random) {
-            float radius = arc4random_uniform(self.world2max.x);
-            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
-            float x = radius * cos(theta);
-            float y = radius * sin(theta);
-            CGPoint newPos = CGPointMake(x,y);
-            [self addRandomRockAt:newPos];
-        }
-        
-        // add random robot
-        random = arc4random_uniform(10000);
-        float robot2random  = 300;
-        if (random < robot2random) {
-            float radius = arc4random_uniform(self.world2max.x);
-            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
-            float x = radius * cos(theta);
-            float y = radius * sin(theta);
-            CGPoint newPos = CGPointMake(x,y);
-            [self addRandomRobotAt:newPos];
-        }
-        
-        // add random bonus
-        random = arc4random_uniform(10000);
-        float bonus2random  = 20;
-        if (random < bonus2random) {
-            float radius = arc4random_uniform(self.world2max.x);
-            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
-            float x = radius * cos(theta);
-            float y = radius * sin(theta);
-            CGPoint newPos = CGPointMake(x,y);
-            [self addRandomBonusAt:newPos];
-        }
-        
-    }
-    else {
-        //NSLog(@"WARNING/FPS/delta/%.2f ms", 1000*self.deltaUpdateT);
-    }
-    
-
+    [self.userGame updateNextFrame:currentTime];
 }
 
 
 -(void) updateHud
 {
-    // SCORE
-    if (self.playerScore < 0) self.playerScore = 0;
-    // ENERGY
-    if (self.playerEnergy < 0) self.playerEnergy = 0;
-
-    if (self.playerScore >= self.playerScoreWin) {
-        self.hud2center.text = @"YOU WIN";
-        self.hud2center.fontColor = [SKColor colorWithRed:0 green:1 blue:0 alpha:1];
-    }
-    else if (self.playerEnergy == 0) {
-        self.hud2center.text = @"GAME OVER";
-        self.hud2center.fontColor = [SKColor colorWithRed:1 green:0 blue:0 alpha:1];
-    }
-    else {
-        self.hud2center.text = @"";
-    }
-
-    self.hud2top.text = [NSString stringWithFormat:@"LEVEL %d - ENERGY %d",
-                                self.playerLevel,
-                                self.playerEnergy];
-    
-    self.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d/%d",
-                                self.playerScore,
-                                self.playerScoreWin];
+    [self.userGame updateHud];
 }
 
-- (void) update:(NSTimeInterval)currentTime {
+- (void) update: (NSTimeInterval) currentTime
+{
     
     if (self.userRestart == 1) {
         // RESTART NEW GAME
@@ -554,7 +430,7 @@
     }
     [self centerOnNode: self.world2camera];
 
-    // keep the world round
+    // keep the world round or flat
     [self manageWorldLimit];
     
 }
@@ -611,7 +487,7 @@
 }
 
 
-- (void) didBeginContact:(SKPhysicsContact *)contact
+- (void) didBeginContact: (SKPhysicsContact *) contact
 {
     SKPhysicsBody *firstBody, *secondBody;
     

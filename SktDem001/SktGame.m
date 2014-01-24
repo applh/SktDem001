@@ -52,5 +52,27 @@
     [self.game setupWorld];
 }
 
+-(void) setupPlayer
+{
+    [self.game setupPlayer];
+}
+
+-(void) updateHud
+{
+    [self.game updateHud];
+}
+
+-(void) updateNextFrame:(NSTimeInterval)currentTime
+{
+    [self.game updateNextFrame:currentTime];
+}
+-(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event
+{
+    /* Called when a touch begins */
+    [self.game touchesBegan:touches
+                  withEvent:event];
+}
+
+
 
 @end

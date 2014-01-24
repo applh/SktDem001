@@ -83,9 +83,14 @@
 
 -(void) centerOnNode: (SKNode *) node;
 -(void) manageWorldLimit;
--(void) addRandomRobotAt:(CGPoint) location;
 
 -(void) updateNextFrame:(NSTimeInterval)currentTime;
 -(void) updateHud;
+
+-(void) launchMissile:(SKNode*) from Time: (NSTimeInterval) currentTime;
+
+-(void) addRandomRockAt:(CGPoint) location;
+-(void) addRandomRobotAt:(CGPoint) location;
+-(void) addRandomBonusAt:(CGPoint) location;
 
 @end
