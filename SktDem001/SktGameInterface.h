@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+
+// FORWARD CLASS DECLARATION
 @class SktSceneGame;
+@class SktGame;
 
 @protocol SktGameInterface <NSObject>
 // ATTRIBUTES
 @property SktSceneGame* scene;
+@property SktGame* game;
 
 // METHODS
 @required

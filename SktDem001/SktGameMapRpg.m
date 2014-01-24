@@ -8,9 +8,11 @@
 
 #import "SktGameMapRpg.h"
 #import "SktSceneGame.h"
+#import "SktGame.h"
 
 @implementation SktGameMapRpg
 @synthesize scene;
+@synthesize game;
 
 // METHODS
 -(id) init
@@ -194,7 +196,7 @@
     self.scene.world2camera.position = self.scene.world2player.position;
     
     // SETUP MISSILE
-    self.scene.minMissileT = .5; // ONE MISSILE PER SECOND
+    self.game.minMissileT = .5; // ONE MISSILE PER SECOND
     
 }
 
@@ -229,7 +231,7 @@
             float x = radius * cos(theta);
             float y = radius * sin(theta);
             CGPoint newPos = CGPointMake(x,y);
-            [self.scene addRandomRockAt:newPos];
+            [self.game addRandomRockAt:newPos];
         }
         
         // add random robot
@@ -241,7 +243,7 @@
             float x = radius * cos(theta);
             float y = radius * sin(theta);
             CGPoint newPos = CGPointMake(x,y);
-            [self.scene addRandomRobotAt:newPos];
+            [self.game addRandomRobotAt:newPos];
         }
         
         // add random bonus
@@ -253,7 +255,7 @@
             float x = radius * cos(theta);
             float y = radius * sin(theta);
             CGPoint newPos = CGPointMake(x,y);
-            [self.scene addRandomBonusAt:newPos];
+            [self.game addRandomBonusAt:newPos];
         }
         
     }

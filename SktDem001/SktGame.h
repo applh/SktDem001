@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 APPLH.COM. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 #import "SktGameInterface.h"
 
 // DECLARATION FORWARD
@@ -19,6 +19,17 @@
 @property int                   userChoice;
 @property id <SktGameInterface> game;
 
+@property double  lastMissileT; // MISSILE FPS
+@property double  minMissileT; // MISSILE FPS
+
+
+@property uint32_t ccPlayer;
+@property uint32_t ccOrb;
+@property uint32_t ccRobot;
+@property uint32_t ccBonus;
+@property uint32_t ccRock;
+
+
 
 // METHODS
 -(void) setupGame:(int) g
@@ -29,8 +40,19 @@
 -(void) setupWorld;
 -(void) setupPlayer;
 -(void) updateHud;
--(void) updateNextFrame:(NSTimeInterval)currentTime;
+-(void) updateNextFrame: (NSTimeInterval) currentTime;
 
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
+-(void) touchesBegan: (NSSet *)     touches
+           withEvent: (UIEvent *)   event;
+
+-(void) launchMissile:(SKNode*)         from
+                 Time: (NSTimeInterval) currentTime;
+
+-(void) addRandomRockAt: (CGPoint)  location;
+-(void) addRandomRobotAt: (CGPoint) location;
+-(void) addRandomBonusAt: (CGPoint) location;
+
+-(void) didBeginContact: (SKPhysicsContact *) contact;
+
 
 @end

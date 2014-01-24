@@ -16,12 +16,6 @@
 
 @interface SktSceneGame : SKScene <SKPhysicsContactDelegate>
 
-@property uint32_t ccPlayer;
-@property uint32_t ccOrb;
-@property uint32_t ccRobot;
-@property uint32_t ccBonus;
-@property uint32_t ccRock;
-
 @property SKNode* hud;              // HEAD UP DISPLAY
 @property SKNode* hud2bg;           // HUD BACKGROUND
 @property SKNode* hud2fg;           // HUD FOREGROUND
@@ -54,8 +48,6 @@
 @property double  curUpdateT;   // REALTIME FPS
 @property double  deltaUpdateT; // REALTIME FPS
 
-@property double  lastMissileT; // MISSILE FPS
-@property double  minMissileT; // MISSILE FPS
 
 @property int playerLevel;
 @property int playerWinner;
@@ -87,10 +79,6 @@
 -(void) updateNextFrame:(NSTimeInterval)currentTime;
 -(void) updateHud;
 
--(void) launchMissile:(SKNode*) from Time: (NSTimeInterval) currentTime;
 
--(void) addRandomRockAt:(CGPoint) location;
--(void) addRandomRobotAt:(CGPoint) location;
--(void) addRandomBonusAt:(CGPoint) location;
 
 @end
