@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class SktSceneGame;
 
 @protocol SktGameInterface <NSObject>
+// ATTRIBUTES
+@property SktSceneGame* scene;
 
 // METHODS
 @required

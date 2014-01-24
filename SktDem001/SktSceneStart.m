@@ -54,7 +54,7 @@
     SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
     
     myLabel.text = @"SELECT YOUR GAME";
-    myLabel.fontSize = 60;
+    myLabel.fontSize = 50;
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    2*CGRectGetMidY(self.frame));

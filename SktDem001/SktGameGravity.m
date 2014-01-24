@@ -7,13 +7,23 @@
 //
 
 #import "SktGameGravity.h"
+#import "SktSceneGame.h"
 
 @implementation SktGameGravity
+@synthesize scene;
 
 // METHODS
 -(void) restartGame
 {
+    NSLog(@"GRAVITY");
+
+    // SCALE THE MAP
+    self.scene.world2scale = .05;
+    self.scene.player2vmax2scale = self.scene.world2scale * (self.scene.world2scale + .25);
     
+    // THE WORLD IS ROUND
+    self.scene.world2mode = 0;
+   
 }
 
 

@@ -43,9 +43,9 @@
 -(void) didMoveToView:(SKView *)view
 {
     // FORMER SCENE HAS SETUP USER CHOICES
-    
     self.userGame = [SktGame new];
-    [self.userGame setupGame:self.userGameChoice];
+    [self.userGame setupGame:self.userGameChoice
+                   withScene:self];
     
     self.playerWinner = 0;
     self.playerLevel = 1;
@@ -59,40 +59,7 @@
 -(void) setupNewGame
 {
     [self.userGame restartGame];
-    
-    if (self.userGameChoice == 0) {
-        // SCALE THE MAP
-        self.world2scale = .2;
-        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
         
-        // THE WORLD IS ROUND
-        self.world2mode = 0;
-    }
-    else if (self.userGameChoice == 1) {
-        // SCALE THE MAP
-        self.world2scale = .2;
-        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
-        
-        // THE WORLD IS ROUND
-        self.world2mode = 0;
-    }
-    else if (self.userGameChoice == 2) {
-        // SCALE THE MAP
-        self.world2scale = .1;
-        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
-        
-        // THE WORLD IS ROUND
-        self.world2mode = 0;
-    }
-    else if (self.userGameChoice == 3) {
-        // SCALE THE MAP
-        self.world2scale = .05;
-        self.player2vmax2scale = self.world2scale * (self.world2scale + .25);
-        
-        // THE WORLD IS ROUND
-        self.world2mode = 0;
-    }
-    
     [self.world removeAllChildren];
     [self setupWorld];
     self.userRestart = 0;

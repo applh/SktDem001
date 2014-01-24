@@ -16,18 +16,25 @@
 @implementation SktGame
 
 -(void) setupGame:(int) g
+        withScene:(SktSceneGame*) scene
 {
+    self.scene = scene;
+    
     self.userChoice = g;
     
-    if (g == 0)  {
+    // CREATE DELEGATE DEPENDING ON USER CHOICE
+    if (g == 1)  {
         self.game = [SktGameMapShoot new];
     }
-    else if (g == 1)  {
+    else if (g == 2)  {
         self.game = [SktGameMapRpg new];
     }
-    else if (g == 2)  {
+    else if (g == 3)  {
         self.game = [SktGameGravity new];
     }
+    
+    // SETUP SCENE WITH GAME DELEGATE
+    self.game.scene = scene;
 }
 
 -(void) restartGame
