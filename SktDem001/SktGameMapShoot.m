@@ -26,6 +26,9 @@
 
 -(void) restartGame
 {
+    // NO GRAVITY
+    self.scene.physicsWorld.gravity = CGVectorMake(0, 0);
+
     // SCALE THE MAP
     self.scene.world2scale = .2;
     self.scene.player2vmax2scale = self.scene.world2scale * (self.scene.world2scale + .25);

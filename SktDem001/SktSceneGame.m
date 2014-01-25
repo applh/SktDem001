@@ -74,8 +74,6 @@
     // SCORE TO WIN
     self.playerScoreWin = self.playerLevel * 100;
 
-    // NO GRAVITY
-    self.physicsWorld.gravity = CGVectorMake(0, 0);
     // CONTACT DELEGATE
     self.physicsWorld.contactDelegate = self;
     
