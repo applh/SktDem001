@@ -33,6 +33,13 @@
 -(void) updateNextFrame:(NSTimeInterval)currentTime;
 
 @required
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
+-(void) touchesBegan: (NSSet *) touches
+           withEvent: (UIEvent *) event;
+@required
+-(void) touchesMoved: (NSSet *)     touches
+           withEvent: (UIEvent *)   event;
+@required
+-(void) touchesEnded: (NSSet *)     touches
+           withEvent: (UIEvent *)   event;
 
 @end

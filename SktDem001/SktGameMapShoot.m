@@ -9,6 +9,7 @@
 #import "SktGameMapShoot.h"
 #import "SktSceneGame.h"
 #import "SktGame.h"
+#import "SktPopup.h"
 
 @implementation SktGameMapShoot
 @synthesize scene;
@@ -268,7 +269,8 @@
     
 }
 
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event
+-(void) touchesBegan: (NSSet *)     touches
+           withEvent: (UIEvent *)   event
 {
     /* Called when a touch begins */
     
@@ -283,5 +285,64 @@
     }
 }
 
+-(void) touchesMoved: (NSSet *)     touches
+           withEvent: (UIEvent *)   event
+{
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self.scene.world2fg];
+        CGPoint curLoc = self.scene.world2player.position;
+        float dx = location.x - curLoc.x;
+        float dy = location.y - curLoc.y;
+        self.scene.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
+        self.scene.world2player.physicsBody.angularVelocity = 0;
+        self.scene.world2player.zRotation = atan2f(dy, dx);
+    }
+}
+
+-(void) touchesEnded: (NSSet *)     touches
+           withEvent: (UIEvent *)   event
+{
+    /* Called when a touch ends */
+    
+    for (UITouch *touch in touches) {
+        if (self.scene.popup) {
+            SKNode* popup = [self.scene.hud2popup childNodeWithName: @"popup"];
+            NSArray *nodes = [popup nodesAtPoint:[touch locationInNode:popup]];
+            for (SKNode *node in nodes) {
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"OK"]) {
+                    self.scene.userRestart = 1;
+                    self.scene.userPause = 1;
+                    self.scene.popup = [self.scene.popup close];
+                }
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"CANCEL"]) {
+                    self.scene.userRestart = 0;
+                    self.scene.userPause = 0;
+                    self.scene.popup = [self.scene.popup close];
+                }
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"EXIT"]) {
+                    self.scene.userRestart = 1;
+                    self.scene.userPause = 1;
+                    self.scene.popup = [self.scene.popup close];
+                    
+                    [self.scene showGameStart];
+                }
+            }
+        }
+        else {
+            NSArray *nodes = [self.scene nodesAtPoint:[touch locationInNode:self.scene.hud2fg]];
+            for (SKNode *node in nodes) {
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"bottom label"]) {
+                    self.scene.userPause = 1;
+                    [self.scene pausePopup];
+                }
+            }
+        }
+    }
+    
+}
 
 @end

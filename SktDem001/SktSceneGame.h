@@ -39,7 +39,6 @@
 @property CGPoint world2max;
 @property int     world2mode;   // 0 = round, 1 = flat
 
-
 @property float   player2vmax;  // Velocity max
 @property float   player2vmax2scale;  // Velocity max factor
 
@@ -64,7 +63,18 @@
 
 // OVERRIDE
 -(id)   initWithSize: (CGSize) size;
--(void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event;
+
+-(void) showGameStart;
+
+-(void) touchesBegan: (NSSet *) touches
+           withEvent: (UIEvent *) event;
+-(void) touchesMoved: (NSSet *)     touches
+           withEvent: (UIEvent *)   event;
+-(void) touchesEnded: (NSSet *)     touches
+           withEvent: (UIEvent *)   event;
+
+- (void) didSimulatePhysics;
+
 -(void) didBeginContact: (SKPhysicsContact *) contact;
 
 // CUSTOM
@@ -74,11 +84,13 @@
 -(void) setupPlayer;
 
 -(void) centerOnNode: (SKNode *) node;
--(void) manageWorldLimit;
 
 -(void) updateNextFrame:(NSTimeInterval)currentTime;
 -(void) updateHud;
 
+
+
+-(void) pausePopup;
 
 
 @end

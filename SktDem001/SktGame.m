@@ -52,6 +52,12 @@
 
 -(void) setupWorld
 {
+    self.ccPlayer   =  0x1 << 0;
+    self.ccOrb      =  0x1 << 1;
+    self.ccRobot    =  0x1 << 2;
+    self.ccBonus    =  0x1 << 3;
+    self.ccRock     =  0x1 << 4;
+
     [self.game setupWorld];
 }
 
@@ -75,6 +81,22 @@
 {
     /* Called when a touch begins */
     [self.game touchesBegan:touches
+                  withEvent:event];
+}
+
+-(void) touchesMoved: (NSSet *) touches
+           withEvent: (UIEvent *) event
+{
+    /* Called when a touch begins */
+    [self.game touchesMoved:touches
+                  withEvent:event];
+}
+
+-(void) touchesEnded: (NSSet *) touches
+           withEvent: (UIEvent *) event
+{
+    /* Called when a touch begins */
+    [self.game touchesEnded:touches
                   withEvent:event];
 }
 
@@ -338,5 +360,76 @@
         [self.scene.world2fg addChild:emitter];
     }
 }
+
+
+- (void) didSimulatePhysics
+{
+    float dx = self.scene.world2camera.position.x - self.scene.world2player.position.x;
+    float dy = self.scene.world2camera.position.y - self.scene.world2player.position.y;
+    float d2 = dx*dx + dy*dy;
+    // FIXME: how do we compute this threshold?
+    // half of max screen size divided by scale ?
+    float d2max = self.scene.init2size.width
+                    * self.scene.init2size.height
+                    * .5
+                    / self.scene.world2scale; // 5000000;
+    
+    if (d2 > d2max ) {
+        // animate the camera
+        SKAction *action = [SKAction moveTo:self.scene.world2player.position duration: .5];
+        [self.scene.world2camera runAction:action];
+    }
+    [self.scene centerOnNode: self.scene.world2camera];
+    
+    // keep the world round or flat
+    [self manageWorldLimit];
+    
+}
+
+-(void) manageWorldLimit
+{
+    
+    // loop on all elements and check position
+    // warning: might be CPU consuming if too many elements
+    for (SKNode* curN in [self.scene.world2fg children]) {
+        CGPoint curPos = curN.position;
+        float curX = curPos.x;
+        float curY = curPos.y;
+        
+        if (self.scene.world2mode == 0) {
+            // THE WORLD IS ROUND
+            if (curX < self.scene.world2min.x) {
+                curX = self.scene.world2min.x;
+                curN.position = CGPointMake(self.scene.world2max.x, curY);
+            }
+            else if (curX > self.scene.world2max.x) {
+                curX = self.scene.world2max.x;
+                curN.position = CGPointMake(self.scene.world2min.x, curY);
+            }
+            
+            if (curY < self.scene.world2min.y) curN.position = CGPointMake(curX, self.scene.world2max.y);
+            else if (curY > self.scene.world2max.y) curN.position = CGPointMake(curX, self.scene.world2min.y);
+            
+        }
+        else {
+            // THE WORLD IS FLAT
+            if (curX < self.scene.world2min.x) {
+                curX = self.scene.world2min.x;
+                curN.position = CGPointMake(self.scene.world2min.x, curY);
+            }
+            else if (curX > self.scene.world2max.x) {
+                curX = self.scene.world2max.x;
+                curN.position = CGPointMake(self.scene.world2max.x, curY);
+            }
+            
+            if (curY < self.scene.world2min.y)
+                curN.position = CGPointMake(curX, self.scene.world2min.y);
+            else if (curY > self.scene.world2max.y)
+                curN.position = CGPointMake(curX, self.scene.world2max.y);
+            
+        }
+    }
+}
+
 
 @end

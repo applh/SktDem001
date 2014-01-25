@@ -42,7 +42,11 @@
 -(void) updateHud;
 -(void) updateNextFrame: (NSTimeInterval) currentTime;
 
--(void) touchesBegan: (NSSet *)     touches
+-(void) touchesBegan: (NSSet *) touches
+           withEvent: (UIEvent *) event;
+-(void) touchesMoved: (NSSet *)     touches
+           withEvent: (UIEvent *)   event;
+-(void) touchesEnded: (NSSet *)     touches
            withEvent: (UIEvent *)   event;
 
 -(void) launchMissile:(SKNode*)         from
@@ -53,6 +57,9 @@
 -(void) addRandomBonusAt: (CGPoint) location;
 
 -(void) didBeginContact: (SKPhysicsContact *) contact;
+
+-(void) didSimulatePhysics;
+-(void) manageWorldLimit;
 
 
 @end
