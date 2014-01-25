@@ -111,8 +111,6 @@
                             self.scene.playerScoreWin];
 }
 
-
-
 -(void) setupWorld
 {
     self.ccPlayer   =  0x1 << 0;

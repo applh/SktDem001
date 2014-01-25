@@ -19,7 +19,7 @@
         
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
         
-        myLabel.text = @"HELLIX";
+        myLabel.text = @"HELLIOS";
         myLabel.fontSize = 100;
         myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
