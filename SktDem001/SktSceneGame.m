@@ -9,6 +9,7 @@
 #import "SktSceneGame.h"
 #import "SktSceneStart.h"
 #import "SktPopup.h"
+#import "SktKeyboard.h"
 #import "SktGame.h"
 
 @implementation SktSceneGame
@@ -169,6 +170,10 @@
                     self.userPause = 1;
                     [self pausePopup];
                 }
+                else if ([node.name isEqualToString:@"top label"]) {
+                    self.userPause = 1;
+                    [self keyboardPopup];
+                }
             }
         }
     }
@@ -187,6 +192,16 @@
                       showExit:@"exit"
                        inScene:self
                     parentNode:self.hud2popup];
+    }
+    
+}
+
+-(void) keyboardPopup
+{
+    if (self.popup == nil) {
+        self.popup =
+        [SktKeyboard initWithName:@"popup"
+                       parentNode:self.hud2popup];
     }
     
 }

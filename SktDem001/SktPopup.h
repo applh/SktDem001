@@ -13,6 +13,7 @@
 @property SKNode*       parentNode;
 @property SKShapeNode*  popupRootNode;
 
+-(id) init;
 
 +(id) initWithName:(NSString*)  name
           showText:(NSString*)  text

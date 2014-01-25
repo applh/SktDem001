@@ -10,6 +10,15 @@
 
 @implementation SktPopup
 
+-(id) init
+{
+    if (self = [super init]) {
+        
+    }
+    
+    return self;
+}
+
 
 +(id) initWithName:(NSString *) name
           showText:(NSString*)  text

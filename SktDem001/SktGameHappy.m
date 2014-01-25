@@ -62,6 +62,7 @@
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame),
                                    CGRectGetMaxY(self.scene.frame)-1.5*fontSize1);
+    myLabel.name = @"top label";
     self.scene.hud2top = myLabel;
     [self.scene.hud2fg addChild:myLabel];
     
