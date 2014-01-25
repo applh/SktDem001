@@ -1,19 +1,17 @@
 //
-//  SktGameGravity.m
+//  SktGameHappy.m
 //  SktDem001
 //
-//  Created by APPLH.COM on 24/01/2014.
+//  Created by APPLH.COM on 25/01/2014.
 //  Copyright (c) 2014 APPLH.COM. All rights reserved.
 //
 
-#import "SktGameGravity.h"
+#import "SktGameHappy.h"
 #import "SktSceneGame.h"
 #import "SktGame.h"
 #import "SktPopup.h"
 
-@implementation SktGameGravity
-
-// ATTRIBUTES
+@implementation SktGameHappy
 @synthesize scene;
 @synthesize game;
 
@@ -29,21 +27,21 @@
 -(void) restartGame
 {
     // NO GRAVITY
-    //self.scene.physicsWorld.gravity = CGVectorMake(0, 0);
-
+    self.scene.physicsWorld.gravity = CGVectorMake(0, 0);
+    
     // SCALE THE MAP
     self.scene.world2scale = .2;
     self.scene.player2vmax2scale = self.scene.world2scale * (self.scene.world2scale + .25);
     
-    // THE WORLD IS ROUND
+    // THE WORLD IS FLAT
     self.scene.world2mode = 1;
-   
+    
 }
 
 -(void) setupHud
 {
     float fontSize1 = 30;
-    NSString * fontName1 = @"Chalkduster";
+    NSString * fontName1 = @"PartyLetPlain";
     
     SKNode* bg = [SKNode node];
     SKNode* fg = [SKNode node];
@@ -85,7 +83,7 @@
     myLabel.name = @"bottom label";
     self.scene.hud2bottom = myLabel;
     [self.scene.hud2fg addChild:myLabel];
-
+    
 }
 
 -(void) updateHud
@@ -107,7 +105,7 @@
         self.scene.hud2center.text = @"";
     }
     
-    self.scene.hud2top.text = [NSString stringWithFormat:@"GRAVITY LEVEL %d - ENERGY %d",
+    self.scene.hud2top.text = [NSString stringWithFormat:@"HAPPY - LEVEL %d - ENERGY %d",
                                self.scene.playerLevel,
                                self.scene.playerEnergy];
     
@@ -154,7 +152,7 @@
     
     SKAction* scale = [SKAction scaleTo:self.scene.world2scale duration:1];
     [self.scene.world runAction:scale];
-
+    
 }
 
 -(void) setupPlayer
@@ -167,7 +165,8 @@
     
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"player1-256x256"];
     
-    sprite.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMidY(self.scene.frame)) ;
+    sprite.position = CGPointMake(CGRectGetMidX(self.scene.frame),
+                                  CGRectGetMidY(self.scene.frame)) ;
     
     float angle = arc4random()%360*M_PI/180;
     float speed = 100;
@@ -206,7 +205,7 @@
     
 }
 
--(void) updateNextFrame: (NSTimeInterval) currentTime
+-(void) updateNextFrame:(NSTimeInterval)currentTime
 {
     // MAX SPEED
     float curV = hypot(self.scene.world2player.physicsBody.velocity.dx,
@@ -217,9 +216,11 @@
                      self.scene.player2vmax * sin(self.scene.world2player.zRotation));
         self.scene.world2player.physicsBody.angularVelocity = 0;
     }
+    // KEEP THE PLAYER STRAIGHT
+    self.scene.world2player.zRotation =0;
     
     // LAUNCH MISSILE
-    //[self.game launchMissile:self.scene.world2player Time:currentTime];
+    //[self.scene launchMissile:self.scene.world2player Time:currentTime];
     
     // KEEP FPS > 25
     if (self.scene.deltaUpdateT < .04) {
@@ -282,7 +283,7 @@
         float dy = location.y - curLoc.y;
         self.scene.world2player.physicsBody.velocity = CGVectorMake(dx, dy);
         self.scene.world2player.physicsBody.angularVelocity = 0;
-        self.scene.world2player.zRotation = atan2f(dy, dx);
+        //self.scene.world2player.zRotation = atan2f(dy, dx);
     }
 }
 
@@ -345,6 +346,5 @@
     }
     
 }
-
 
 @end

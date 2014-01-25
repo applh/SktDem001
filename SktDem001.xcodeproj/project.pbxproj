@@ -28,6 +28,7 @@
 		2827233C1883E40E00759DC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282723171883E40E00759DC7 /* UIKit.framework */; };
 		282723441883E40E00759DC7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 282723421883E40E00759DC7 /* InfoPlist.strings */; };
 		282723461883E40E00759DC7 /* SktDem001Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 282723451883E40E00759DC7 /* SktDem001Tests.m */; };
+		282AD901189408D800EFC22E /* SktGameHappy.m in Sources */ = {isa = PBXBuildFile; fileRef = 282AD900189408D800EFC22E /* SktGameHappy.m */; };
 		28639E2A1892BD5500BE75F8 /* player1-256x256.png in Resources */ = {isa = PBXBuildFile; fileRef = 28639E291892BD5500BE75F8 /* player1-256x256.png */; };
 		2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 2894796E18881BA500F19CE1 /* SktSceneStart.m */; };
 		2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */ = {isa = PBXBuildFile; fileRef = 2894797018883E6E00F19CE1 /* orb-42x42.png */; };
@@ -93,6 +94,8 @@
 		282723411883E40E00759DC7 /* SktDem001Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SktDem001Tests-Info.plist"; sourceTree = "<group>"; };
 		282723431883E40E00759DC7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		282723451883E40E00759DC7 /* SktDem001Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SktDem001Tests.m; sourceTree = "<group>"; };
+		282AD8FF189408D800EFC22E /* SktGameHappy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGameHappy.h; sourceTree = "<group>"; };
+		282AD900189408D800EFC22E /* SktGameHappy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktGameHappy.m; sourceTree = "<group>"; };
 		28639E291892BD5500BE75F8 /* player1-256x256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player1-256x256.png"; sourceTree = "<group>"; };
 		2894796D18881BA500F19CE1 /* SktSceneStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktSceneStart.h; sourceTree = "<group>"; };
 		2894796E18881BA500F19CE1 /* SktSceneStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktSceneStart.m; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 				28BFF1EE1892693400B6C6FD /* SktGameGravity.h */,
 				28BFF1EF1892693400B6C6FD /* SktGameGravity.m */,
 				28BFF1F1189269A300B6C6FD /* SktGameInterface.h */,
+				282AD8FF189408D800EFC22E /* SktGameHappy.h */,
+				282AD900189408D800EFC22E /* SktGameHappy.m */,
 			);
 			path = SktDem001;
 			sourceTree = "<group>";
@@ -431,6 +436,7 @@
 				2894796F18881BA500F19CE1 /* SktSceneStart.m in Sources */,
 				281621061883EF9200C9170E /* SktSceneGame.m in Sources */,
 				28BFF1F01892693400B6C6FD /* SktGameGravity.m in Sources */,
+				282AD901189408D800EFC22E /* SktGameHappy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

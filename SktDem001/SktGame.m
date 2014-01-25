@@ -13,6 +13,7 @@
 #import "SktGameMapShoot.h"
 #import "SktGameMapRpg.h"
 #import "SktGameGravity.h"
+#import "SktGameHappy.h"
 
 @implementation SktGame
 
@@ -32,6 +33,9 @@
     }
     else if (g == 3)  {
         self.game = [SktGameGravity new];
+    }
+    else if (g == 4)  {
+        self.game = [SktGameHappy new];
     }
     
     // SETUP SCENE WITH GAME DELEGATE

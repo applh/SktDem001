@@ -68,6 +68,8 @@
     [self addChoice:@"arcade" inCode: @"arcade"];
     // CHOICE 3
     [self addChoice:@"gravity" inCode: @"gravity"];
+    // CHOICE 4
+    [self addChoice:@"happy" inCode: @"happy"];
     
 }
 
@@ -104,7 +106,7 @@
     SktSceneGame * scene = [SktSceneGame sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    // SET THE GMAE CHOICE
+    // SET THE GAME CHOICE
     scene.userGameChoice = self.gameChoice;
     
     // ADD TRANSITION EFFECT
@@ -131,6 +133,9 @@
             }
             else if ([node.name isEqualToString:@"gravity"]) {
                 self.gameChoice = 3;
+            }
+            else if ([node.name isEqualToString:@"happy"]) {
+                self.gameChoice = 4;
             }
         }
         
