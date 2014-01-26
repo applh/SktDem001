@@ -134,56 +134,8 @@
            withEvent: (UIEvent *)   event
 {
     /* Called when a touch ends */
-    
-    for (UITouch *touch in touches) {
-        if (self.popup) {
-            SKNode* popup = [self.hud2popup childNodeWithName: @"popup"];
-            NSArray *nodes = [popup nodesAtPoint:[touch locationInNode:popup]];
-            for (SKNode *node in nodes) {
-                if (node) {
-                    // GET THE BUTTON
-                    if ([node.name isEqualToString:@"OK"]) {
-                        self.userRestart = 1;
-                        self.userPause = 1;
-                        self.popup = [self.popup close];
-                    }
-                    // GET THE BUTTON
-                    if ([node.name isEqualToString:@"CANCEL"]) {
-                        self.userRestart = 0;
-                        self.userPause = 0;
-                        self.popup = [self.popup close];
-                    }
-                    // GET THE BUTTON
-                    if ([node.name isEqualToString:@"EXIT"]) {
-                        self.userRestart = 1;
-                        self.userPause = 1;
-                        self.popup = [self.popup close];
-                        
-                        [self showGameStart];
-                    }
-                    
-                    if (self.popup && node) {
-                        [self.popup processNode:node];
-                    }
-                }
-            }
-        }
-        else {
-            NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self.hud2fg]];
-            for (SKNode *node in nodes) {
-                // GET THE BUTTON
-                if ([node.name isEqualToString:@"bottom label"]) {
-                    self.userPause = 1;
-                    [self pausePopup];
-                }
-                else if ([node.name isEqualToString:@"top label"]) {
-                    self.userPause = 1;
-                    [self keyboardPopup];
-                }
-            }
-        }
-    }
-
+    [self.userGame touchesEnded:touches
+                      withEvent:event];
 }
 
 
@@ -191,13 +143,13 @@
 {
     if (self.popup == nil) {
         self.popup =
-        [SktPopup initWithName:@"popup"
-                      showText:@"START A NEW GAME ?"
-                        showOk:@"Restart"
-                    showCancel:@"Back"
-                      showExit:@"exit"
-                       inScene:self
-                    parentNode:self.hud2popup];
+        [SktPopup initWithName: @"popup"
+                      showText: @"START A NEW GAME ?"
+                        showOk: @"Restart"
+                    showCancel: @"Back"
+                      showExit: @"exit"
+                       inScene: self
+                    parentNode: self.hud2popup];
     }
     
 }

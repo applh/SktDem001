@@ -88,9 +88,8 @@
 -(void) updateNextFrame:(NSTimeInterval)currentTime;
 -(void) updateHud;
 
-
-
 -(void) pausePopup;
+-(void) keyboardPopup;
 
 
 @end

@@ -14,6 +14,7 @@
 #import "SktGameMapRpg.h"
 #import "SktGameGravity.h"
 #import "SktGameHappy.h"
+#import "SktPopup.h"
 
 @implementation SktGame
 
@@ -102,6 +103,56 @@
     /* Called when a touch begins */
     [self.game touchesEnded:touches
                   withEvent:event];
+    
+    for (UITouch *touch in touches) {
+        if (self.scene.popup) {
+            SKNode* popup = [self.scene.hud2popup childNodeWithName: @"popup"];
+            NSArray *nodes = [popup nodesAtPoint:[touch locationInNode:popup]];
+            for (SKNode *node in nodes) {
+                if (node) {
+                    // GET THE BUTTON
+                    if ([node.name isEqualToString:@"OK"]) {
+                        self.scene.userRestart = 1;
+                        self.scene.userPause = 1;
+                        self.scene.popup = [self.scene.popup close];
+                    }
+                    // GET THE BUTTON
+                    if ([node.name isEqualToString:@"CANCEL"]) {
+                        self.scene.userRestart = 0;
+                        self.scene.userPause = 0;
+                        self.scene.popup = [self.scene.popup close];
+                    }
+                    // GET THE BUTTON
+                    if ([node.name isEqualToString:@"EXIT"]) {
+                        self.scene.userRestart = 1;
+                        self.scene.userPause = 1;
+                        self.scene.popup = [self.scene.popup close];
+                        
+                        [self.scene showGameStart];
+                    }
+                    
+                    if (self.scene.popup && node) {
+                        [self.scene.popup processNode:node];
+                    }
+                }
+            }
+        }
+        else {
+            NSArray *nodes = [self.scene nodesAtPoint:[touch locationInNode:self.scene.hud2fg]];
+            for (SKNode *node in nodes) {
+                // GET THE BUTTON
+                if ([node.name isEqualToString:@"bottom label"]) {
+                    self.scene.userPause = 1;
+                    [self.scene pausePopup];
+                }
+                else if ([node.name isEqualToString:@"top label"]) {
+                    self.scene.userPause = 1;
+                    [self.scene keyboardPopup];
+                }
+            }
+        }
+    }
+
 }
 
 -(void) launchMissile: (SKNode*)        from

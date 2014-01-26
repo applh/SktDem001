@@ -14,7 +14,7 @@
 -(id) initWithSize: (CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        self.backgroundColor = [SKColor colorWithWhite:.2 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithWhite:1.0 alpha:1.0];
         
         // USER HAS TO SELECT A GAME
         self.gameChoice = 0;
@@ -55,7 +55,7 @@
     
     myLabel.text = @"SELECT YOUR GAME";
     myLabel.fontSize = 40;
-    myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    myLabel.fontColor = [SKColor colorWithWhite:0.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    2*CGRectGetMidY(self.frame));
     SKAction* action = [SKAction moveByX:0 y: -0.30 * CGRectGetMidY(self.frame) duration:.5];
@@ -86,7 +86,7 @@
     choice.fontColor = [ SKColor colorWithHue: arc4random_uniform(360) / 360.0
                                    saturation: 1.0
                                    brightness: 1.0
-                                        alpha: 1.0 ];
+                                        alpha: 0.8 ];
     
     choice.position = CGPointMake(CGRectGetMidX(self.frame), -2*CGRectGetMidY(self.frame));
     SKAction* action = [SKAction moveByX: 0
