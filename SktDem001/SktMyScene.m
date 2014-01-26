@@ -15,25 +15,25 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:1.0 green:0.4 blue:0.0 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithWhite:0.1 alpha:1.0];
         
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
         
-        myLabel.text = @"HELLIOS";
-        myLabel.fontSize = 80;
-        myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+        myLabel.text = @"hellios";
+        myLabel.fontSize = 60;
+        myLabel.fontColor = [SKColor colorWithHue:0.2 saturation:1.0 brightness:1.0 alpha:1.0 ];
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                         2*CGRectGetMidY(self.frame));
 
         SKLabelNode *myLabel2 = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
         
         myLabel2.text = @"touch to start";
-        myLabel2.fontSize = 30;
+        myLabel2.fontSize = 20;
         myLabel2.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
 
         myLabel2.position = CGPointMake(CGRectGetMidX(self.frame), 0);
-        SKAction* action = [SKAction moveByX:0 y:-CGRectGetMidY(self.frame) duration:2];
-        SKAction* action2 = [SKAction moveByX:0 y:CGRectGetMidY(self.frame)/2 duration:2];
+        SKAction* action = [SKAction moveByX:0 y:-CGRectGetMidY(self.frame) duration:1];
+        SKAction* action2 = [SKAction moveByX:0 y:CGRectGetMidY(self.frame)*.8 duration:2];
         
         [myLabel runAction: action];
         [myLabel2 runAction: action2];

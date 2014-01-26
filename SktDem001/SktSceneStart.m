@@ -14,7 +14,7 @@
 -(id) initWithSize: (CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        self.backgroundColor = [SKColor colorWithRed:0.4 green:0.8 blue:0.0 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithWhite:.2 alpha:1.0];
         
         // USER HAS TO SELECT A GAME
         self.gameChoice = 0;
@@ -54,7 +54,7 @@
     SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
     
     myLabel.text = @"SELECT YOUR GAME";
-    myLabel.fontSize = 50;
+    myLabel.fontSize = 40;
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                    2*CGRectGetMidY(self.frame));
@@ -82,11 +82,11 @@
     choice.text = [NSString stringWithFormat:@"(%d)  %@", self.nbChoice, name];
 
     choice.name = code;
-    choice.fontSize = 30;
-    choice.fontColor = [SKColor colorWithRed: .30 + .10 * arc4random_uniform(50)
-                                       green: .30 + .10 * arc4random_uniform(50)
-                                        blue: .30 + .10 * arc4random_uniform(50)
-                                       alpha: .8 ];
+    choice.fontSize = 20;
+    choice.fontColor = [ SKColor colorWithHue: arc4random_uniform(360) / 360.0
+                                   saturation: 1.0
+                                   brightness: 1.0
+                                        alpha: 1.0 ];
     
     choice.position = CGPointMake(CGRectGetMidX(self.frame), -2*CGRectGetMidY(self.frame));
     SKAction* action = [SKAction moveByX: 0

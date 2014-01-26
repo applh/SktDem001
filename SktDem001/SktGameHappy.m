@@ -72,6 +72,7 @@
     myLabel.fontColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.scene.frame),
                                    CGRectGetMidY(self.scene.frame));
+    myLabel.name = @"center label";
     self.scene.hud2center = myLabel;
     [self.scene.hud2fg addChild:myLabel];
     

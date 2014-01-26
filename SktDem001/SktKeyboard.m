@@ -49,7 +49,7 @@
             SKLabelNode* label0 = [SKLabelNode new];
             label0.text = text;
             label0.name = @"text";
-            label0.position = CGPointMake(0, +240);
+            label0.position = CGPointMake(0, +260);
             [res.popupRootNode addChild:label0];
             
             res.curLabel = label0;
@@ -106,10 +106,10 @@
 
         }
         
-        NSArray* tabC = @[  @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0",
-                            @"B", @"C", @"D", @"F", @"G", @"H", @"J", @"K", @"L", @"M",
-                            @"N", @"P", @"Q", @"R", @"S", @"T", @"V", @"W", @"X", @"Z",
-                            @"A", @"E", @"I", @"O", @"U", @"Y", @",", @";", @".", @"@",
+        NSArray* tabC = @[  @"0", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9",
+                            @"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J",
+                            @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T",
+                            @"U", @"V", @"W", @"X", @"Y", @"Z", @",", @";", @".", @"@",
                         ];
         curX0 = -260;
         curX = curX0;
@@ -180,11 +180,11 @@
 -(void) processInput: (SKNode*) n
 {
     
-    int l = 0;
+    long l = 0;
     if ([n.name length]) l = [n.name length];
     
     if ([n.name isEqualToString:@"backspace"]) {
-        int tl = [self.curText length];
+        long tl = [self.curText length];
         if (tl > 0)
             self.curText = [self.curText substringToIndex: ([self.curText length] - 1)];
     }
