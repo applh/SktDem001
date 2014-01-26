@@ -84,6 +84,16 @@
     return res;
 }
 
+-(void) processNode: (SKNode*) n
+{
+    [self processInput:n];
+}
+
+-(void) processInput: (SKNode*) n
+{
+    NSLog(@"Popup");
+}
+
 -(id) close
 {
     SKAction* act1 = [SKAction fadeOutWithDuration:.25];

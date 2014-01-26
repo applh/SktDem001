@@ -8,12 +8,20 @@
 
 #import "SktPopup.h"
 
+@class SKLabelNode;
+
 @interface SktKeyboard : SktPopup
+
+@property NSString*     curText;
+@property SKLabelNode*  curLabel;
 
 -(id) init;
 
-+(id) initWithName:(NSString*)  name
-        parentNode:(SKNode*)    parent;
++(id) initWithName: (NSString*)  name
+        parentNode: (SKNode*)    parent;
 
+-(void) processNode: (SKNode*) n;
+
+-(void) processInput: (SKNode*) n;
 
 @end

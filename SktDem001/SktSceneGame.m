@@ -140,25 +140,31 @@
             SKNode* popup = [self.hud2popup childNodeWithName: @"popup"];
             NSArray *nodes = [popup nodesAtPoint:[touch locationInNode:popup]];
             for (SKNode *node in nodes) {
-                // GET THE BUTTON
-                if ([node.name isEqualToString:@"OK"]) {
-                    self.userRestart = 1;
-                    self.userPause = 1;
-                    self.popup = [self.popup close];
-                }
-                // GET THE BUTTON
-                if ([node.name isEqualToString:@"CANCEL"]) {
-                    self.userRestart = 0;
-                    self.userPause = 0;
-                    self.popup = [self.popup close];
-                }
-                // GET THE BUTTON
-                if ([node.name isEqualToString:@"EXIT"]) {
-                    self.userRestart = 1;
-                    self.userPause = 1;
-                    self.popup = [self.popup close];
+                if (node) {
+                    // GET THE BUTTON
+                    if ([node.name isEqualToString:@"OK"]) {
+                        self.userRestart = 1;
+                        self.userPause = 1;
+                        self.popup = [self.popup close];
+                    }
+                    // GET THE BUTTON
+                    if ([node.name isEqualToString:@"CANCEL"]) {
+                        self.userRestart = 0;
+                        self.userPause = 0;
+                        self.popup = [self.popup close];
+                    }
+                    // GET THE BUTTON
+                    if ([node.name isEqualToString:@"EXIT"]) {
+                        self.userRestart = 1;
+                        self.userPause = 1;
+                        self.popup = [self.popup close];
+                        
+                        [self showGameStart];
+                    }
                     
-                    [self showGameStart];
+                    if (self.popup && node) {
+                        [self.popup processNode:node];
+                    }
                 }
             }
         }

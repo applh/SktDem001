@@ -15,14 +15,18 @@
 
 -(id) init;
 
-+(id) initWithName:(NSString*)  name
-          showText:(NSString*)  text
-            showOk:(NSString*)  textOk
-        showCancel:(NSString*)  textCancel
-          showExit:(NSString*)  textExit
-           inScene:(SKScene*)   scene
-        parentNode:(SKNode*)    parent;
++(id) initWithName: (NSString*)  name
+          showText: (NSString*)  text
+            showOk: (NSString*)  textOk
+        showCancel: (NSString*)  textCancel
+          showExit: (NSString*)  textExit
+           inScene: (SKScene*)   scene
+        parentNode: (SKNode*)    parent;
 
 -(id) close;
+
+-(void) processNode: (SKNode*) n;
+
+-(void) processInput: (SKNode*) n;
 
 @end

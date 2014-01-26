@@ -22,18 +22,20 @@
 +(id) initWithName:(NSString*)  name
         parentNode:(SKNode*)    parent
 {
-    SktPopup* res;
+    SktKeyboard* res;
     
-    res = [SktPopup new];
+    res = [SktKeyboard new];
     if (res) {
         res.scene = parent.scene;
         res.parentNode = parent;
         res.popupRootNode = [SKShapeNode new];
         res.popupRootNode.name = name;
-        float w = 480;
+        float fontSize = 36;
+        float w = 800;
         float h = 480;
         float x = -w/2;
         float y = -h/2;
+        int maxCol = 10;
         
         res.popupRootNode.path = CGPathCreateWithRoundedRect(CGRectMake(x, y, w, h), 20, 20, 0);
         
@@ -47,19 +49,39 @@
             SKLabelNode* label0 = [SKLabelNode new];
             label0.text = text;
             label0.name = @"text";
-            label0.position = CGPointMake(0, +300);
+            label0.position = CGPointMake(0, +240);
             [res.popupRootNode addChild:label0];
+            
+            res.curLabel = label0;
+            res.curText= @"";
+            res.curLabel.text = res.curText;
+        }
+        
+        NSString* textCancel = @"(x)";
+        if (textCancel) {
+            SKLabelNode* label1 = [SKLabelNode new];
+            label1.text = textCancel;
+            label1.name = @"CANCEL";
+            label1.position = CGPointMake(-360, 200);
+            [res.popupRootNode addChild:label1];
         }
 
-        float fontSize = 26;
-        float curX0 = -100;
-        int maxCol = 8;
-        float curDX = 40;
+        NSString* textBackspace = @"<<";
+        if (textBackspace) {
+            SKLabelNode* label2 = [SKLabelNode new];
+            label2.text = textBackspace;
+            label2.name = @"backspace";
+            label2.position = CGPointMake(360, 200);
+            [res.popupRootNode addChild:label2];
+        }
+
+        float curX0 = -260;
+        float curDX = 60;
         float curDY = 0;
         float curX = 0;
         float curY = 0;
 
-        NSArray* tabV = @[@"A", @"E", @"I", @"O", @"U", @"Y"];
+        NSArray* tabV = @[];
         curX = curX0;
         curY = 0;
         int curCol = 0;
@@ -76,18 +98,23 @@
             }
             // MOVE TO NEXT POSITION
             curX += curDX;
-            curX += curDY;
+            curCol++;
+            if (0 == (curCol % maxCol)) {
+                curX = curX0;
+                curY += curDY;
+            }
 
         }
         
-        NSArray* tabC = @[  @"B", @"C", @"D", @"F", @"G", @"H", @"J",
-                            @"K", @"L", @"M", @"N", @"P", @"Q", @"R",
-                            @"S", @"T", @"V", @"W", @"X", @"Z"
+        NSArray* tabC = @[  @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0",
+                            @"B", @"C", @"D", @"F", @"G", @"H", @"J", @"K", @"L", @"M",
+                            @"N", @"P", @"Q", @"R", @"S", @"T", @"V", @"W", @"X", @"Z",
+                            @"A", @"E", @"I", @"O", @"U", @"Y", @",", @";", @".", @"@",
                         ];
-        curX0 = -100;
+        curX0 = -260;
         curX = curX0;
         curY = 160;
-        curDY = -40;
+        curDY = -50;
         curCol = 0;
         for (NSString* curC in tabC) {
             text = curC;
@@ -110,14 +137,13 @@
             
         }
 
-        NSArray* tabN = @[  @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"0",
-                            @"+", @"<", @"-", @">", @"*", @"/", @".", @",", @"(", @")"
-                            @"[", @";", @"]", @"_", @"@", @"=", @"%", @"$", @"!", @"?"
+        NSArray* tabN = @[  @"+", @"-", @">", @"<", @"*", @"/", @"(", @")", @"[", @"]",
+                            @"_", @"=", @"%", @"$", @"!", @"?", @"\\", @"#"
                             ];
-        curX0 = -100;
+        curX0 = -260;
         curX = curX0;
         curY = -80;
-        curDY = -40;
+        curDY = -50;
         curCol = 0;
         for (NSString* curN in tabN) {
             text = curN;
@@ -144,6 +170,29 @@
         [res.parentNode addChild:res.popupRootNode];
     }
     return res;
+}
+
+-(void) processNode: (SKNode*) n
+{
+    [self processInput:n];
+}
+
+-(void) processInput: (SKNode*) n
+{
+    
+    int l = 0;
+    if ([n.name length]) l = [n.name length];
+    
+    if ([n.name isEqualToString:@"backspace"]) {
+        int tl = [self.curText length];
+        if (tl > 0)
+            self.curText = [self.curText substringToIndex: ([self.curText length] - 1)];
+    }
+    else if (l > 0) {
+        self.curText = [NSString stringWithFormat:@"%@%@", self.curText, n.name];
+    }
+    
+    self.curLabel.text = self.curText;
 }
 
 @end
