@@ -40,6 +40,7 @@
         float h = 480;
         float x = -w/2;
         float y = -h/2;
+        float fontSize = 20;
         
         res.popupRootNode.path = CGPathCreateWithRoundedRect(CGRectMake(x, y, w, h), 20, 20, 0);
         
@@ -47,10 +48,13 @@
                                    CGRectGetMidY(res.parentNode.frame));
         
         res.popupRootNode.fillColor = [SKColor colorWithWhite:.5 alpha:.5];
+        res.popupRootNode.lineWidth = 0.1;
+        
         if (text) {
             SKLabelNode* label0 = [SKLabelNode new];
             label0.text = text;
             label0.name = @"text";
+            label0.fontSize = fontSize;
             label0.position = CGPointMake(0, +100);
             [res.popupRootNode addChild:label0];
         }
@@ -59,6 +63,7 @@
             SKLabelNode* label1 = [SKLabelNode new];
             label1.text = textCancel;
             label1.name = @"CANCEL";
+            label1.fontSize = fontSize;
             label1.position = CGPointMake(-100, -100);
             [res.popupRootNode addChild:label1];
         }
@@ -67,6 +72,7 @@
             SKLabelNode* label2 = [SKLabelNode new];
             label2.text = textOk;
             label2.name = @"OK";
+            label2.fontSize = fontSize;
             label2.position = CGPointMake(100, -100);
             [res.popupRootNode addChild:label2];
         }
@@ -75,6 +81,7 @@
             SKLabelNode* label3 = [SKLabelNode new];
             label3.text = textExit;
             label3.name = @"EXIT";
+            label3.fontSize = fontSize;
             label3.position = CGPointMake(0, -200);
             [res.popupRootNode addChild:label3];
         }

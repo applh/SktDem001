@@ -21,7 +21,10 @@
         
         self.userGameChoice = 0;
         
-        self.backgroundColor = [SKColor colorWithRed:0.05 green:0.05 blue:0.20 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed: 0.05
+                                               green: 0.05
+                                                blue: 0.20
+                                               alpha: 1.0];
         
         // create the parent nodes
         self.hud = [SKNode node];
@@ -227,7 +230,8 @@
 
 - (void) centerOnNode: (SKNode *) node
 {
-    CGPoint cameraPositionInScene = [node.scene convertPoint:node.position fromNode:node.parent];
+    CGPoint cameraPositionInScene = [node.scene convertPoint: node.position
+                                                    fromNode: node.parent];
     self.world.position = CGPointMake(self.world.position.x - cameraPositionInScene.x,
                                        self.world.position.y - cameraPositionInScene.y);
 }

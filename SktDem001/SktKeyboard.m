@@ -113,7 +113,7 @@
                         ];
         curX0 = -260;
         curX = curX0;
-        curY = 160;
+        curY = 140;
         curDY = -50;
         curCol = 0;
         for (NSString* curC in tabC) {
@@ -142,7 +142,7 @@
                             ];
         curX0 = -260;
         curX = curX0;
-        curY = -80;
+        curY = -100;
         curDY = -50;
         curCol = 0;
         for (NSString* curN in tabN) {
