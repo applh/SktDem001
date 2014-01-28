@@ -19,6 +19,9 @@
         // USER HAS TO SELECT A GAME
         self.gameChoice = 0;
         
+        // CENTER ORIGIN
+        self.anchorPoint = CGPointMake(.5, .5);
+
         if (self.gameChoice == 0) {
             [self showGameSelection];
         }
@@ -57,7 +60,7 @@
     myLabel.fontSize = 40;
     myLabel.fontColor = [SKColor colorWithWhite:0.0 alpha:1.0];
     myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   2*CGRectGetMidY(self.frame));
+                                   CGRectGetMidY(self.frame) + 2 * myLabel.fontSize);
     SKAction* action = [SKAction moveByX:0 y: -0.30 * CGRectGetMidY(self.frame) duration:.5];
     [myLabel runAction: action];
     [self addChild:myLabel];
@@ -90,7 +93,8 @@
     
     choice.position = CGPointMake(CGRectGetMidX(self.frame), -2*CGRectGetMidY(self.frame));
     SKAction* action = [SKAction moveByX: 0
-                                       y: (((5 - self.nbChoice) * .3) +2) * CGRectGetMidY(self.frame)
+                                       y: ((5 - self.nbChoice) +2) * 3 * choice.fontSize
+                                            + CGRectGetMinY(self.frame)
                                 duration: 1];
     [choice runAction: action];
     [self addChild:choice];
@@ -104,7 +108,9 @@
     SKView * skView = (SKView *)self.view;
     
     SktSceneGame * scene = [SktSceneGame sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+//    scene.scaleMode = SKSceneScaleModeAspectFill;
+    // RESIZE THE FRAME TO ADJUST ORIENTATION
+    scene.scaleMode = SKSceneScaleModeResizeFill;
     
     // SET THE GAME CHOICE
     scene.userGameChoice = self.gameChoice;

@@ -45,6 +45,11 @@
     return self;
 }
 
+- (void) didChangeSize: (CGSize) oldSize {
+//    NSLog(@"%@", NSStringFromCGSize(oldSize));
+    [self.userGame updateHudOrientation];
+}
+
 -(void) didMoveToView: (SKView *)view
 {
     // FORMER SCENE HAS SETUP USER CHOICES
@@ -108,7 +113,8 @@
     SKView * skView = (SKView *)self.view;
     
     SktSceneStart * scene = [SktSceneStart sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFit;
+//    scene.scaleMode = SKSceneScaleModeAspectFit;
+    scene.scaleMode = SKSceneScaleModeResizeFill;
     
     // ADD TRANSITION EFFECT
     SKTransition *doors = [SKTransition

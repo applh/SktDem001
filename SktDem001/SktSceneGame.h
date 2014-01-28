@@ -62,34 +62,38 @@
 @property SktGame* userGame;
 
 // OVERRIDE
--(id)   initWithSize: (CGSize) size;
+- (id)   initWithSize: (CGSize) size;
 
--(void) showGameStart;
+- (void) didChangeSize: (CGSize) oldSize;
 
--(void) touchesBegan: (NSSet *) touches
-           withEvent: (UIEvent *) event;
--(void) touchesMoved: (NSSet *)     touches
-           withEvent: (UIEvent *)   event;
--(void) touchesEnded: (NSSet *)     touches
-           withEvent: (UIEvent *)   event;
+- (void) showGameStart;
+
+- (void) touchesBegan: (NSSet *)    touches
+            withEvent: (UIEvent *)   event;
+
+- (void) touchesMoved: (NSSet *)    touches
+            withEvent: (UIEvent *)   event;
+
+- (void) touchesEnded: (NSSet *)    touches
+            withEvent: (UIEvent *)   event;
 
 - (void) didSimulatePhysics;
 
--(void) didBeginContact: (SKPhysicsContact *) contact;
+- (void) didBeginContact: (SKPhysicsContact *) contact;
 
 // CUSTOM
--(void) setupNewGame;
--(void) setupHud;
--(void) setupWorld;
--(void) setupPlayer;
+- (void) setupNewGame;
+- (void) setupHud;
+- (void) setupWorld;
+- (void) setupPlayer;
 
--(void) centerOnNode: (SKNode *) node;
+- (void) centerOnNode: (SKNode *) node;
 
--(void) updateNextFrame:(NSTimeInterval)currentTime;
--(void) updateHud;
+- (void) updateNextFrame: (NSTimeInterval) currentTime;
+- (void) updateHud;
 
--(void) pausePopup;
--(void) keyboardPopup;
+- (void) pausePopup;
+- (void) keyboardPopup;
 
 
 @end

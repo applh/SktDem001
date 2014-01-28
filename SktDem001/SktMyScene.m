@@ -17,27 +17,31 @@
         
         self.backgroundColor = [ SKColor colorWithHue: arc4random_uniform(360) / 360.0
                                            saturation: 1.0
-                                           brightness: 1.0
+                                           brightness: 0.8
                                                 alpha: 1.0 ];
-// [SKColor colorWithWhite:0.1 alpha:1.0];
         
+        self.anchorPoint = CGPointMake(.5, .5);
+
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
         
         myLabel.text = @"hellios";
         myLabel.fontSize = 60;
         myLabel.fontColor = [SKColor colorWithWhite:1.0 alpha:1.0 ];
-        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                        2*CGRectGetMidY(self.frame));
 
         SKLabelNode *myLabel2 = [SKLabelNode labelNodeWithFontNamed:@"AvenirNext-HeavyItalic"];
         
         myLabel2.text = @"touch to start";
         myLabel2.fontSize = 20;
-        myLabel2.fontColor = [SKColor colorWithWhite:1.0 alpha:1.0 ];
+        myLabel2.fontColor = [SKColor colorWithWhite: 1.0
+                                               alpha: 1.0 ];
 
-        myLabel2.position = CGPointMake(CGRectGetMidX(self.frame), 0);
-        SKAction* action = [SKAction moveByX:0 y:-CGRectGetMidY(self.frame) duration:1];
-        SKAction* action2 = [SKAction moveByX:0 y:CGRectGetMidY(self.frame)*.8 duration:2];
+        myLabel.position = CGPointMake(CGRectGetMidX(self.frame), 2*CGRectGetMidY(self.frame));
+        myLabel2.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMinY(self.frame));
+        
+        SKAction* action = [SKAction moveToY: CGRectGetMidY(self.frame)
+                                    duration: 1];
+        SKAction* action2 = [SKAction moveToY: CGRectGetMidY(self.frame) - (2 * myLabel2.fontSize)
+                                     duration: 2];
         
         [myLabel runAction: action];
         [myLabel2 runAction: action2];
@@ -56,7 +60,8 @@
     SKView * skView = (SKView *)self.view;
 
     SktSceneStart * scene = [SktSceneStart sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFit;
+//    scene.scaleMode = SKSceneScaleModeAspectFit;
+    scene.scaleMode = SKSceneScaleModeResizeFill;
 
     // ADD TRANSITION EFFECT
     SKTransition *doors = [SKTransition

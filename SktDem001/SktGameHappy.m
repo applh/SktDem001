@@ -90,8 +90,6 @@
 
 -(void) updateHud
 {
-    [self.game updateHudOrientation];
-
     // SCORE
     if (self.scene.playerScore < 0) self.scene.playerScore = 0;
     // ENERGY
@@ -106,7 +104,8 @@
         self.scene.hud2center.fontColor = [SKColor colorWithRed:1 green:0 blue:0 alpha:1];
     }
     else {
-        self.scene.hud2center.text = @"";
+        NSString* textCenter = @"";
+        self.scene.hud2center.text = textCenter;
     }
     
     self.scene.hud2top.text = [NSString stringWithFormat:@"HAPPY - LEVEL %d - ENERGY %d",

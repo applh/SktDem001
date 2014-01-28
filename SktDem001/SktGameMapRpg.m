@@ -87,9 +87,7 @@
 }
 
 -(void) updateHud
-{
-    [self.game updateHudOrientation];
-    
+{    
     // SCORE
     if (self.scene.playerScore < 0) self.scene.playerScore = 0;
     // ENERGY

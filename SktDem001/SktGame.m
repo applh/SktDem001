@@ -48,9 +48,10 @@
 
 -(BOOL) isLandscape
 {
-    // FIXME: LOOKS UGLY :-/
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    BOOL res = UIInterfaceOrientationIsLandscape(orientation);
+    // NEEDS THIS SCALE MODE
+    // scene.scaleMode = SKSceneScaleModeResizeFill;
+    BOOL res = (self.scene.frame.size.width > self.scene.frame.size.height);
+    
     if (res) {
         self.sceneLandscape = 1;
     }
@@ -97,21 +98,21 @@
     
     if (res) {
         self.scene.hud2top.position = CGPointMake(CGRectGetMidX(self.scene.frame),
-                                                  CGRectGetMidY(self.scene.frame)
-                                                  + 250);
+                                                  CGRectGetMaxY(self.scene.frame)
+                                                  -50);
         self.scene.hud2bottom.position = CGPointMake(CGRectGetMidX(self.scene.frame),
-                                                     CGRectGetMidY(self.scene.frame)
-                                                     - 250);
-        //NSLog(@"LANDSCAPE %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
+                                                     CGRectGetMinY(self.scene.frame)
+                                                     +50);
+        NSLog(@"LANDSCAPE %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
     }
     else {
         self.scene.hud2top.position = CGPointMake(CGRectGetMidX(self.scene.frame),
-                                                  CGRectGetMidY(self.scene.frame)
-                                                  + 450);
+                                                  CGRectGetMaxY(self.scene.frame)
+                                                  -50);
         self.scene.hud2bottom.position = CGPointMake(CGRectGetMidX(self.scene.frame),
-                                                     CGRectGetMidY(self.scene.frame)
-                                                     - 450);
-        //NSLog(@"PORTRAIT %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
+                                                     CGRectGetMinY(self.scene.frame)
+                                                     +50);
+        NSLog(@"PORTRAIT %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
     }
     
     return res;
