@@ -31,7 +31,7 @@
         res.popupRootNode = [SKShapeNode new];
         res.popupRootNode.name = name;
         float fontSize = 36;
-        float w = 800;
+        float w = 640;
         float h = 480;
         float x = -w/2;
         float y = -h/2;
@@ -49,7 +49,7 @@
             SKLabelNode* label0 = [SKLabelNode new];
             label0.text = text;
             label0.name = @"text";
-            label0.position = CGPointMake(0, +260);
+            label0.position = CGPointMake(0, +200);
             [res.popupRootNode addChild:label0];
             
             res.curLabel = label0;
@@ -62,7 +62,7 @@
             SKLabelNode* label1 = [SKLabelNode new];
             label1.text = textCancel;
             label1.name = @"CANCEL";
-            label1.position = CGPointMake(-360, 200);
+            label1.position = CGPointMake(-300, 200);
             [res.popupRootNode addChild:label1];
         }
 
@@ -71,7 +71,7 @@
             SKLabelNode* label2 = [SKLabelNode new];
             label2.text = textBackspace;
             label2.name = @"backspace";
-            label2.position = CGPointMake(360, 200);
+            label2.position = CGPointMake(300, 200);
             [res.popupRootNode addChild:label2];
         }
 
@@ -113,7 +113,7 @@
                         ];
         curX0 = -260;
         curX = curX0;
-        curY = 140;
+        curY = 100;
         curDY = -50;
         curCol = 0;
         for (NSString* curC in tabC) {
@@ -142,7 +142,7 @@
                             ];
         curX0 = -260;
         curX = curX0;
-        curY = -100;
+        curY = -140;
         curDY = -50;
         curCol = 0;
         for (NSString* curN in tabN) {

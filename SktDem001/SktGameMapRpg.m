@@ -83,11 +83,13 @@
     myLabel.name = @"bottom label";
     self.scene.hud2bottom = myLabel;
     [self.scene.hud2fg addChild:myLabel];
-   
+
 }
 
 -(void) updateHud
 {
+    [self.game updateHudOrientation];
+    
     // SCORE
     if (self.scene.playerScore < 0) self.scene.playerScore = 0;
     // ENERGY

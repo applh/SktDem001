@@ -16,6 +16,8 @@
 
 // ATTRIBUTES
 @property SktSceneGame*         scene;
+@property int                   sceneLandscape;
+
 @property int                   userChoice;
 @property id <SktGameInterface> game;
 
@@ -35,11 +37,16 @@
 -(void) setupGame:(int) g
         withScene:(SktSceneGame*) scene;
 
+-(BOOL) isLandscape;
+
+
 -(void) restartGame;
 -(void) setupHud;
 -(void) setupWorld;
 -(void) setupPlayer;
+
 -(void) updateHud;
+-(BOOL) updateHudOrientation;
 -(void) updateNextFrame: (NSTimeInterval) currentTime;
 
 -(void) touchesBegan: (NSSet *) touches

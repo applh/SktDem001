@@ -43,6 +43,21 @@
     self.game.scene = scene;
     self.game.game = self;
     
+
+}
+
+-(BOOL) isLandscape
+{
+    // FIXME: LOOKS UGLY :-/
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    BOOL res = UIInterfaceOrientationIsLandscape(orientation);
+    if (res) {
+        self.sceneLandscape = 1;
+    }
+    else {
+        self.sceneLandscape = 0;
+    }
+    return res;
 }
 
 -(void) restartGame
@@ -75,6 +90,33 @@
 {
     [self.game updateHud];
 }
+
+-(BOOL) updateHudOrientation
+{
+    BOOL res = [self isLandscape];
+    
+    if (res) {
+        self.scene.hud2top.position = CGPointMake(CGRectGetMidX(self.scene.frame),
+                                                  CGRectGetMidY(self.scene.frame)
+                                                  + 250);
+        self.scene.hud2bottom.position = CGPointMake(CGRectGetMidX(self.scene.frame),
+                                                     CGRectGetMidY(self.scene.frame)
+                                                     - 250);
+        //NSLog(@"LANDSCAPE %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
+    }
+    else {
+        self.scene.hud2top.position = CGPointMake(CGRectGetMidX(self.scene.frame),
+                                                  CGRectGetMidY(self.scene.frame)
+                                                  + 450);
+        self.scene.hud2bottom.position = CGPointMake(CGRectGetMidX(self.scene.frame),
+                                                     CGRectGetMidY(self.scene.frame)
+                                                     - 450);
+        //NSLog(@"PORTRAIT %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
+    }
+    
+    return res;
+}
+
 
 -(void) updateNextFrame: (NSTimeInterval) currentTime
 {
