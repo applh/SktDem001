@@ -70,6 +70,11 @@
 		28F20451189911E5005FA755 /* cardboard-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20440189911E5005FA755 /* cardboard-8.png */; };
 		28F20452189911E5005FA755 /* cardboard-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20441189911E5005FA755 /* cardboard-9.png */; };
 		28F20453189911E5005FA755 /* cardboard-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20442189911E5005FA755 /* cardboard-1.png */; };
+		28F2045918992A5B005FA755 /* hero-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2045418992A5B005FA755 /* hero-0.png */; };
+		28F2045A18992A5B005FA755 /* hero-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2045518992A5B005FA755 /* hero-1.png */; };
+		28F2045B18992A5B005FA755 /* hero-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2045618992A5B005FA755 /* hero-2.png */; };
+		28F2045C18992A5B005FA755 /* hero-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2045718992A5B005FA755 /* hero-3.png */; };
+		28F2045D18992A5B005FA755 /* hero-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2045818992A5B005FA755 /* hero-4.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +167,11 @@
 		28F20440189911E5005FA755 /* cardboard-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-8.png"; sourceTree = "<group>"; };
 		28F20441189911E5005FA755 /* cardboard-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-9.png"; sourceTree = "<group>"; };
 		28F20442189911E5005FA755 /* cardboard-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-1.png"; sourceTree = "<group>"; };
+		28F2045418992A5B005FA755 /* hero-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hero-0.png"; sourceTree = "<group>"; };
+		28F2045518992A5B005FA755 /* hero-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hero-1.png"; sourceTree = "<group>"; };
+		28F2045618992A5B005FA755 /* hero-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hero-2.png"; sourceTree = "<group>"; };
+		28F2045718992A5B005FA755 /* hero-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hero-3.png"; sourceTree = "<group>"; };
+		28F2045818992A5B005FA755 /* hero-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hero-4.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +359,11 @@
 		28F20431189911E5005FA755 /* ancient-beast */ = {
 			isa = PBXGroup;
 			children = (
+				28F2045418992A5B005FA755 /* hero-0.png */,
+				28F2045518992A5B005FA755 /* hero-1.png */,
+				28F2045618992A5B005FA755 /* hero-2.png */,
+				28F2045718992A5B005FA755 /* hero-3.png */,
+				28F2045818992A5B005FA755 /* hero-4.png */,
 				28F20432189911E5005FA755 /* cardboard-10.png */,
 				28F20433189911E5005FA755 /* cardboard-11.png */,
 				28F20434189911E5005FA755 /* cardboard-12.png */,
@@ -454,8 +469,10 @@
 				289B48B0188897C300C0CB1F /* rock2.png in Resources */,
 				28947977188850D500F19CE1 /* gem1.png in Resources */,
 				28F2044E189911E5005FA755 /* cardboard-5.png in Resources */,
+				28F2045B18992A5B005FA755 /* hero-2.png in Resources */,
 				28947978188850D500F19CE1 /* gem2.png in Resources */,
 				28F20449189911E5005FA755 /* cardboard-16.png in Resources */,
+				28F2045A18992A5B005FA755 /* hero-1.png in Resources */,
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
 				28F2044D189911E5005FA755 /* cardboard-4.png in Resources */,
 				2816210818841B4100C9170E /* Spaceship2.png in Resources */,
@@ -484,10 +501,13 @@
 				282723291883E40E00759DC7 /* Main.storyboard in Resources */,
 				28947979188850D500F19CE1 /* gem3.png in Resources */,
 				28F20447189911E5005FA755 /* cardboard-14.png in Resources */,
+				28F2045D18992A5B005FA755 /* hero-4.png in Resources */,
 				289B48B61888B08400C0CB1F /* spark.png in Resources */,
 				28F2044B189911E5005FA755 /* cardboard-2.png in Resources */,
 				28F20446189911E5005FA755 /* cardboard-13.png in Resources */,
+				28F2045C18992A5B005FA755 /* hero-3.png in Resources */,
 				289B48BA1888B63F00C0CB1F /* flies1.sks in Resources */,
+				28F2045918992A5B005FA755 /* hero-0.png in Resources */,
 				289B48C01888C32600C0CB1F /* bokeh.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

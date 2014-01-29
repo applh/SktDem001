@@ -138,6 +138,9 @@
     float sizeMax = self.scene.init2size.width;
     if (sizeMax < self.scene.init2size.height) sizeMax = self.scene.init2size.height;
     
+    // make the world 8x8 tiles of 1024x1024
+    sizeMax = 2 * sizeMax;
+    
     self.scene.world2min = CGPointMake(-sizeMax/self.scene.world2scale, -sizeMax/self.scene.world2scale);
     self.scene.world2max = CGPointMake(sizeMax/self.scene.world2scale, sizeMax/self.scene.world2scale);
     
@@ -195,7 +198,9 @@
     // FIXME
     self.scene.player2vmax = self.scene.player2vmax2scale * self.scene.world2max.x;
     
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"cardboard-1"];
+    uint hero = arc4random_uniform(5);
+    NSString* heroFile = [NSString stringWithFormat: @"hero-%d", hero];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed: heroFile];
     
     sprite.position = CGPointMake(CGRectGetMidX(self.scene.frame),
                                   CGRectGetMidY(self.scene.frame)) ;
