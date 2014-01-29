@@ -144,8 +144,10 @@
     self.scene.world2min = CGPointMake(-sizeMax/self.scene.world2scale, -sizeMax/self.scene.world2scale);
     self.scene.world2max = CGPointMake(sizeMax/self.scene.world2scale, sizeMax/self.scene.world2scale);
     
-    SKSpriteNode *sprite2bg = [SKSpriteNode spriteNodeWithTexture:
-                               [SKTexture textureWithImageNamed: @"world-bg-512"]];
+    SKTexture * bgTexture = [SKTexture textureWithImageNamed: @"rpg-bg-4"];
+    bgTexture.usesMipmaps = YES;
+    SKSpriteNode *sprite2bg = [SKSpriteNode spriteNodeWithTexture: bgTexture];
+    
     sprite2bg.size = CGSizeMake(self.scene.world2max.x - self.scene.world2min.x,
                                 self.scene.world2max.y - self.scene.world2min.y);
     
@@ -226,6 +228,34 @@
     //SKAction *action = [SKAction scaleTo:1.0 duration:1];
     //[sprite runAction:action];
     
+    NSArray* tabTextures45 = @[
+                                [SKTexture textureWithImageNamed:@"45-0"],
+                                [SKTexture textureWithImageNamed:@"45-1"],
+                                [SKTexture textureWithImageNamed:@"45-2"],
+                                [SKTexture textureWithImageNamed:@"45-3"],
+                                [SKTexture textureWithImageNamed:@"45-4"],
+                                [SKTexture textureWithImageNamed:@"45-6"],
+                                [SKTexture textureWithImageNamed:@"45-7"],
+                                ];
+    
+    self.animation45 = [SKAction animateWithTextures: tabTextures45
+                                         timePerFrame: 0.1];
+    self.animation45 = [SKAction repeatActionForever: self.animation45];
+
+    NSArray* tabTextures135 = @[
+                               [SKTexture textureWithImageNamed:@"135-0"],
+                               [SKTexture textureWithImageNamed:@"135-1"],
+                               [SKTexture textureWithImageNamed:@"135-2"],
+                               [SKTexture textureWithImageNamed:@"135-3"],
+                               [SKTexture textureWithImageNamed:@"135-4"],
+                               [SKTexture textureWithImageNamed:@"135-6"],
+                               [SKTexture textureWithImageNamed:@"135-7"],
+                               ];
+    
+    self.animation135 = [SKAction animateWithTextures: tabTextures135
+                                        timePerFrame: 0.1];
+    self.animation135 = [SKAction repeatActionForever: self.animation135];
+    
     NSArray* tabTextures225 = @[
                                 [SKTexture textureWithImageNamed:@"225-0"],
                                 [SKTexture textureWithImageNamed:@"225-1"],
@@ -291,19 +321,39 @@
     // UPDATE PLAYER ANIMATION FOLLOWING DIRECTION
     float nextAnimation;
     if (self.scene.world2player.physicsBody.velocity.dx > 0) {
-        nextAnimation = 315;
-        if (nextAnimation != self.playerCurAnimation) {
-            [self.scene.world2player runAction: self.animation315
-                                       withKey: @"animation"];
-            self.playerCurAnimation = 315;
+        if (self.scene.world2player.physicsBody.velocity.dy > 0) {
+            nextAnimation = 45;
+            if (nextAnimation != self.playerCurAnimation) {
+                [self.scene.world2player runAction: self.animation45
+                                           withKey: @"animation"];
+                self.playerCurAnimation = nextAnimation;
+            }
+        }
+        else {
+            nextAnimation = 315;
+            if (nextAnimation != self.playerCurAnimation) {
+                [self.scene.world2player runAction: self.animation315
+                                           withKey: @"animation"];
+                self.playerCurAnimation = nextAnimation;
+            }
         }
     }
     else {
-        nextAnimation = 225;
-        if (nextAnimation != self.playerCurAnimation) {
-            [self.scene.world2player runAction: self.animation225
-                                       withKey: @"animation"];
-            self.playerCurAnimation = 225;
+        if (self.scene.world2player.physicsBody.velocity.dy > 0) {
+            nextAnimation = 135;
+            if (nextAnimation != self.playerCurAnimation) {
+                [self.scene.world2player runAction: self.animation135
+                                           withKey: @"animation"];
+                self.playerCurAnimation = nextAnimation;
+            }
+        }
+        else {
+            nextAnimation = 225;
+            if (nextAnimation != self.playerCurAnimation) {
+                [self.scene.world2player runAction: self.animation225
+                                           withKey: @"animation"];
+                self.playerCurAnimation = nextAnimation;
+            }
         }
     }
 
@@ -413,8 +463,8 @@
 
 -(id) addRandomRobotAt: (CGPoint) location
 {
-    uint r = 2+ arc4random_uniform(15);
-    NSString* spriteFile = [NSString stringWithFormat: @"cardboard-%d", r];
+    uint r = 1+ arc4random_uniform(22);
+    NSString* spriteFile = [NSString stringWithFormat: @"rpg-bot-%d", r];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:spriteFile];
     
     sprite.position = location;

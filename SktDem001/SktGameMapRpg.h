@@ -18,6 +18,8 @@
 @property uint32_t ccBonus;
 @property uint32_t ccRock;
 
+@property SKAction* animation45;
+@property SKAction* animation135;
 @property SKAction* animation225;
 @property SKAction* animation315;
 @property float playerCurAnimation;
