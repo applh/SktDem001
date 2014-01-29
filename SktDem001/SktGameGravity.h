@@ -31,9 +31,19 @@
 
 -(void) touchesBegan: (NSSet *)     touches
            withEvent: (UIEvent *)   event;
+
 -(void) touchesMoved: (NSSet *)     touches
            withEvent: (UIEvent *)   event;
+
 -(void) touchesEnded: (NSSet *)     touches
            withEvent: (UIEvent *)   event;
+
+- (id) addRandomRobotAt: (CGPoint) location;
+
+- (id) addRandomRockAt: (CGPoint)  location;
+
+- (id) addRandomBonusAt: (CGPoint)  location;
+
+- (id) didBeginContact: (SKPhysicsContact *) contact;
 
 @end

@@ -103,7 +103,7 @@
         self.scene.hud2bottom.position = CGPointMake(CGRectGetMidX(self.scene.frame),
                                                      CGRectGetMinY(self.scene.frame)
                                                      +50);
-        NSLog(@"LANDSCAPE %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
+        //NSLog(@"LANDSCAPE %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
     }
     else {
         self.scene.hud2top.position = CGPointMake(CGRectGetMidX(self.scene.frame),
@@ -112,7 +112,7 @@
         self.scene.hud2bottom.position = CGPointMake(CGRectGetMidX(self.scene.frame),
                                                      CGRectGetMinY(self.scene.frame)
                                                      +50);
-        NSLog(@"PORTRAIT %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
+        //NSLog(@"PORTRAIT %.0fx%.0f", self.scene.frame.size.width, self.scene.frame.size.height);
     }
     
     return res;
@@ -248,40 +248,45 @@
 
 -(void) addRandomRobotAt: (CGPoint) location
 {
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"disk-256x256"];
+    id g = [self.game addRandomRobotAt:location];
     
-    sprite.position = location;
-    
-    float angle = arc4random_uniform(360) * M_PI / 180;
-    float speed = 100;
-    float dx = speed * cos(angle);
-    float dy = speed * sin(angle);
-    
-    // warning: apply scaling also to physics body
-    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.scene.world2scale/2];
-    sprite.physicsBody.dynamic = YES;
-    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
-    sprite.physicsBody.angularVelocity = 0;
-    sprite.physicsBody.linearDamping = 0;
-    sprite.physicsBody.angularDamping = 0;
-    sprite.physicsBody.restitution = 0;
-    
-    // CONTACT AND COLLISION
-    sprite.physicsBody.categoryBitMask = self.ccRobot;
-    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
-    
-    SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
-    SKAction *action1 = [SKAction waitForDuration:500];
-    SKAction *action2 = [SKAction fadeOutWithDuration:.5];
-    SKAction *action3 = [SKAction removeFromParent];
-    [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
-    
-    [self.scene.world2fg addChild:sprite];
-    
+    if (g == nil) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"disk-256x256"];
+        
+        sprite.position = location;
+        
+        float angle = arc4random_uniform(360) * M_PI / 180;
+        float speed = 100;
+        float dx = speed * cos(angle);
+        float dy = speed * sin(angle);
+        
+        // warning: apply scaling also to physics body
+        sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.scene.world2scale/2];
+        sprite.physicsBody.dynamic = YES;
+        sprite.physicsBody.velocity = CGVectorMake(dx,dy);
+        sprite.physicsBody.angularVelocity = 0;
+        sprite.physicsBody.linearDamping = 0;
+        sprite.physicsBody.angularDamping = 0;
+        sprite.physicsBody.restitution = 0;
+        
+        // CONTACT AND COLLISION
+        sprite.physicsBody.categoryBitMask = self.ccRobot;
+        sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus;
+        
+        SKAction *action0 = [SKAction rotateByAngle:angle duration:.5];
+        SKAction *action1 = [SKAction waitForDuration:500];
+        SKAction *action2 = [SKAction fadeOutWithDuration:.5];
+        SKAction *action3 = [SKAction removeFromParent];
+        [sprite runAction: [SKAction sequence: @[action0, action1, action2, action3]]];
+        
+        [self.scene.world2fg addChild:sprite];
+    }
 }
 
 -(void) addRandomRockAt: (CGPoint) location
 {
+    if (nil != [self.game addRandomRockAt:location]) return;
+
     NSString * spriteName = [NSString stringWithFormat:@"rock%d",
                              (int) (1+floor(sqrt(arc4random_uniform(9))))];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:spriteName];
@@ -320,7 +325,8 @@
 
 -(void) addRandomBonusAt: (CGPoint) location
 {
-    
+    if (nil != [self.game addRandomBonusAt:location]) return;
+
     uint index = 1 + arc4random_uniform(3);
     NSString * gemName = [NSString stringWithFormat:@"gem%d", index];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:gemName];
@@ -357,6 +363,10 @@
 
 - (void) didBeginContact: (SKPhysicsContact *) contact
 {
+    
+    if ([self.game didBeginContact:contact] != nil)
+        return;
+    
     SKPhysicsBody *firstBody, *secondBody;
     
     firstBody = contact.bodyA;

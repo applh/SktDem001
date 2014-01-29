@@ -11,35 +11,51 @@
 // FORWARD CLASS DECLARATION
 @class SktSceneGame;
 @class SktGame;
+@class SKPhysicsContact;
+
 
 @protocol SktGameInterface <NSObject>
+
 // ATTRIBUTES
 @property SktSceneGame* scene;
 @property SktGame* game;
 
 // METHODS
 @required
--(void) restartGame;
+- (void) restartGame;
 
 @required
--(void) setupHud;
+- (void) setupHud;
 @required
--(void) setupWorld;
+- (void) setupWorld;
 @required
--(void) setupPlayer;
+- (void) setupPlayer;
 @required
--(void) updateHud;
+- (void) updateHud;
 @required
--(void) updateNextFrame:(NSTimeInterval)currentTime;
+- (void) updateNextFrame:(NSTimeInterval)currentTime;
 
 @required
--(void) touchesBegan: (NSSet *) touches
-           withEvent: (UIEvent *) event;
+- (void) touchesBegan: (NSSet *)    touches
+            withEvent: (UIEvent *)  event;
 @required
--(void) touchesMoved: (NSSet *)     touches
-           withEvent: (UIEvent *)   event;
+- (void) touchesMoved: (NSSet *)    touches
+            withEvent: (UIEvent *)  event;
 @required
--(void) touchesEnded: (NSSet *)     touches
-           withEvent: (UIEvent *)   event;
+- (void) touchesEnded: (NSSet *)    touches
+            withEvent: (UIEvent *)  event;
+
+@required
+- (id) addRandomRobotAt: (CGPoint) location;
+
+@required
+- (id) addRandomRockAt: (CGPoint)  location;
+
+@required
+- (id) addRandomBonusAt: (CGPoint)  location;
+
+@required
+- (id) didBeginContact: (SKPhysicsContact *) contact;
+
 
 @end

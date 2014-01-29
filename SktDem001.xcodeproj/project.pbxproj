@@ -53,6 +53,23 @@
 		28BFF1ED1892665900B6C6FD /* SktGameMapRpg.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFF1EC1892665900B6C6FD /* SktGameMapRpg.m */; };
 		28BFF1F01892693400B6C6FD /* SktGameGravity.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BFF1EF1892693400B6C6FD /* SktGameGravity.m */; };
 		28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */ = {isa = PBXBuildFile; fileRef = 28CB8C9C188546E100AAFEF7 /* world-bg-512.png */; };
+		28F20443189911E5005FA755 /* cardboard-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20432189911E5005FA755 /* cardboard-10.png */; };
+		28F20444189911E5005FA755 /* cardboard-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20433189911E5005FA755 /* cardboard-11.png */; };
+		28F20445189911E5005FA755 /* cardboard-12.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20434189911E5005FA755 /* cardboard-12.png */; };
+		28F20446189911E5005FA755 /* cardboard-13.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20435189911E5005FA755 /* cardboard-13.png */; };
+		28F20447189911E5005FA755 /* cardboard-14.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20436189911E5005FA755 /* cardboard-14.png */; };
+		28F20448189911E5005FA755 /* cardboard-15.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20437189911E5005FA755 /* cardboard-15.png */; };
+		28F20449189911E5005FA755 /* cardboard-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20438189911E5005FA755 /* cardboard-16.png */; };
+		28F2044A189911E5005FA755 /* cardboard-17.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20439189911E5005FA755 /* cardboard-17.png */; };
+		28F2044B189911E5005FA755 /* cardboard-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2043A189911E5005FA755 /* cardboard-2.png */; };
+		28F2044C189911E5005FA755 /* cardboard-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2043B189911E5005FA755 /* cardboard-3.png */; };
+		28F2044D189911E5005FA755 /* cardboard-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2043C189911E5005FA755 /* cardboard-4.png */; };
+		28F2044E189911E5005FA755 /* cardboard-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2043D189911E5005FA755 /* cardboard-5.png */; };
+		28F2044F189911E5005FA755 /* cardboard-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2043E189911E5005FA755 /* cardboard-6.png */; };
+		28F20450189911E5005FA755 /* cardboard-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F2043F189911E5005FA755 /* cardboard-7.png */; };
+		28F20451189911E5005FA755 /* cardboard-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20440189911E5005FA755 /* cardboard-8.png */; };
+		28F20452189911E5005FA755 /* cardboard-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20441189911E5005FA755 /* cardboard-9.png */; };
+		28F20453189911E5005FA755 /* cardboard-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 28F20442189911E5005FA755 /* cardboard-1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +145,23 @@
 		28BFF1EF1892693400B6C6FD /* SktGameGravity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SktGameGravity.m; sourceTree = "<group>"; };
 		28BFF1F1189269A300B6C6FD /* SktGameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SktGameInterface.h; sourceTree = "<group>"; };
 		28CB8C9C188546E100AAFEF7 /* world-bg-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "world-bg-512.png"; sourceTree = "<group>"; };
+		28F20432189911E5005FA755 /* cardboard-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-10.png"; sourceTree = "<group>"; };
+		28F20433189911E5005FA755 /* cardboard-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-11.png"; sourceTree = "<group>"; };
+		28F20434189911E5005FA755 /* cardboard-12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-12.png"; sourceTree = "<group>"; };
+		28F20435189911E5005FA755 /* cardboard-13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-13.png"; sourceTree = "<group>"; };
+		28F20436189911E5005FA755 /* cardboard-14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-14.png"; sourceTree = "<group>"; };
+		28F20437189911E5005FA755 /* cardboard-15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-15.png"; sourceTree = "<group>"; };
+		28F20438189911E5005FA755 /* cardboard-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-16.png"; sourceTree = "<group>"; };
+		28F20439189911E5005FA755 /* cardboard-17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-17.png"; sourceTree = "<group>"; };
+		28F2043A189911E5005FA755 /* cardboard-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-2.png"; sourceTree = "<group>"; };
+		28F2043B189911E5005FA755 /* cardboard-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-3.png"; sourceTree = "<group>"; };
+		28F2043C189911E5005FA755 /* cardboard-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-4.png"; sourceTree = "<group>"; };
+		28F2043D189911E5005FA755 /* cardboard-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-5.png"; sourceTree = "<group>"; };
+		28F2043E189911E5005FA755 /* cardboard-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-6.png"; sourceTree = "<group>"; };
+		28F2043F189911E5005FA755 /* cardboard-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-7.png"; sourceTree = "<group>"; };
+		28F20440189911E5005FA755 /* cardboard-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-8.png"; sourceTree = "<group>"; };
+		28F20441189911E5005FA755 /* cardboard-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-9.png"; sourceTree = "<group>"; };
+		28F20442189911E5005FA755 /* cardboard-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cardboard-1.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +293,7 @@
 		28639E261892BACE00BE75F8 /* rpg.atlas */ = {
 			isa = PBXGroup;
 			children = (
+				28F20431189911E5005FA755 /* ancient-beast */,
 				28639E291892BD5500BE75F8 /* player1-256x256.png */,
 			);
 			name = rpg.atlas;
@@ -309,6 +344,31 @@
 				289B48C21888C39E00C0CB1F /* fire1.sks */,
 			);
 			name = particles;
+			sourceTree = "<group>";
+		};
+		28F20431189911E5005FA755 /* ancient-beast */ = {
+			isa = PBXGroup;
+			children = (
+				28F20432189911E5005FA755 /* cardboard-10.png */,
+				28F20433189911E5005FA755 /* cardboard-11.png */,
+				28F20434189911E5005FA755 /* cardboard-12.png */,
+				28F20435189911E5005FA755 /* cardboard-13.png */,
+				28F20436189911E5005FA755 /* cardboard-14.png */,
+				28F20437189911E5005FA755 /* cardboard-15.png */,
+				28F20438189911E5005FA755 /* cardboard-16.png */,
+				28F20439189911E5005FA755 /* cardboard-17.png */,
+				28F2043A189911E5005FA755 /* cardboard-2.png */,
+				28F2043B189911E5005FA755 /* cardboard-3.png */,
+				28F2043C189911E5005FA755 /* cardboard-4.png */,
+				28F2043D189911E5005FA755 /* cardboard-5.png */,
+				28F2043E189911E5005FA755 /* cardboard-6.png */,
+				28F2043F189911E5005FA755 /* cardboard-7.png */,
+				28F20440189911E5005FA755 /* cardboard-8.png */,
+				28F20441189911E5005FA755 /* cardboard-9.png */,
+				28F20442189911E5005FA755 /* cardboard-1.png */,
+			);
+			name = "ancient-beast";
+			path = "dossier sans titre";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,27 +449,44 @@
 			buildActionMask = 2147483647;
 			files = (
 				289B48B21888A98200C0CB1F /* rock3.png in Resources */,
+				28F20445189911E5005FA755 /* cardboard-12.png in Resources */,
 				28CB8C9D188546E100AAFEF7 /* world-bg-512.png in Resources */,
 				289B48B0188897C300C0CB1F /* rock2.png in Resources */,
 				28947977188850D500F19CE1 /* gem1.png in Resources */,
+				28F2044E189911E5005FA755 /* cardboard-5.png in Resources */,
 				28947978188850D500F19CE1 /* gem2.png in Resources */,
+				28F20449189911E5005FA755 /* cardboard-16.png in Resources */,
 				282723201883E40E00759DC7 /* InfoPlist.strings in Resources */,
+				28F2044D189911E5005FA755 /* cardboard-4.png in Resources */,
 				2816210818841B4100C9170E /* Spaceship2.png in Resources */,
+				28F2044C189911E5005FA755 /* cardboard-3.png in Resources */,
+				28F20444189911E5005FA755 /* cardboard-11.png in Resources */,
+				28F20452189911E5005FA755 /* cardboard-9.png in Resources */,
 				282723331883E40E00759DC7 /* Images.xcassets in Resources */,
 				289B48AF188897C300C0CB1F /* rock1.png in Resources */,
 				2894797118883E6E00F19CE1 /* orb-42x42.png in Resources */,
+				28F2044A189911E5005FA755 /* cardboard-17.png in Resources */,
 				281621031883EC8000C9170E /* README.md in Resources */,
 				28639E2A1892BD5500BE75F8 /* player1-256x256.png in Resources */,
 				289B48B51888B08400C0CB1F /* spark1.sks in Resources */,
+				28F20453189911E5005FA755 /* cardboard-1.png in Resources */,
 				289B48C31888C39E00C0CB1F /* fire1.sks in Resources */,
+				28F20443189911E5005FA755 /* cardboard-10.png in Resources */,
 				289479731888416000F19CE1 /* disk-256x256.png in Resources */,
 				289B48BF1888C32600C0CB1F /* bokeh1.sks in Resources */,
+				28F20448189911E5005FA755 /* cardboard-15.png in Resources */,
+				28F20450189911E5005FA755 /* cardboard-7.png in Resources */,
+				28F20451189911E5005FA755 /* cardboard-8.png in Resources */,
 				289B48BC1888BCDF00C0CB1F /* smoke1.sks in Resources */,
 				289B48B81888B4B100C0CB1F /* magic1.sks in Resources */,
+				28F2044F189911E5005FA755 /* cardboard-6.png in Resources */,
 				282723311883E40E00759DC7 /* Spaceship.png in Resources */,
 				282723291883E40E00759DC7 /* Main.storyboard in Resources */,
 				28947979188850D500F19CE1 /* gem3.png in Resources */,
+				28F20447189911E5005FA755 /* cardboard-14.png in Resources */,
 				289B48B61888B08400C0CB1F /* spark.png in Resources */,
+				28F2044B189911E5005FA755 /* cardboard-2.png in Resources */,
+				28F20446189911E5005FA755 /* cardboard-13.png in Resources */,
 				289B48BA1888B63F00C0CB1F /* flies1.sks in Resources */,
 				289B48C01888C32600C0CB1F /* bokeh.png in Resources */,
 			);

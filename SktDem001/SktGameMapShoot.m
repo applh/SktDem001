@@ -346,4 +346,24 @@
     
 }
 
+- (id) addRandomRobotAt: (CGPoint) location
+{
+    return nil;
+}
+
+- (id) addRandomRockAt: (CGPoint)  location;
+{
+    return nil;
+}
+
+- (id) addRandomBonusAt: (CGPoint)  location;
+{
+    return nil;
+}
+
+- (id) didBeginContact: (SKPhysicsContact *) contact;
+{
+    return nil;
+}
+
 @end
