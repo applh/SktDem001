@@ -30,7 +30,7 @@
     self.scene.physicsWorld.gravity = CGVectorMake(0, 0);
 
     // SCALE THE MAP
-    self.scene.world2scale = .5;
+    self.scene.world2scale = 1;
     self.scene.player2vmax2scale = self.scene.world2scale * (self.scene.world2scale + .25);
     
     // THE WORLD IS FLAT
@@ -197,9 +197,9 @@
     
     // FIXME
     self.scene.player2vmax = self.scene.player2vmax2scale * self.scene.world2max.x;
-    
-    uint hero = arc4random_uniform(5);
-    NSString* heroFile = [NSString stringWithFormat: @"hero-%d", hero];
+        
+    uint hero = arc4random_uniform(8);
+    NSString* heroFile = [NSString stringWithFormat: @"1-%d", hero];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed: heroFile];
     
     sprite.position = CGPointMake(CGRectGetMidX(self.scene.frame),
@@ -223,8 +223,40 @@
     sprite.physicsBody.categoryBitMask = self.ccPlayer;
     sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus | self.ccRock;
     
-    SKAction *action = [SKAction rotateByAngle:angle duration:.5];
-    [sprite runAction:action];
+    //SKAction *action = [SKAction scaleTo:1.0 duration:1];
+    //[sprite runAction:action];
+    
+    NSArray* tabTextures225 = @[
+                                [SKTexture textureWithImageNamed:@"225-0"],
+                                [SKTexture textureWithImageNamed:@"225-1"],
+                                [SKTexture textureWithImageNamed:@"225-2"],
+                                [SKTexture textureWithImageNamed:@"225-3"],
+                                [SKTexture textureWithImageNamed:@"225-4"],
+                                [SKTexture textureWithImageNamed:@"225-6"],
+                                [SKTexture textureWithImageNamed:@"225-7"],
+                                ];
+    
+    self.animation225 = [SKAction animateWithTextures: tabTextures225
+                                         timePerFrame: 0.1];
+    self.animation225 = [SKAction repeatActionForever: self.animation225];
+
+    NSArray* tabTextures315 = @[
+                                [SKTexture textureWithImageNamed:@"315-0"],
+                                [SKTexture textureWithImageNamed:@"315-1"],
+                                [SKTexture textureWithImageNamed:@"315-2"],
+                                [SKTexture textureWithImageNamed:@"315-3"],
+                                [SKTexture textureWithImageNamed:@"315-4"],
+                                [SKTexture textureWithImageNamed:@"315-6"],
+                                [SKTexture textureWithImageNamed:@"315-7"],
+                                ];
+    
+    self.animation315 = [SKAction animateWithTextures: tabTextures315
+                                         timePerFrame: 0.1];
+    self.animation315 = [SKAction repeatActionForever: self.animation315];
+    
+    // ANIMATE
+    [sprite runAction:self.animation225 withKey: @"animation"];
+    self.playerCurAnimation = 225;
     
     [self.scene.world2fg addChild:sprite];
     
@@ -255,7 +287,26 @@
     }
     // KEEP THE PLAYER STRAIGHT
     self.scene.world2player.zRotation =0;
-    
+
+    // UPDATE PLAYER ANIMATION FOLLOWING DIRECTION
+    float nextAnimation;
+    if (self.scene.world2player.physicsBody.velocity.dx > 0) {
+        nextAnimation = 315;
+        if (nextAnimation != self.playerCurAnimation) {
+            [self.scene.world2player runAction: self.animation315
+                                       withKey: @"animation"];
+            self.playerCurAnimation = 315;
+        }
+    }
+    else {
+        nextAnimation = 225;
+        if (nextAnimation != self.playerCurAnimation) {
+            [self.scene.world2player runAction: self.animation225
+                                       withKey: @"animation"];
+            self.playerCurAnimation = 225;
+        }
+    }
+
     // LAUNCH MISSILE
     //[self.scene launchMissile:self.scene.world2player Time:currentTime];
     
@@ -373,8 +424,12 @@
     float dx = speed * cos(angle);
     float dy = speed * sin(angle);
     
+    float customScale = .5;
+    
     // warning: apply scaling also to physics body
-    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.scene.world2scale/2];
+    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:
+                            customScale * sprite.size.width * self.scene.world2scale/2];
+    
     sprite.physicsBody.dynamic = YES;
     sprite.physicsBody.velocity = CGVectorMake(dx,dy);
     sprite.physicsBody.angularVelocity = 0;
@@ -398,7 +453,12 @@
                                                                shortestUnitArc: YES]];
     [sprite runAction: action4
               withKey: @"rotation0"];
+
+    SKAction *scale = [SKAction scaleTo: customScale
+                                duration: 0];
     
+    [sprite runAction:scale withKey:@"scale"];
+
     [self.scene.world2fg addChild:sprite];
     
     return self;

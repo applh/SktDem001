@@ -479,8 +479,8 @@
     // half of max screen size divided by scale ?
     float d2max = self.scene.init2size.width
                     * self.scene.init2size.height
-                    * .5
-                    / self.scene.world2scale; // 5000000;
+                    * .10                           // FIXME ???
+                    / self.scene.world2scale;       // 5000000;
     
     if (d2 > d2max ) {
         // animate the camera

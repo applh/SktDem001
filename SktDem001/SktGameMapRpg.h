@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 APPLH.COM. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <SpriteKit/SpriteKit.h>
 #import "SktGameInterface.h"
 
 @interface SktGameMapRpg : NSObject <SktGameInterface>
@@ -17,6 +17,10 @@
 @property uint32_t ccRobot;
 @property uint32_t ccBonus;
 @property uint32_t ccRock;
+
+@property SKAction* animation225;
+@property SKAction* animation315;
+@property float playerCurAnimation;
 
 // METHODS
 - (id) init;
