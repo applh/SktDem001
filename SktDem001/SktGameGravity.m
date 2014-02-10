@@ -168,6 +168,9 @@
     SKShapeNode * shapeBody = [SKShapeNode new];
     CGMutablePathRef pathBody = CGPathCreateMutable();
     
+    xBody -= wBody*.5;
+    yBody -= hBody*.5;
+    
     NSString* sBody = [NSString stringWithFormat:@"{{%.0f,%.0f},{%.0f,%.0f}}", xBody, yBody, wBody, hBody];
     NSLog(@"%@", sBody);
     
@@ -272,18 +275,18 @@
 
     shapeBody.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMidY(self.scene.frame));
     
-    shapeHead.position = CGPointMake(shapeBody.position.x +25,              shapeBody.position.y +100);
-    shapeBell.position = CGPointMake(shapeBody.position.x +25,              shapeBody.position.y -50);
+    shapeHead.position = CGPointMake(shapeBody.position.x,              shapeBody.position.y +75);
+    shapeBell.position = CGPointMake(shapeBody.position.x,              shapeBody.position.y -75);
     
-    shapeLegLeft.position = CGPointMake(shapeBody.position.x +10,           shapeBody.position.y -100);
-    shapeBootLeft.position = CGPointMake(shapeBody.position.x +10,          shapeBody.position.y -200);
-    shapeLegRight.position = CGPointMake(shapeBody.position.x +65,          shapeBody.position.y -100);
-    shapeBootRight.position = CGPointMake(shapeBody.position.x +65,         shapeBody.position.y -200);
+    shapeLegLeft.position = CGPointMake(shapeBody.position.x -30,           shapeBody.position.y -100);
+    shapeBootLeft.position = CGPointMake(shapeBody.position.x -30,          shapeBody.position.y -200);
+    shapeLegRight.position = CGPointMake(shapeBody.position.x +30,          shapeBody.position.y -100);
+    shapeBootRight.position = CGPointMake(shapeBody.position.x +30,         shapeBody.position.y -200);
 
-    shapeShoulderLeft.position = CGPointMake(shapeBody.position.x -22,      shapeBody.position.y +25);
-    shapeArmLeft.position = CGPointMake(shapeBody.position.x -20,           shapeBody.position.y -50);
-    shapeShoulderRight.position = CGPointMake(shapeBody.position.x +103,    shapeBody.position.y +25);
-    shapeArmRight.position = CGPointMake(shapeBody.position.x +105,         shapeBody.position.y -50);
+    shapeShoulderLeft.position = CGPointMake(shapeBody.position.x -62,      shapeBody.position.y +5);
+    shapeArmLeft.position = CGPointMake(shapeBody.position.x -62,           shapeBody.position.y -70);
+    shapeShoulderRight.position = CGPointMake(shapeBody.position.x +62,    shapeBody.position.y +5);
+    shapeArmRight.position = CGPointMake(shapeBody.position.x +62,         shapeBody.position.y -70);
 
     SKNode* playerNode = [SKNode new];
     // BUILD PLAYER
