@@ -29,13 +29,13 @@
 -(void) restartGame
 {
     // NO GRAVITY
-    //self.scene.physicsWorld.gravity = CGVectorMake(0, 0);
+    self.scene.physicsWorld.gravity = CGVectorMake(0, 0);
 
     // SCALE THE MAP
-    self.scene.world2scale = .2;
+    self.scene.world2scale = .5;
     self.scene.player2vmax2scale = self.scene.world2scale * (self.scene.world2scale + .25);
     
-    // THE WORLD IS ROUND
+    // THE WORLD IS FLAT
     self.scene.world2mode = 1;
    
 }
@@ -157,6 +157,30 @@
 
 }
 
+-(SKShapeNode*) addPlayerPart: (NSString*)  name
+                            x: (CGFloat)    xBody
+                            y: (CGFloat)    yBody
+                            w: (CGFloat)    wBody
+                            h: (CGFloat)    hBody
+                         fill: (SKColor*)   cFill
+{
+    // BODY
+    SKShapeNode * shapeBody = [SKShapeNode new];
+    CGMutablePathRef pathBody = CGPathCreateMutable();
+    
+    NSString* sBody = [NSString stringWithFormat:@"{{%.0f,%.0f},{%.0f,%.0f}}", xBody, yBody, wBody, hBody];
+    NSLog(@"%@", sBody);
+    
+    CGPathAddEllipseInRect(pathBody, NULL, CGRectFromString(sBody));
+    shapeBody.path=pathBody;
+    shapeBody.lineWidth = 1.0;
+    shapeBody.fillColor = cFill;
+    shapeBody.strokeColor = [SKColor whiteColor];
+    shapeBody.glowWidth = 0.5;
+
+    return shapeBody;
+}
+
 -(void) setupPlayer
 {
     self.scene.playerEnergy = 100;
@@ -165,9 +189,116 @@
     // FIXME
     self.scene.player2vmax = self.scene.player2vmax2scale * self.scene.world2max.x;
     
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"player1-256x256"];
+    // COMPOSE PLAYER
+    // BODY
+    SKShapeNode* shapeBody = [self addPlayerPart: @"body"
+                                               x: 0
+                                               y: 0
+                                               w: 100
+                                               h: 100
+                                            fill: [SKColor blueColor]];
+    // HEAD
+    SKShapeNode* shapeHead = [self addPlayerPart: @"head"
+                                               x: 0
+                                               y: 0
+                                               w: 50
+                                               h: 50
+                                            fill: [SKColor redColor]];
+    // BELL
+    SKShapeNode* shapeBell = [self addPlayerPart: @"bell"
+                                               x: 0
+                                               y: 0
+                                               w: 50
+                                               h: 50
+                                            fill: [SKColor yellowColor]];
+
+    // LEFT LEG
+    SKShapeNode* shapeLegLeft = [self addPlayerPart: @"left leg"
+                                               x: 0
+                                               y: 0
+                                               w: 30
+                                               h: 100
+                                            fill: [SKColor orangeColor]];
+    // LEFT BOOT
+    SKShapeNode* shapeBootLeft = [self addPlayerPart: @"left boot"
+                                                  x: 0
+                                                  y: 0
+                                                  w: 30
+                                                  h: 100
+                                               fill: [SKColor orangeColor]];
+    // RIGHT LEG
+    SKShapeNode* shapeLegRight = [self addPlayerPart: @"right leg"
+                                               x: 0
+                                               y: 0
+                                               w: 30
+                                               h: 100
+                                            fill: [SKColor orangeColor]];
+    // RIGHT BOOT
+    SKShapeNode* shapeBootRight = [self addPlayerPart: @"right boot"
+                                                   x: 0
+                                                   y: 0
+                                                   w: 30
+                                                   h: 100
+                                                fill: [SKColor orangeColor]];
+
+    // LEFT shoulder
+    SKShapeNode* shapeShoulderLeft = [self addPlayerPart: @"left shoulder"
+                                                  x: 0
+                                                  y: 0
+                                                  w: 24
+                                                  h: 75
+                                               fill: [SKColor orangeColor]];
+    // LEFT arm
+    SKShapeNode* shapeArmLeft = [self addPlayerPart: @"left arm"
+                                                   x: 0
+                                                   y: 0
+                                                   w: 20
+                                                   h: 75
+                                                fill: [SKColor orangeColor]];
+    // RIGHT shoulder
+    SKShapeNode* shapeShoulderRight = [self addPlayerPart: @"right shoulder"
+                                                   x: 0
+                                                   y: 0
+                                                   w: 24
+                                                   h: 75
+                                                fill: [SKColor orangeColor]];
+    // RIGHT arm
+    SKShapeNode* shapeArmRight = [self addPlayerPart: @"right arm"
+                                                    x: 0
+                                                    y: 0
+                                                    w: 20
+                                                    h: 75
+                                                 fill: [SKColor orangeColor]];
+
+    shapeBody.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMidY(self.scene.frame));
     
-    sprite.position = CGPointMake(CGRectGetMidX(self.scene.frame), CGRectGetMidY(self.scene.frame)) ;
+    shapeHead.position = CGPointMake(shapeBody.position.x +25,              shapeBody.position.y +100);
+    shapeBell.position = CGPointMake(shapeBody.position.x +25,              shapeBody.position.y -50);
+    
+    shapeLegLeft.position = CGPointMake(shapeBody.position.x +10,           shapeBody.position.y -100);
+    shapeBootLeft.position = CGPointMake(shapeBody.position.x +10,          shapeBody.position.y -200);
+    shapeLegRight.position = CGPointMake(shapeBody.position.x +65,          shapeBody.position.y -100);
+    shapeBootRight.position = CGPointMake(shapeBody.position.x +65,         shapeBody.position.y -200);
+
+    shapeShoulderLeft.position = CGPointMake(shapeBody.position.x -22,      shapeBody.position.y +25);
+    shapeArmLeft.position = CGPointMake(shapeBody.position.x -20,           shapeBody.position.y -50);
+    shapeShoulderRight.position = CGPointMake(shapeBody.position.x +103,    shapeBody.position.y +25);
+    shapeArmRight.position = CGPointMake(shapeBody.position.x +105,         shapeBody.position.y -50);
+
+    SKNode* playerNode = [SKNode new];
+    // BUILD PLAYER
+    [playerNode addChild:shapeBody];
+    [playerNode addChild:shapeHead];
+    [playerNode addChild:shapeBell];
+    [playerNode addChild:shapeLegLeft];
+    [playerNode addChild:shapeLegRight];
+    [playerNode addChild:shapeBootLeft];
+    [playerNode addChild:shapeBootRight];
+    [playerNode addChild:shapeShoulderLeft];
+    [playerNode addChild:shapeShoulderRight];
+    [playerNode addChild:shapeArmLeft];
+    [playerNode addChild:shapeArmRight];
+    
     
     float angle = arc4random()%360*M_PI/180;
     float speed = 100;
@@ -175,24 +306,22 @@
     float dy = speed * sin(angle);
     
     // warning: apply scaling also to physics body
-    sprite.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:sprite.size.width*self.scene.world2scale/2];
-    sprite.physicsBody.dynamic = YES;
-    sprite.physicsBody.velocity = CGVectorMake(dx,dy);
-    sprite.physicsBody.angularVelocity = 0;
-    sprite.physicsBody.linearDamping = 0;
-    sprite.physicsBody.angularDamping = 0;
-    sprite.physicsBody.restitution = 0;
+    playerNode.physicsBody = [SKPhysicsBody
+                                bodyWithCircleOfRadius:200*self.scene.world2scale/2];
+    
+    playerNode.physicsBody.dynamic = YES;
+    playerNode.physicsBody.velocity = CGVectorMake(dx,dy);
+    playerNode.physicsBody.angularVelocity = 0;
+    playerNode.physicsBody.linearDamping = 0;
+    playerNode.physicsBody.angularDamping = 0;
+    playerNode.physicsBody.restitution = 0;
     
     // CONTACT AND COLLISION
-    sprite.physicsBody.categoryBitMask = self.ccPlayer;
-    sprite.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus | self.ccRock;
+    playerNode.physicsBody.categoryBitMask = self.ccPlayer;
+    playerNode.physicsBody.contactTestBitMask = self.ccPlayer | self.ccRobot | self.ccBonus | self.ccRock;
     
-    SKAction *action = [SKAction rotateByAngle:angle duration:.5];
-    [sprite runAction:action];
-    
-    [self.scene.world2fg addChild:sprite];
-    
-    self.scene.world2player = sprite;
+    [self.scene.world2fg addChild:playerNode];
+    self.scene.world2player = playerNode;
     
     // SETUP CAMERA
     SKNode *camera = [SKNode node];
@@ -222,7 +351,7 @@
     //[self.game launchMissile:self.scene.world2player Time:currentTime];
     
     // KEEP FPS > 25
-    if (self.scene.deltaUpdateT < .04) {
+    if (self.scene.deltaUpdateT < .01) {
         
         float random = 0;
         
