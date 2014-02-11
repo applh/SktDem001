@@ -180,7 +180,7 @@
     shapeBody.lineWidth = 1.0;
     shapeBody.fillColor = cFill;
     shapeBody.strokeColor = [SKColor whiteColor];
-    shapeBody.glowWidth = 0.5;
+    shapeBody.glowWidth = 0.0;
 
     return shapeBody;
 }
@@ -301,10 +301,10 @@
     [playerNode addChild:shapeArmRight];
     
     // BREATHE
-    SKAction* act1 = [SKAction scaleTo:1.2 duration:2];
-    SKAction* act2 = [SKAction scaleTo:1.0 duration:2];
-    SKAction* act3 = [SKAction sequence:@[act1, act2]];
-    SKAction* act4 = [SKAction repeatActionForever:act3];
+//    SKAction* act1 = [SKAction scaleTo:1.2 duration:2];
+//    SKAction* act2 = [SKAction scaleTo:1.0 duration:2];
+//    SKAction* act3 = [SKAction sequence:@[act1, act2]];
+//    SKAction* act4 = [SKAction repeatActionForever:act3];
     
     //[shapeBody runAction:act4 withKey:@"breathe"];
     
@@ -312,14 +312,18 @@
     SKAction* act5 = [SKAction rotateToAngle:0 duration:2 shortestUnitArc:TRUE];
     SKAction* act6 = [SKAction repeatActionForever:act5];
     //[shapeBody runAction:act6 withKey:@"standup"];
-    
+
     SKTexture* texture = [self.scene.view textureFromNode:playerNode];
     SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:texture];
     [sprite runAction:act6 withKey:@"standup"];
     
-    return sprite;
+    SKNode* res;
+    res = sprite;
     
-    //return playerNode;
+    //res = playerNode;
+    
+    return res;
+    
 }
 
 -(void) setupPlayer
@@ -336,10 +340,10 @@
                                       bodyColor: bColor
                                       headColor: hColor];
     
-    float angle = 0;
-    float speed = 0;
-    float dx = speed * cos(angle);
-    float dy = speed * sin(angle);
+//    float angle = 0;
+//    float speed = 0;
+//    float dx = speed * cos(angle);
+//    float dy = speed * sin(angle);
     
     [self.scene.world2fg addChild:playerNode];
     self.scene.world2player = playerNode;
@@ -373,8 +377,21 @@
     
 }
 
+-(void) updatePerspective25
+{
+    // 2.5D perspective
+    // objects at the top are further than objects at the bottom
+    NSArray* tabFG = [self.scene.world2fg children];
+    for (SKNode* curN in tabFG) {
+        curN.zPosition = 10000-curN.position.y;
+    }
+
+}
+
 -(void) updateNextFrame: (NSTimeInterval) currentTime
 {
+    [self updatePerspective25];
+    
     // MAX SPEED
     float curV = hypot(self.scene.world2player.physicsBody.velocity.dx,
                        self.scene.world2player.physicsBody.velocity.dy);
@@ -398,11 +415,11 @@
         random = arc4random_uniform(10000);
         float rock2random  = 50;
         if (random < rock2random) {
-            float radius = arc4random_uniform(self.scene.world2max.x);
-            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
-            float x = radius * cos(theta);
-            float y = radius * sin(theta);
-            CGPoint newPos = CGPointMake(x,y);
+//            float radius = arc4random_uniform(self.scene.world2max.x);
+//            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
+//            float x = radius * cos(theta);
+//            float y = radius * sin(theta);
+//            CGPoint newPos = CGPointMake(x,y);
             //[self.game addRandomRockAt:newPos];
         }
         
@@ -422,11 +439,11 @@
         random = arc4random_uniform(10000);
         float bonus2random  = 20;
         if (random < bonus2random) {
-            float radius = arc4random_uniform(self.scene.world2max.x);
-            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
-            float x = radius * cos(theta);
-            float y = radius * sin(theta);
-            CGPoint newPos = CGPointMake(x,y);
+//            float radius = arc4random_uniform(self.scene.world2max.x);
+//            float theta = 2 * M_PI * arc4random_uniform(360) / 360;
+//            float x = radius * cos(theta);
+//            float y = radius * sin(theta);
+//            CGPoint newPos = CGPointMake(x,y);
             //[self.game addRandomBonusAt:newPos];
         }
         
