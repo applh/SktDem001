@@ -616,11 +616,14 @@
     CGFloat curZ = curBot.zPosition;
     CGFloat curDx = curBot.physicsBody.velocity.dx;
     CGFloat curDy = curBot.physicsBody.velocity.dy;
-
+    SKColor* fc = [SKColor colorWithWhite:0.9 alpha:1.0];
+    SKColor* cc = [SKColor colorWithWhite:0.8 alpha:1.0];
+    SKColor* bc = [SKColor colorWithWhite:0.7 alpha:1.0];
+    
     if (curDx < 0) {
         curBot.speed = 1.0;
         // MOVING WEST
-        for (SKNode* mNode in [curBot children]) {
+        for (SKShapeNode* mNode in [curBot children]) {
             NSRange mSide = [mNode.name rangeOfString:@"left"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ-1;
@@ -636,7 +639,10 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ-4;
                 }
+                mNode.alpha = 0.95;
+                mNode.strokeColor = bc;
             }
+            
             mSide = [mNode.name rangeOfString:@"right"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ+1;
@@ -652,17 +658,22 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ+4;
                 }
+                mNode.alpha = 1.0;
+                mNode.strokeColor = fc;
             }
+
             mSide = [mNode.name rangeOfString:@"center"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ;
+                mNode.alpha = 1.0;
+                mNode.strokeColor = cc;
             }
         }
     }
     else if (curDx > 0) {
         curBot.speed = 1.0;
         // MOVING EST
-        for (SKNode* mNode in [curBot children]) {
+        for (SKShapeNode* mNode in [curBot children]) {
             NSRange mSide = [mNode.name rangeOfString:@"left"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ+1;
@@ -678,7 +689,10 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ+4;
                 }
+                mNode.alpha = 1.0;
+                mNode.strokeColor = fc;
             }
+
             mSide = [mNode.name rangeOfString:@"right"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ-1;
@@ -694,10 +708,15 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ-4;
                 }
+                mNode.alpha = 0.95;
+                mNode.strokeColor = bc;
             }
+
             mSide = [mNode.name rangeOfString:@"center"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ;
+                mNode.alpha = 1.0;
+                mNode.strokeColor = cc;
             }
         }
         
