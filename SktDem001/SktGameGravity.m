@@ -183,6 +183,7 @@
     shapeBody.fillColor = cFill;
     shapeBody.strokeColor = [SKColor whiteColor];
     shapeBody.glowWidth = 0.0;
+    shapeBody.name= name;
     
     return shapeBody;
 }
@@ -195,7 +196,7 @@
     SKNode* playerNode = [SKNode new];
     // COMPOSE PLAYER
     // BODY
-    SKShapeNode* shapeBody = [self addPlayerPartV2: @"body"
+    SKShapeNode* shapeBody = [self addPlayerPartV2: @"center body"
                                                  x: 0
                                                  y: 0
                                                  w: 200
@@ -205,7 +206,7 @@
     [playerNode addChild:shapeBody];
 
     // SHOULDERS
-    SKShapeNode* shapeShoulders = [self addPlayerPartV2: @"shoulders"
+    SKShapeNode* shapeShoulders = [self addPlayerPartV2: @"center shoulders"
                                                  x: 0
                                                  y: 0
                                                  w: 100
@@ -215,7 +216,7 @@
     [playerNode addChild:shapeShoulders];
 
     // HEAD
-    SKShapeNode* shapeHead = [self addPlayerPartV2: @"head"
+    SKShapeNode* shapeHead = [self addPlayerPartV2: @"center head"
                                                       x: 0
                                                       y: 0
                                                       w: 100
@@ -570,9 +571,59 @@
 
 }
 
+-(void) updatePerspectivePlayer
+{
+    SKNode * curBot = self.scene.world2player;
+    
+    CGFloat curZ = curBot.zPosition;
+    CGFloat curDx = curBot.physicsBody.velocity.dx;
+    CGFloat curDy = curBot.physicsBody.velocity.dy;
+
+    if (curDx < 0) {
+        // MOVING WEST
+        for (SKNode* mNode in [curBot children]) {
+            NSRange mSide = [mNode.name rangeOfString:@"left"];
+            if (mSide.length > 0) {
+                mNode.zPosition = curZ-10;
+            }
+            mSide = [mNode.name rangeOfString:@"right"];
+            if (mSide.length > 0) {
+                mNode.zPosition = curZ+10;
+            }
+            mSide = [mNode.name rangeOfString:@"center"];
+            if (mSide.length > 0) {
+                mNode.zPosition = curZ;
+            }
+        }
+    }
+    else if (curDx > 0) {
+        // MOVING EST
+        for (SKNode* mNode in [curBot children]) {
+            NSRange mSide = [mNode.name rangeOfString:@"left"];
+            if (mSide.length > 0) {
+                mNode.zPosition = curZ+10;
+            }
+            mSide = [mNode.name rangeOfString:@"right"];
+            if (mSide.length > 0) {
+                mNode.zPosition = curZ-10;
+            }
+            mSide = [mNode.name rangeOfString:@"center"];
+            if (mSide.length > 0) {
+                mNode.zPosition = curZ;
+            }
+        }
+        
+    }
+    else {
+        // MOVING NORTH OR SOUTH
+    }
+    
+}
+
 -(void) updateNextFrame: (NSTimeInterval) currentTime
 {
     [self updatePerspective25];
+    [self updatePerspectivePlayer];
     
     // MAX SPEED
     float curV = hypot(self.scene.world2player.physicsBody.velocity.dx,
