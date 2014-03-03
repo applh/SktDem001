@@ -19,6 +19,8 @@
 @property uint32_t ccRock;
 
 // ANIMATION
+@property SKAction* animationMoveMUL3;
+@property SKAction* animationMoveMUR3;
 @property SKAction* animationMoveMLL3;
 @property SKAction* animationMoveMLR3;
 

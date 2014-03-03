@@ -198,7 +198,7 @@
     
     // COMPOSE PLAYER
     // HEAD
-    SKShapeNode* shapeHead = [self addPlayerPartV2: @"center head"
+    SKShapeNode* shapeHead = [self addPlayerPartV2: @"center head r0"
                                                  x: 0
                                                  y: 0
                                                  w: 100
@@ -208,7 +208,7 @@
     [playerNode addChild:shapeHead];
 
     // SHOULDERS
-    SKShapeNode* shapeShoulders = [self addPlayerPartV2: @"center shoulders"
+    SKShapeNode* shapeShoulders = [self addPlayerPartV2: @"center shoulders r0"
                                                       x: 0
                                                       y: 0
                                                       w: 100
@@ -218,7 +218,7 @@
     [playerNode addChild:shapeShoulders];
 
     // BODY
-    SKShapeNode* shapeBody = [self addPlayerPartV2: @"center body"
+    SKShapeNode* shapeBody = [self addPlayerPartV2: @"center body r0"
                                                  x: 0
                                                  y: 0
                                                  w: 200
@@ -228,7 +228,7 @@
     [playerNode addChild:shapeBody];
 
     // LEGS
-    SKShapeNode* shapeLegLeft = [self addPlayerPartV2: @"leg left"
+    SKShapeNode* shapeLegLeft = [self addPlayerPartV2: @"leg left r1"
                                                     x: 0
                                                     y: 0
                                                     w: 100
@@ -237,7 +237,7 @@
     shapeLegLeft.position = CGPointMake(botCenter.x-50, botCenter.y-100);
     [playerNode addChild:shapeLegLeft];
 
-    SKShapeNode* shapeLegRight = [self addPlayerPartV2: @"leg right"
+    SKShapeNode* shapeLegRight = [self addPlayerPartV2: @"leg right r1"
                                                     x: 0
                                                     y: 0
                                                     w: 100
@@ -247,7 +247,7 @@
     [playerNode addChild:shapeLegRight];
 
     // FOOT
-    SKShapeNode* shapeFeetLeft = [self addPlayerPartV2: @"feet left"
+    SKShapeNode* shapeFeetLeft = [self addPlayerPartV2: @"feet left r2"
                                                     x: 0
                                                     y: 0
                                                     w: 100
@@ -256,7 +256,7 @@
     shapeFeetLeft.position = CGPointMake(botCenter.x-50, botCenter.y-200);
     [playerNode addChild:shapeFeetLeft];
     
-    SKShapeNode* shapeFeetRight = [self addPlayerPartV2: @"feet right"
+    SKShapeNode* shapeFeetRight = [self addPlayerPartV2: @"feet right r2"
                                                      x: 0
                                                      y: 0
                                                      w: 100
@@ -266,7 +266,7 @@
     [playerNode addChild:shapeFeetRight];
 
     // SHOE
-    SKShapeNode* shapeShoeLeft = [self addPlayerPartV2: @"shoe left"
+    SKShapeNode* shapeShoeLeft = [self addPlayerPartV2: @"shoe left r3"
                                                      x: 0
                                                      y: 0
                                                      w: 100
@@ -275,7 +275,7 @@
     shapeShoeLeft.position = CGPointMake(botCenter.x-50, botCenter.y-300);
     [playerNode addChild:shapeShoeLeft];
     
-    SKShapeNode* shapeShoeRight = [self addPlayerPartV2: @"shoe right"
+    SKShapeNode* shapeShoeRight = [self addPlayerPartV2: @"shoe right r3"
                                                       x: 0
                                                       y: 0
                                                       w: 100
@@ -285,7 +285,7 @@
     [playerNode addChild:shapeShoeRight];
 
     // HANDS
-    SKShapeNode* shapeHandLeft = [self addPlayerPartV2: @"hand left"
+    SKShapeNode* shapeHandLeft = [self addPlayerPartV2: @"hand left r2"
                                                     x: 0
                                                     y: 0
                                                     w: 100
@@ -294,7 +294,7 @@
     shapeHandLeft.position = CGPointMake(botCenter.x-150, botCenter.y+50);
     [playerNode addChild:shapeHandLeft];
     
-    SKShapeNode* shapeHandRight = [self addPlayerPartV2: @"hand right"
+    SKShapeNode* shapeHandRight = [self addPlayerPartV2: @"hand right r2"
                                                      x: 0
                                                      y: 0
                                                      w: 100
@@ -304,7 +304,7 @@
     [playerNode addChild:shapeHandRight];
 
     // ARMS
-    SKShapeNode* shapeArmLeft = [self addPlayerPartV2: @"arm left"
+    SKShapeNode* shapeArmLeft = [self addPlayerPartV2: @"arm left r1"
                                                     x: 0
                                                     y: 0
                                                     w: 100
@@ -313,7 +313,7 @@
     shapeArmLeft.position = CGPointMake(botCenter.x-100, botCenter.y+75);
     [playerNode addChild:shapeArmLeft];
     
-    SKShapeNode* shapeArmRight = [self addPlayerPartV2: @"arm right"
+    SKShapeNode* shapeArmRight = [self addPlayerPartV2: @"arm right r1"
                                                      x: 0
                                                      y: 0
                                                      w: 100
@@ -323,7 +323,7 @@
     [playerNode addChild:shapeArmRight];
 
     // TOOLS
-    SKShapeNode* shapeToolLeft = [self addPlayerPartV2: @"tool left"
+    SKShapeNode* shapeToolLeft = [self addPlayerPartV2: @"tool left r3"
                                                      x: 0
                                                      y: 0
                                                      w: 100
@@ -332,7 +332,7 @@
     shapeToolLeft.position = CGPointMake(botCenter.x-150, botCenter.y-50);
     [playerNode addChild:shapeToolLeft];
     
-    SKShapeNode* shapeToolRight = [self addPlayerPartV2: @"tool right"
+    SKShapeNode* shapeToolRight = [self addPlayerPartV2: @"tool right r3"
                                                       x: 0
                                                       y: 0
                                                       w: 100
@@ -344,8 +344,13 @@
     // ANIMATION
     SKAction * act1 = [SKAction moveBy:CGVectorMake(50, 0) duration:1];
     SKAction * act2 = [SKAction moveBy:CGVectorMake(-50, 0) duration:1];
+    SKAction * act3 = [SKAction moveBy:CGVectorMake(150, 0) duration:1];
+    SKAction * act4 = [SKAction moveBy:CGVectorMake(-150, 0) duration:1];
+
     self.animationMoveMLL3 = [SKAction  repeatActionForever: [SKAction  sequence:@[act1, act2]]];
     self.animationMoveMLR3 = [SKAction  repeatActionForever: [SKAction  sequence:@[act2, act1]]];
+    self.animationMoveMUL3 = [SKAction  repeatActionForever: [SKAction  sequence:@[act3, act4]]];
+    self.animationMoveMUR3 = [SKAction  repeatActionForever: [SKAction  sequence:@[act4, act3]]];
     
     [shapeLegLeft runAction:self.animationMoveMLL3 withKey:@"move"];
     [shapeFeetLeft runAction:self.animationMoveMLL3 withKey:@"move"];
@@ -355,13 +360,21 @@
     [shapeFeetRight runAction:self.animationMoveMLR3 withKey:@"move"];
     [shapeShoeRight runAction:self.animationMoveMLR3 withKey:@"move"];
 
-    [shapeArmLeft runAction:self.animationMoveMLL3 withKey:@"move"];
-    [shapeHandLeft runAction:self.animationMoveMLL3 withKey:@"move"];
-    [shapeToolLeft runAction:self.animationMoveMLL3 withKey:@"move"];
+    [shapeArmLeft runAction:self.animationMoveMUL3 withKey:@"move"];
+    [shapeHandLeft runAction:self.animationMoveMUL3 withKey:@"move"];
+    [shapeToolLeft runAction:self.animationMoveMUL3 withKey:@"move"];
 
-    [shapeArmRight runAction:self.animationMoveMLR3 withKey:@"move"];
-    [shapeHandRight runAction:self.animationMoveMLR3 withKey:@"move"];
-    [shapeToolRight runAction:self.animationMoveMLR3 withKey:@"move"];
+    shapeArmLeft.speed = 1.0;
+    shapeHandLeft.speed = 1.0;
+    shapeToolLeft.speed = 1.0;
+    
+    [shapeArmRight runAction:self.animationMoveMUR3 withKey:@"move"];
+    [shapeHandRight runAction:self.animationMoveMUR3 withKey:@"move"];
+    [shapeToolRight runAction:self.animationMoveMUR3 withKey:@"move"];
+
+    shapeArmRight.speed = 1.0;
+    shapeHandRight.speed = 1.0;
+    shapeToolRight.speed = 1.0;
 
     res = playerNode;
     return res;
@@ -610,11 +623,35 @@
         for (SKNode* mNode in [curBot children]) {
             NSRange mSide = [mNode.name rangeOfString:@"left"];
             if (mSide.length > 0) {
-                mNode.zPosition = curZ-10;
+                mNode.zPosition = curZ-1;
+                mSide = [mNode.name rangeOfString:@"r1"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ-2;
+                }
+                mSide = [mNode.name rangeOfString:@"r2"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ-3;
+                }
+                mSide = [mNode.name rangeOfString:@"r3"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ-4;
+                }
             }
             mSide = [mNode.name rangeOfString:@"right"];
             if (mSide.length > 0) {
-                mNode.zPosition = curZ+10;
+                mNode.zPosition = curZ+1;
+                mSide = [mNode.name rangeOfString:@"r1"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ+2;
+                }
+                mSide = [mNode.name rangeOfString:@"r2"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ+3;
+                }
+                mSide = [mNode.name rangeOfString:@"r3"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ+4;
+                }
             }
             mSide = [mNode.name rangeOfString:@"center"];
             if (mSide.length > 0) {
@@ -628,11 +665,35 @@
         for (SKNode* mNode in [curBot children]) {
             NSRange mSide = [mNode.name rangeOfString:@"left"];
             if (mSide.length > 0) {
-                mNode.zPosition = curZ+10;
+                mNode.zPosition = curZ+1;
+                mSide = [mNode.name rangeOfString:@"r1"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ+2;
+                }
+                mSide = [mNode.name rangeOfString:@"r2"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ+3;
+                }
+                mSide = [mNode.name rangeOfString:@"r3"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ+4;
+                }
             }
             mSide = [mNode.name rangeOfString:@"right"];
             if (mSide.length > 0) {
-                mNode.zPosition = curZ-10;
+                mNode.zPosition = curZ-1;
+                mSide = [mNode.name rangeOfString:@"r1"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ-2;
+                }
+                mSide = [mNode.name rangeOfString:@"r2"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ-3;
+                }
+                mSide = [mNode.name rangeOfString:@"r3"];
+                if (mSide.length > 0) {
+                    mNode.zPosition = curZ-4;
+                }
             }
             mSide = [mNode.name rangeOfString:@"center"];
             if (mSide.length > 0) {
@@ -650,6 +711,10 @@
         //actMove = [curBot actionForKey:@"move"];
         curBot.speed = 0.0;
     }
+
+    float curV = hypot(self.scene.world2player.physicsBody.velocity.dx,
+                       self.scene.world2player.physicsBody.velocity.dy);
+    curBot.speed = 2.0f * curV / self.scene.player2vmax;
 }
 
 -(void) updateNextFrame: (NSTimeInterval) currentTime
