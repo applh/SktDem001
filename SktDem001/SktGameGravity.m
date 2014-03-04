@@ -107,10 +107,10 @@
         self.scene.hud2center.text = @"";
     }
     
-    self.scene.hud2top.text = [NSString stringWithFormat:@"GRAVITY LEVEL %d - ENERGY %d - COUNT %d",
+    self.scene.hud2top.text = [NSString stringWithFormat:@"GRAVITY LEVEL %d - ENERGY %d - TILES %d",
                                self.scene.playerLevel,
                                self.scene.playerEnergy,
-                               self.scene.world2fg.children.count];
+                               self.scene.world2rootile.children.count];
     
     self.scene.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d/%d",
                                   self.scene.playerScore,
@@ -119,7 +119,9 @@
 
 -(void) setupWorldTiles: (SKNode*) rootNode
 {
-    float tileSize= 100;
+    self.scene.world2rootile = rootNode;
+    
+    float tileSize= 128;
     float w0 = CGRectGetWidth(rootNode.frame);
     float h0 = CGRectGetHeight(rootNode.frame);
     float x0 = CGRectGetMinX(rootNode.frame);

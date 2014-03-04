@@ -27,12 +27,13 @@
 @property SKLabelNode* hud2center;  // HUD CENTER
 @property SKLabelNode* hud2bottom;  // HUD BOTTOM
 
-@property float   world2scale;  // ZOOM FACTOR
-@property SKNode* world;        // WORLD
-@property SKNode* world2fg;     // WORLD FOREGROUND
-@property SKNode* world2bg;     // WORLD BACKGROUND
-@property SKNode* world2camera; // WORLD CAMERA NODE / POSITION
-@property SKNode* world2player; // WORLD PLAYER
+@property float   world2scale;      // ZOOM FACTOR
+@property SKNode* world;            // WORLD
+@property SKNode* world2fg;         // WORLD FOREGROUND
+@property SKNode* world2bg;         // WORLD BACKGROUND
+@property SKNode* world2rootile;    // WORLD ROOT TILE
+@property SKNode* world2camera;     // WORLD CAMERA NODE / POSITION
+@property SKNode* world2player;     // WORLD PLAYER
 
 @property CGSize  init2size;
 @property CGPoint world2min;
