@@ -107,9 +107,10 @@
         self.scene.hud2center.text = @"";
     }
     
-    self.scene.hud2top.text = [NSString stringWithFormat:@"GRAVITY LEVEL %d - ENERGY %d",
+    self.scene.hud2top.text = [NSString stringWithFormat:@"GRAVITY LEVEL %d - ENERGY %d - COUNT %d",
                                self.scene.playerLevel,
-                               self.scene.playerEnergy];
+                               self.scene.playerEnergy,
+                               self.scene.world2fg.children.count];
     
     self.scene.hud2bottom.text = [NSString stringWithFormat:@"SCORE %d/%d",
                                   self.scene.playerScore,
@@ -605,13 +606,15 @@
     NSArray* tabFG = [self.scene.world2fg children];
     for (SKNode* curN in tabFG) {
         curN.zPosition = 10000-curN.position.y;
+        [self updatePerspectivePlayer:curN];
+
     }
 
 }
 
--(void) updatePerspectivePlayer
+-(void) updatePerspectivePlayer:(SKNode *) curBot
 {
-    SKNode * curBot = self.scene.world2player;
+    //SKNode * curBot = self.scene.world2player;
     
     CGFloat curZ = curBot.zPosition;
     CGFloat curDx = curBot.physicsBody.velocity.dx;
@@ -639,7 +642,7 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ-4;
                 }
-                mNode.alpha = 0.95;
+                //mNode.alpha = 0.95;
                 mNode.strokeColor = bc;
             }
             
@@ -658,14 +661,14 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ+4;
                 }
-                mNode.alpha = 1.0;
+                //mNode.alpha = 1.0;
                 mNode.strokeColor = fc;
             }
 
             mSide = [mNode.name rangeOfString:@"center"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ;
-                mNode.alpha = 1.0;
+                //mNode.alpha = 1.0;
                 mNode.strokeColor = cc;
             }
         }
@@ -689,7 +692,7 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ+4;
                 }
-                mNode.alpha = 1.0;
+                //mNode.alpha = 1.0;
                 mNode.strokeColor = fc;
             }
 
@@ -708,14 +711,14 @@
                 if (mSide.length > 0) {
                     mNode.zPosition = curZ-4;
                 }
-                mNode.alpha = 0.95;
+                //mNode.alpha = 0.95;
                 mNode.strokeColor = bc;
             }
 
             mSide = [mNode.name rangeOfString:@"center"];
             if (mSide.length > 0) {
                 mNode.zPosition = curZ;
-                mNode.alpha = 1.0;
+                //mNode.alpha = 1.0;
                 mNode.strokeColor = cc;
             }
         }
@@ -739,7 +742,7 @@
 -(void) updateNextFrame: (NSTimeInterval) currentTime
 {
     [self updatePerspective25];
-    [self updatePerspectivePlayer];
+    //[self updatePerspectivePlayer:self.scene.world2player];
     
     // MAX SPEED
     float curV = hypot(self.scene.world2player.physicsBody.velocity.dx,
@@ -781,7 +784,10 @@
             float x = radius * cos(theta);
             float y = radius * sin(theta);
             CGPoint newPos = CGPointMake(x,y);
-            [self.game addRandomRobotAt:newPos];
+            
+            if (self.scene.world2fg.children.count < 100) {
+                [self.game addRandomRobotAt:newPos];
+            }
         }
         
         // add random bonus
@@ -905,11 +911,15 @@
     SKNode* robotNode = [self buildPlayerParts: @"player"
                                      bodyColor: bColor
                                      headColor: hColor];
+    
+    CGFloat vdx = arc4random() % 100 - 50;
+    CGFloat vdy = arc4random() % 100 - 50;
+    
     robotNode.position = location;
     // warning: apply scaling also to physics body
     robotNode.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:200*self.scene.world2scale/2];
     robotNode.physicsBody.dynamic = YES;
-    robotNode.physicsBody.velocity = CGVectorMake(0, 0);
+    robotNode.physicsBody.velocity = CGVectorMake(vdx, vdy);
     robotNode.physicsBody.angularVelocity = 0;
     robotNode.physicsBody.linearDamping = 0;
     robotNode.physicsBody.angularDamping = 0;
