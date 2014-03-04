@@ -117,6 +117,28 @@
                                   self.scene.playerScoreWin];
 }
 
+-(void) setupWorldTiles: (SKNode*) rootNode
+{
+    float tileSize= 100;
+    float w0 = CGRectGetWidth(rootNode.frame);
+    float h0 = CGRectGetHeight(rootNode.frame);
+    float x0 = CGRectGetMinX(rootNode.frame);
+    float y0 = CGRectGetMinY(rootNode.frame);
+    
+    for (int x=x0 + tileSize/2; x < x0 + w0; x+=tileSize)  {
+        for (int y=y0 + tileSize/2; y < y0 + h0; y+=tileSize) {
+            float hue = .01 * (arc4random()%100);
+    
+            UIColor * color = [UIColor colorWithHue:hue saturation:.5 brightness:.5 alpha:1.0];
+            SKSpriteNode *tile =
+                [SKSpriteNode spriteNodeWithColor: color
+                                             size: CGSizeMake(tileSize, tileSize)];
+            tile.position = CGPointMake(x, y);
+            [rootNode addChild:tile];
+        }
+    }
+}
+
 -(void) setupWorld
 {
     self.ccPlayer   =  0x1 << 0;
@@ -150,6 +172,9 @@
     
     sprite2bg.size = CGSizeMake(self.scene.world2max.x - self.scene.world2min.x,
                                 self.scene.world2max.y - self.scene.world2min.y);
+    
+    // build the tiles
+    [self setupWorldTiles:sprite2bg];
     
     [self.scene.world2bg addChild:sprite2bg];
     
