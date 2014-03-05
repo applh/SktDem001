@@ -117,24 +117,76 @@
                                   self.scene.playerScoreWin];
 }
 
+- (SKNode*) getTileNodeAtX: (float) x
+                         Y: (float) y
+                         W: (float) w
+                         H: (float) h
+{
+    SKNode* res;
+    float tileSize= 128;
+    float hue = .001 * (arc4random()%100);
+    float saturation = .5;
+    float brightness = .5;
+    
+    if (y/h < .3) {
+        hue += .2;
+        saturation = .3;
+        brightness = .4;
+    }
+    else if (y/h < .6) {
+        hue += .4;
+        saturation = .4;
+        brightness = .5;
+    }
+    else {
+        hue += .6;
+        saturation = .5;
+        brightness = .6;
+    }
+    
+    UIColor * color = [UIColor colorWithHue: hue
+                                 saturation: saturation
+                                 brightness: brightness
+                                      alpha: 1.0];
+    SKTexture* texture;
+    NSString* key = [NSString stringWithFormat:@"%2f %2f %2f", hue, saturation, brightness];
+    
+    // FIND
+    texture = [self.textureDict objectForKey: key];
+    if (texture == nil) {
+        // CREATE
+        SKSpriteNode *tile;
+        tile = [SKSpriteNode spriteNodeWithColor: color
+                                            size: CGSizeMake(tileSize, tileSize)];
+        
+        texture = [self.scene.view textureFromNode:tile];
+        [self.textureDict setObject: texture
+                             forKey: key];
+    }
+    SKSpriteNode* sprite = [SKSpriteNode spriteNodeWithTexture:texture];
+    res = sprite;
+    
+    return res;
+}
+
 -(void) setupWorldTiles: (SKNode*) rootNode
 {
+    self.textureDict = [NSMutableDictionary new];
     self.scene.world2rootile = rootNode;
     
-    float tileSize= 128;
     float w0 = CGRectGetWidth(rootNode.frame);
     float h0 = CGRectGetHeight(rootNode.frame);
     float x0 = CGRectGetMinX(rootNode.frame);
     float y0 = CGRectGetMinY(rootNode.frame);
     
+    float tileSize= 128;
     for (int x=x0 + tileSize/2; x < x0 + w0; x+=tileSize)  {
         for (int y=y0 + tileSize/2; y < y0 + h0; y+=tileSize) {
-            float hue = .01 * (arc4random()%100);
     
-            UIColor * color = [UIColor colorWithHue:hue saturation:.5 brightness:.5 alpha:1.0];
-            SKSpriteNode *tile =
-                [SKSpriteNode spriteNodeWithColor: color
-                                             size: CGSizeMake(tileSize, tileSize)];
+            SKNode *tile = [self getTileNodeAtX: x-x0
+                                              Y: y-y0
+                                              W: w0
+                                              H: h0];
             tile.position = CGPointMake(x, y);
             [rootNode addChild:tile];
         }
@@ -143,6 +195,8 @@
 
 -(void) setupWorld
 {
+    self.boardScale = 2;
+    
     self.ccPlayer   =  0x1 << 0;
     self.ccOrb      =  0x1 << 1;
     self.ccRobot    =  0x1 << 2;
@@ -164,6 +218,9 @@
     // build the world limits depending on screen resolution
     float sizeMax = self.scene.init2size.width;
     if (sizeMax < self.scene.init2size.height) sizeMax = self.scene.init2size.height;
+    
+    // BOARDGAME WITH 2048x2048 pixels
+    sizeMax = self.boardScale * sizeMax;
     
     self.scene.world2min = CGPointMake(-sizeMax/self.scene.world2scale, -sizeMax/self.scene.world2scale);
     self.scene.world2max = CGPointMake(sizeMax/self.scene.world2scale, sizeMax/self.scene.world2scale);

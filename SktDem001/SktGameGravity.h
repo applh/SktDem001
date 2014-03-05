@@ -24,6 +24,11 @@
 @property SKAction* animationMoveMLL3;
 @property SKAction* animationMoveMLR3;
 
+
+@property float boardScale;
+
+@property NSMutableDictionary* textureDict;
+
 // METHODS
 -(id)   init;
 
